@@ -59,7 +59,7 @@
             // 
             this.groupBox_liveBCstatus.Controls.Add(this.listBox_Live_Bc_Status);
             this.groupBox_liveBCstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.groupBox_liveBCstatus.ForeColor = System.Drawing.Color.White;
+            this.groupBox_liveBCstatus.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_liveBCstatus.Location = new System.Drawing.Point(12, 81);
             this.groupBox_liveBCstatus.Name = "groupBox_liveBCstatus";
             this.groupBox_liveBCstatus.Size = new System.Drawing.Size(776, 311);
@@ -84,7 +84,7 @@
             this.groupBox_filter.Controls.Add(this.comboBox_seats);
             this.groupBox_filter.Controls.Add(this.label_seat);
             this.groupBox_filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_filter.ForeColor = System.Drawing.Color.White;
+            this.groupBox_filter.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_filter.Location = new System.Drawing.Point(12, 0);
             this.groupBox_filter.Name = "groupBox_filter";
             this.groupBox_filter.Size = new System.Drawing.Size(776, 76);
@@ -131,7 +131,7 @@
             // label_seat
             // 
             this.label_seat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_seat.ForeColor = System.Drawing.Color.White;
+            this.label_seat.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label_seat.Location = new System.Drawing.Point(14, 31);
             this.label_seat.Name = "label_seat";
             this.label_seat.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -144,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.groupBox_filter);
             this.Controls.Add(this.groupBox_liveBCstatus);

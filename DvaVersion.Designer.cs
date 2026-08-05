@@ -49,7 +49,7 @@
             this.dataGridView_Version.AllowUserToResizeRows = false;
             this.dataGridView_Version.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView_Version.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridView_Version.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_Version.BackgroundColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -76,7 +76,7 @@
             this.dataGridView_Version.ReadOnly = true;
             this.dataGridView_Version.RowHeadersVisible = false;
             this.dataGridView_Version.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             this.dataGridView_Version.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_Version.RowTemplate.Height = 24;
@@ -153,7 +153,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1024, 88);
             this.Controls.Add(this.dataGridView_Version);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

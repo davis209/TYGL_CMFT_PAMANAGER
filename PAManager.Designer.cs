@@ -174,7 +174,7 @@ namespace ste.pa.pamanager
             this.groupBox_BCconfig.Controls.Add(this.button_clearOne_msg);
             this.groupBox_BCconfig.Controls.Add(this.groupBox_cyclicbroadcast);
             this.groupBox_BCconfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_BCconfig.ForeColor = System.Drawing.Color.White;
+            this.groupBox_BCconfig.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_BCconfig.Location = new System.Drawing.Point(505, 354);
             this.groupBox_BCconfig.Name = "groupBox_BCconfig";
             this.groupBox_BCconfig.Size = new System.Drawing.Size(612, 431);
@@ -372,7 +372,7 @@ namespace ste.pa.pamanager
             this.groupBox_cyclicbroadcast.Controls.Add(this.label_recycle_time);
             this.groupBox_cyclicbroadcast.Controls.Add(this.numericUpDown_sec);
             this.groupBox_cyclicbroadcast.Controls.Add(this.label_cyclic_interval);
-            this.groupBox_cyclicbroadcast.ForeColor = System.Drawing.Color.White;
+            this.groupBox_cyclicbroadcast.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_cyclicbroadcast.Location = new System.Drawing.Point(7, 173);
             this.groupBox_cyclicbroadcast.Name = "groupBox_cyclicbroadcast";
             this.groupBox_cyclicbroadcast.Size = new System.Drawing.Size(596, 124);
@@ -520,7 +520,7 @@ namespace ste.pa.pamanager
             // 
             this.groupBox_Prerecmsg.Controls.Add(this.listBox_prerecorded_msg);
             this.groupBox_Prerecmsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_Prerecmsg.ForeColor = System.Drawing.Color.White;
+            this.groupBox_Prerecmsg.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_Prerecmsg.Location = new System.Drawing.Point(10, 354);
             this.groupBox_Prerecmsg.Name = "groupBox_Prerecmsg";
             this.groupBox_Prerecmsg.Size = new System.Drawing.Size(489, 431);
@@ -583,7 +583,7 @@ namespace ste.pa.pamanager
             this.groupBox_zones.Controls.Add(this.button_selectall_zone);
             this.groupBox_zones.Controls.Add(this.zone_flowLayoutPanel);
             this.groupBox_zones.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_zones.ForeColor = System.Drawing.Color.White;
+            this.groupBox_zones.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_zones.Location = new System.Drawing.Point(925, 4);
             this.groupBox_zones.Name = "groupBox_zones";
             this.groupBox_zones.Size = new System.Drawing.Size(493, 344);
@@ -708,7 +708,7 @@ namespace ste.pa.pamanager
             // 
             this.groupBox_zonelist.Controls.Add(this.panel_zoneList);
             this.groupBox_zonelist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_zonelist.ForeColor = System.Drawing.Color.White;
+            this.groupBox_zonelist.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_zonelist.Location = new System.Drawing.Point(1122, 4);
             this.groupBox_zonelist.Name = "groupBox_zonelist";
             this.groupBox_zonelist.Size = new System.Drawing.Size(296, 382);
@@ -734,7 +734,7 @@ namespace ste.pa.pamanager
             this.dataGridView_OCC_selectedzone.AllowUserToDeleteRows = false;
             dataGridViewCellStyle34.ForeColor = System.Drawing.Color.Black;
             this.dataGridView_OCC_selectedzone.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle34;
-            this.dataGridView_OCC_selectedzone.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_OCC_selectedzone.BackgroundColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -755,7 +755,7 @@ namespace ste.pa.pamanager
             this.dataGridView_OCC_selectedzone.Name = "dataGridView_OCC_selectedzone";
             this.dataGridView_OCC_selectedzone.ReadOnly = true;
             dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle39.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle39.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle39.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -764,7 +764,7 @@ namespace ste.pa.pamanager
             this.dataGridView_OCC_selectedzone.RowHeadersDefaultCellStyle = dataGridViewCellStyle39;
             this.dataGridView_OCC_selectedzone.RowHeadersVisible = false;
             this.dataGridView_OCC_selectedzone.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle40.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle40.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle40.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black;
             this.dataGridView_OCC_selectedzone.RowsDefaultCellStyle = dataGridViewCellStyle40;
@@ -823,7 +823,7 @@ namespace ste.pa.pamanager
             this.dataGridView_selectedzone.AllowUserToDeleteRows = false;
             dataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black;
             this.dataGridView_selectedzone.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle41;
-            this.dataGridView_selectedzone.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_selectedzone.BackgroundColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -887,14 +887,14 @@ namespace ste.pa.pamanager
             // 
             // groupBox_station
             // 
-            this.groupBox_station.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.groupBox_station.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox_station.Controls.Add(this.button_station_status);
             this.groupBox_station.Controls.Add(this.button_stnzone);
             this.groupBox_station.Controls.Add(this.button_unselectall_stn);
             this.groupBox_station.Controls.Add(this.button_selectall_stn);
             this.groupBox_station.Controls.Add(this.stn_flowLayoutPanel);
             this.groupBox_station.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_station.ForeColor = System.Drawing.Color.White;
+            this.groupBox_station.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_station.Location = new System.Drawing.Point(10, 5);
             this.groupBox_station.Name = "groupBox_station";
             this.groupBox_station.Size = new System.Drawing.Size(909, 343);
@@ -1049,7 +1049,7 @@ namespace ste.pa.pamanager
             this.groupBox1.Controls.Add(this.button_DvaStatus);
             this.groupBox1.Controls.Add(this.btn_DVA_Version);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(1125, 354);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(293, 431);
@@ -1126,7 +1126,7 @@ namespace ste.pa.pamanager
             // PAManager
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1430, 793);
             this.Controls.Add(this.groupBox_zones);
             this.Controls.Add(this.groupBox1);

@@ -77,7 +77,7 @@
             // label_station
             // 
             this.label_station.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_station.ForeColor = System.Drawing.Color.White;
+            this.label_station.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label_station.Location = new System.Drawing.Point(7, 31);
             this.label_station.Name = "label_station";
             this.label_station.Size = new System.Drawing.Size(84, 20);
@@ -91,7 +91,7 @@
             this.groupBox_filter.Controls.Add(this.comboBox_station);
             this.groupBox_filter.Controls.Add(this.label_station);
             this.groupBox_filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_filter.ForeColor = System.Drawing.Color.White;
+            this.groupBox_filter.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_filter.Location = new System.Drawing.Point(12, 3);
             this.groupBox_filter.Name = "groupBox_filter";
             this.groupBox_filter.Size = new System.Drawing.Size(776, 76);
@@ -116,7 +116,7 @@
             // 
             this.groupBox_device_status.Controls.Add(this.listView_device_status);
             this.groupBox_device_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_device_status.ForeColor = System.Drawing.Color.White;
+            this.groupBox_device_status.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_device_status.Location = new System.Drawing.Point(13, 85);
             this.groupBox_device_status.Name = "groupBox_device_status";
             this.groupBox_device_status.Size = new System.Drawing.Size(775, 304);
@@ -128,7 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.groupBox_device_status);
             this.Controls.Add(this.groupBox_filter);

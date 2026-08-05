@@ -97,7 +97,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.Controls.Add(this.groupBox_pas);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
@@ -120,7 +120,7 @@
             this.groupBox_pas.Controls.Add(this.label_pas_PriIp);
             this.groupBox_pas.Controls.Add(this.label_pas_StationNames);
             this.groupBox_pas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_pas.ForeColor = System.Drawing.Color.White;
+            this.groupBox_pas.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_pas.Location = new System.Drawing.Point(6, 6);
             this.groupBox_pas.Name = "groupBox_pas";
             this.groupBox_pas.Size = new System.Drawing.Size(666, 450);
@@ -232,7 +232,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.Controls.Add(this.groupBox_Station);
             this.tabPage1.Controls.Add(this.groupBox_Config);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -246,7 +246,7 @@
             // 
             this.groupBox_Station.Controls.Add(this.treeView_Stn_Zones);
             this.groupBox_Station.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_Station.ForeColor = System.Drawing.Color.White;
+            this.groupBox_Station.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_Station.Location = new System.Drawing.Point(6, 6);
             this.groupBox_Station.Name = "groupBox_Station";
             this.groupBox_Station.Size = new System.Drawing.Size(309, 449);
@@ -281,7 +281,7 @@
             this.groupBox_Config.Controls.Add(this.label_stationName);
             this.groupBox_Config.Controls.Add(this.but_Zone_Add);
             this.groupBox_Config.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_Config.ForeColor = System.Drawing.Color.White;
+            this.groupBox_Config.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_Config.Location = new System.Drawing.Point(321, 6);
             this.groupBox_Config.Name = "groupBox_Config";
             this.groupBox_Config.Size = new System.Drawing.Size(345, 449);
@@ -458,7 +458,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage3.Controls.Add(this.label_time_weekday);
             this.tabPage3.Controls.Add(this.comboBox_time_weekday);
             this.tabPage3.Controls.Add(this.comboBox_time_station);
@@ -467,7 +467,7 @@
             this.tabPage3.Controls.Add(this.groupBox_time_offpeak);
             this.tabPage3.Controls.Add(this.groupBox_time_peak);
             this.tabPage3.Controls.Add(this.button_time_update);
-            this.tabPage3.ForeColor = System.Drawing.Color.White;
+            this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -517,7 +517,7 @@
             this.groupBox_time_night.Controls.Add(this.label_night_end);
             this.groupBox_time_night.Controls.Add(this.label_night_start);
             this.groupBox_time_night.Controls.Add(this.dateTimePicker_night_start);
-            this.groupBox_time_night.ForeColor = System.Drawing.Color.White;
+            this.groupBox_time_night.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_time_night.Location = new System.Drawing.Point(6, 262);
             this.groupBox_time_night.Name = "groupBox_time_night";
             this.groupBox_time_night.Size = new System.Drawing.Size(666, 79);
@@ -569,7 +569,7 @@
             this.groupBox_time_offpeak.Controls.Add(this.label_offpeak_end);
             this.groupBox_time_offpeak.Controls.Add(this.label_offpeak_start);
             this.groupBox_time_offpeak.Controls.Add(this.dateTimePicker_offpeak_start);
-            this.groupBox_time_offpeak.ForeColor = System.Drawing.Color.White;
+            this.groupBox_time_offpeak.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_time_offpeak.Location = new System.Drawing.Point(6, 167);
             this.groupBox_time_offpeak.Name = "groupBox_time_offpeak";
             this.groupBox_time_offpeak.Size = new System.Drawing.Size(666, 79);
@@ -621,7 +621,7 @@
             this.groupBox_time_peak.Controls.Add(this.label_peak_end);
             this.groupBox_time_peak.Controls.Add(this.label_peak_start);
             this.groupBox_time_peak.Controls.Add(this.dateTimePicker_peak_start);
-            this.groupBox_time_peak.ForeColor = System.Drawing.Color.White;
+            this.groupBox_time_peak.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_time_peak.Location = new System.Drawing.Point(6, 72);
             this.groupBox_time_peak.Name = "groupBox_time_peak";
             this.groupBox_time_peak.Size = new System.Drawing.Size(666, 79);
@@ -684,7 +684,7 @@
             // ConfigPa
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(711, 517);
             this.Controls.Add(this.tabControl_Config);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

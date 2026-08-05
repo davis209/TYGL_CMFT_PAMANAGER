@@ -67,7 +67,7 @@ namespace ste.pa.pamanager
             // 
             this.grpBox_Dva_Zone_Progress.Controls.Add(this.dataGridView_Dva_Progress);
             this.grpBox_Dva_Zone_Progress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Dva_Zone_Progress.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Dva_Zone_Progress.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Dva_Zone_Progress.Location = new System.Drawing.Point(12, 12);
             this.grpBox_Dva_Zone_Progress.Name = "grpBox_Dva_Zone_Progress";
             this.grpBox_Dva_Zone_Progress.Size = new System.Drawing.Size(380, 250);
@@ -77,7 +77,7 @@ namespace ste.pa.pamanager
             // 
             // dataGridView_Dva_Progress
             // 
-            this.dataGridView_Dva_Progress.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_Dva_Progress.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView_Dva_Progress.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Dva_Progress.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Dva_Progress.GridColor = System.Drawing.Color.White;
@@ -85,7 +85,7 @@ namespace ste.pa.pamanager
             this.dataGridView_Dva_Progress.Name = "dataGridView_Dva_Progress";
             this.dataGridView_Dva_Progress.ReadOnly = true;
             this.dataGridView_Dva_Progress.RowHeadersVisible = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dataGridView_Dva_Progress.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_Dva_Progress.RowTemplate.Height = 24;
@@ -100,7 +100,7 @@ namespace ste.pa.pamanager
             this.grpBox_Dva_Zone_Failure.Controls.Add(this.but_Dva_Retry_Sel);
             this.grpBox_Dva_Zone_Failure.Controls.Add(this.dataGridView_Dva_Failure);
             this.grpBox_Dva_Zone_Failure.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Dva_Zone_Failure.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Dva_Zone_Failure.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Dva_Zone_Failure.Location = new System.Drawing.Point(402, 12);
             this.grpBox_Dva_Zone_Failure.Name = "grpBox_Dva_Zone_Failure";
             this.grpBox_Dva_Zone_Failure.Size = new System.Drawing.Size(380, 250);
@@ -139,7 +139,7 @@ namespace ste.pa.pamanager
             // 
             // dataGridView_Dva_Failure
             // 
-            this.dataGridView_Dva_Failure.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_Dva_Failure.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView_Dva_Failure.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Dva_Failure.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView_Dva_Failure.GridColor = System.Drawing.Color.White;
@@ -147,7 +147,7 @@ namespace ste.pa.pamanager
             this.dataGridView_Dva_Failure.Name = "dataGridView_Dva_Failure";
             this.dataGridView_Dva_Failure.ReadOnly = true;
             this.dataGridView_Dva_Failure.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             this.dataGridView_Dva_Failure.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_Dva_Failure.RowTemplate.Height = 24;
@@ -171,7 +171,7 @@ namespace ste.pa.pamanager
             this.grpBox_Dva_Bc_config.Controls.Add(this.label_period);
             this.grpBox_Dva_Bc_config.Controls.Add(this.listBox_msg_no);
             this.grpBox_Dva_Bc_config.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Dva_Bc_config.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Dva_Bc_config.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Dva_Bc_config.Location = new System.Drawing.Point(12, 268);
             this.grpBox_Dva_Bc_config.Name = "grpBox_Dva_Bc_config";
             this.grpBox_Dva_Bc_config.Size = new System.Drawing.Size(770, 191);
@@ -199,7 +199,7 @@ namespace ste.pa.pamanager
             // 
             // listBox_chime
             // 
-            this.listBox_chime.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listBox_chime.BackColor = System.Drawing.SystemColors.Window;
             this.listBox_chime.Enabled = false;
             this.listBox_chime.FormattingEnabled = true;
             this.listBox_chime.ItemHeight = 20;
@@ -219,7 +219,7 @@ namespace ste.pa.pamanager
             // 
             // listBox_period
             // 
-            this.listBox_period.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listBox_period.BackColor = System.Drawing.SystemColors.Window;
             this.listBox_period.Enabled = false;
             this.listBox_period.FormattingEnabled = true;
             this.listBox_period.ItemHeight = 20;
@@ -230,7 +230,7 @@ namespace ste.pa.pamanager
             // 
             // listBox_stop
             // 
-            this.listBox_stop.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listBox_stop.BackColor = System.Drawing.SystemColors.Window;
             this.listBox_stop.Enabled = false;
             this.listBox_stop.FormattingEnabled = true;
             this.listBox_stop.ItemHeight = 20;
@@ -250,7 +250,7 @@ namespace ste.pa.pamanager
             // 
             // listBox_start
             // 
-            this.listBox_start.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listBox_start.BackColor = System.Drawing.SystemColors.Window;
             this.listBox_start.Enabled = false;
             this.listBox_start.FormattingEnabled = true;
             this.listBox_start.ItemHeight = 20;
@@ -261,7 +261,7 @@ namespace ste.pa.pamanager
             // 
             // listBox_dwell
             // 
-            this.listBox_dwell.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listBox_dwell.BackColor = System.Drawing.SystemColors.Window;
             this.listBox_dwell.Enabled = false;
             this.listBox_dwell.FormattingEnabled = true;
             this.listBox_dwell.ItemHeight = 20;
@@ -290,7 +290,7 @@ namespace ste.pa.pamanager
             // 
             // listBox_msg_no
             // 
-            this.listBox_msg_no.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listBox_msg_no.BackColor = System.Drawing.SystemColors.Window;
             this.listBox_msg_no.Enabled = false;
             this.listBox_msg_no.FormattingEnabled = true;
             this.listBox_msg_no.ItemHeight = 20;
@@ -303,7 +303,7 @@ namespace ste.pa.pamanager
             // 
             this.grpBox_Dva_Bc_status.Controls.Add(this.listBox_Dva_Bc_status);
             this.grpBox_Dva_Bc_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Dva_Bc_status.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Dva_Bc_status.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Dva_Bc_status.Location = new System.Drawing.Point(12, 465);
             this.grpBox_Dva_Bc_status.Name = "grpBox_Dva_Bc_status";
             this.grpBox_Dva_Bc_status.Size = new System.Drawing.Size(770, 136);
@@ -358,7 +358,7 @@ namespace ste.pa.pamanager
             // DvaBroadcast
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(794, 658);
             this.Controls.Add(this.but_abort);
             this.Controls.Add(this.but_close);

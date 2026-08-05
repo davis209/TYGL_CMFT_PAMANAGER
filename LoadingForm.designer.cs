@@ -62,7 +62,7 @@ namespace ste.pa.pamanager
             // LoadingForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(573, 102);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBox1);

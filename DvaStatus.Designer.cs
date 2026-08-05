@@ -113,7 +113,7 @@ namespace ste.pa.pamanager
             // 
             this.grpBox_Sel_Zones.Controls.Add(this.textBox_Sel_Zones);
             this.grpBox_Sel_Zones.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Sel_Zones.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Sel_Zones.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Sel_Zones.Location = new System.Drawing.Point(12, 328);
             this.grpBox_Sel_Zones.Name = "grpBox_Sel_Zones";
             this.grpBox_Sel_Zones.Padding = new System.Windows.Forms.Padding(10);
@@ -136,7 +136,7 @@ namespace ste.pa.pamanager
             // 
             this.grpBox_Bc_status.Controls.Add(this.listBox_Dva_Bc_status);
             this.grpBox_Bc_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Bc_status.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Bc_status.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Bc_status.Location = new System.Drawing.Point(12, 411);
             this.grpBox_Bc_status.Name = "grpBox_Bc_status";
             this.grpBox_Bc_status.Padding = new System.Windows.Forms.Padding(10);
@@ -169,7 +169,7 @@ namespace ste.pa.pamanager
             this.grpBox_Dva_Bc_config.Controls.Add(this.label_cyclic_interval);
             this.grpBox_Dva_Bc_config.Controls.Add(this.label_selMsg);
             this.grpBox_Dva_Bc_config.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Dva_Bc_config.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Dva_Bc_config.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Dva_Bc_config.Location = new System.Drawing.Point(12, 12);
             this.grpBox_Dva_Bc_config.Name = "grpBox_Dva_Bc_config";
             this.grpBox_Dva_Bc_config.Size = new System.Drawing.Size(746, 190);
@@ -284,7 +284,7 @@ namespace ste.pa.pamanager
             // 
             // dataGridView_SelectedZones
             // 
-            this.dataGridView_SelectedZones.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_SelectedZones.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView_SelectedZones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_SelectedZones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_Zone,
@@ -320,7 +320,7 @@ namespace ste.pa.pamanager
             // 
             // dataGridView_SelectedZones_Occ
             // 
-            this.dataGridView_SelectedZones_Occ.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_SelectedZones_Occ.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView_SelectedZones_Occ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_SelectedZones_Occ.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Loc,
@@ -415,7 +415,7 @@ namespace ste.pa.pamanager
             // 
             this.grpBox_Sel_Stations.Controls.Add(this.textBox_Sel_Stations);
             this.grpBox_Sel_Stations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Sel_Stations.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Sel_Stations.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Sel_Stations.Location = new System.Drawing.Point(12, 219);
             this.grpBox_Sel_Stations.Name = "grpBox_Sel_Stations";
             this.grpBox_Sel_Stations.Padding = new System.Windows.Forms.Padding(10);
@@ -437,7 +437,7 @@ namespace ste.pa.pamanager
             // DvaStatus
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(774, 613);
             this.Controls.Add(this.grpBox_Sel_Stations);
             this.Controls.Add(this.grpBox_Sel_Zones);

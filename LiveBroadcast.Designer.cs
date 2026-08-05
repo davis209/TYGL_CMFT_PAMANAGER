@@ -52,7 +52,7 @@ namespace ste.pa.pamanager
             // 
             this.groupBox_liveBCstatus.Controls.Add(this.listBox_Live_Bc_Status);
             this.groupBox_liveBCstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.groupBox_liveBCstatus.ForeColor = System.Drawing.Color.White;
+            this.groupBox_liveBCstatus.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_liveBCstatus.Location = new System.Drawing.Point(12, 269);
             this.groupBox_liveBCstatus.Name = "groupBox_liveBCstatus";
             this.groupBox_liveBCstatus.Size = new System.Drawing.Size(770, 136);
@@ -74,7 +74,7 @@ namespace ste.pa.pamanager
             // 
             this.grpBox_Live_Zone_Progress.Controls.Add(this.dataGridView_Bc_Progress);
             this.grpBox_Live_Zone_Progress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Live_Zone_Progress.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Live_Zone_Progress.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Live_Zone_Progress.Location = new System.Drawing.Point(12, 12);
             this.grpBox_Live_Zone_Progress.Name = "grpBox_Live_Zone_Progress";
             this.grpBox_Live_Zone_Progress.Size = new System.Drawing.Size(380, 250);
@@ -84,7 +84,7 @@ namespace ste.pa.pamanager
             // 
             // dataGridView_Bc_Progress
             // 
-            this.dataGridView_Bc_Progress.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_Bc_Progress.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView_Bc_Progress.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Bc_Progress.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Bc_Progress.GridColor = System.Drawing.Color.White;
@@ -105,7 +105,7 @@ namespace ste.pa.pamanager
             this.grpBox_Live_Zone_Failure.Controls.Add(this.but_Live_Retry_All);
             this.grpBox_Live_Zone_Failure.Controls.Add(this.but_Live_Retry_Sel);
             this.grpBox_Live_Zone_Failure.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.grpBox_Live_Zone_Failure.ForeColor = System.Drawing.Color.White;
+            this.grpBox_Live_Zone_Failure.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpBox_Live_Zone_Failure.Location = new System.Drawing.Point(402, 12);
             this.grpBox_Live_Zone_Failure.Name = "grpBox_Live_Zone_Failure";
             this.grpBox_Live_Zone_Failure.Size = new System.Drawing.Size(380, 250);
@@ -115,7 +115,7 @@ namespace ste.pa.pamanager
             // 
             // dataGridView_Bc_Failure
             // 
-            this.dataGridView_Bc_Failure.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_Bc_Failure.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView_Bc_Failure.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Bc_Failure.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView_Bc_Failure.GridColor = System.Drawing.Color.White;
@@ -183,7 +183,7 @@ namespace ste.pa.pamanager
             // LiveBroadcast
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(794, 461);
             this.Controls.Add(this.but_close);
             this.Controls.Add(this.grpBox_Live_Zone_Failure);
