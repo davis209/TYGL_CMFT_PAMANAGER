@@ -124,6 +124,7 @@ namespace ste.pa.pamanager
             // 
             // textBox_Sel_Zones
             // 
+            this.textBox_Sel_Zones.BackColor = System.Drawing.Color.White;
             this.textBox_Sel_Zones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox_Sel_Zones.Location = new System.Drawing.Point(10, 29);
             this.textBox_Sel_Zones.Multiline = true;
@@ -179,6 +180,7 @@ namespace ste.pa.pamanager
             // 
             // textBox_language
             // 
+            this.textBox_language.BackColor = System.Drawing.Color.White;
             this.textBox_language.Location = new System.Drawing.Point(116, 146);
             this.textBox_language.Name = "textBox_language";
             this.textBox_language.ReadOnly = true;
@@ -187,6 +189,7 @@ namespace ste.pa.pamanager
             // 
             // textBox_seat
             // 
+            this.textBox_seat.BackColor = System.Drawing.Color.White;
             this.textBox_seat.Location = new System.Drawing.Point(116, 41);
             this.textBox_seat.Name = "textBox_seat";
             this.textBox_seat.ReadOnly = true;
@@ -213,6 +216,7 @@ namespace ste.pa.pamanager
             // 
             // textBox_selected_msgcontent
             // 
+            this.textBox_selected_msgcontent.BackColor = System.Drawing.Color.White;
             this.textBox_selected_msgcontent.Location = new System.Drawing.Point(426, 53);
             this.textBox_selected_msgcontent.Multiline = true;
             this.textBox_selected_msgcontent.Name = "textBox_selected_msgcontent";
@@ -222,6 +226,7 @@ namespace ste.pa.pamanager
             // 
             // textBox_IntervalSec
             // 
+            this.textBox_IntervalSec.BackColor = System.Drawing.Color.White;
             this.textBox_IntervalSec.Location = new System.Drawing.Point(116, 111);
             this.textBox_IntervalSec.Name = "textBox_IntervalSec";
             this.textBox_IntervalSec.ReadOnly = true;
@@ -230,6 +235,7 @@ namespace ste.pa.pamanager
             // 
             // textBox_RecycleTime
             // 
+            this.textBox_RecycleTime.BackColor = System.Drawing.Color.White;
             this.textBox_RecycleTime.Location = new System.Drawing.Point(117, 76);
             this.textBox_RecycleTime.Name = "textBox_RecycleTime";
             this.textBox_RecycleTime.ReadOnly = true;
@@ -426,6 +432,7 @@ namespace ste.pa.pamanager
             // 
             // textBox_Sel_Stations
             // 
+            this.textBox_Sel_Stations.BackColor = System.Drawing.Color.White;
             this.textBox_Sel_Stations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox_Sel_Stations.Location = new System.Drawing.Point(10, 29);
             this.textBox_Sel_Stations.Multiline = true;
