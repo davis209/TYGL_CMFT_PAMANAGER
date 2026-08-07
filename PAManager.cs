@@ -1256,6 +1256,9 @@ namespace ste.pa.pamanager
                 }
                 stationsString = stationsString.TrimEnd(',');
 
+                //disable main window
+                this.Enabled = false;
+
                 M44 cmd = new M44((byte)seatId, stationPlayList);
 
                 bool result = await PaService.Instance.StartBroadcast(cmd);
@@ -1284,11 +1287,15 @@ namespace ste.pa.pamanager
                 {
                     Program.MessageBox_Error(mbSendMsgFailed_, sysErr_);
                 }
-
             }
             catch (Exception ex)
             {
                 Program.WriteEventLog("[ERROR] [Exception] " + ex.ToString(), fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
+            }
+            finally
+            {
+                //enable main window
+                this.Enabled = true;
             }
         }
 
@@ -1779,7 +1786,7 @@ namespace ste.pa.pamanager
             {
                 CheckBox zoneGrpCheckBox = new CheckBox();
                 zoneGrpCheckBox.Name = "ZoneGrp_" + catName.Key;
-                zoneGrpCheckBox.Text = lbSelect_ + catName.Value;
+                zoneGrpCheckBox.Text = lbSelect_ + catName.Value + "  ";
                 zoneGrpCheckBox.Tag = catName.Key;
 
                 zoneGrpCheckBox.Visible = true;
