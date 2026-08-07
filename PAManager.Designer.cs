@@ -75,7 +75,11 @@ namespace ste.pa.pamanager
             this.numericUpDown_sec = new System.Windows.Forms.NumericUpDown();
             this.label_cyclic_interval = new System.Windows.Forms.Label();
             this.groupBox_Prerecmsg = new System.Windows.Forms.GroupBox();
+            this.tabControl_prerecorded_msg = new System.Windows.Forms.TabControl();
+            this.tabPage_normal_msg = new System.Windows.Forms.TabPage();
             this.listBox_prerecorded_msg = new System.Windows.Forms.ListBox();
+            this.tabPage_emergency_msg = new System.Windows.Forms.TabPage();
+            this.listBox_emergency_msg = new System.Windows.Forms.ListBox();
             this.button_selectall_zone = new System.Windows.Forms.Button();
             this.button_unselectall_zone = new System.Windows.Forms.Button();
             this.groupBox_zones = new System.Windows.Forms.GroupBox();
@@ -124,6 +128,9 @@ namespace ste.pa.pamanager
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_times)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sec)).BeginInit();
             this.groupBox_Prerecmsg.SuspendLayout();
+            this.tabControl_prerecorded_msg.SuspendLayout();
+            this.tabPage_normal_msg.SuspendLayout();
+            this.tabPage_emergency_msg.SuspendLayout();
             this.groupBox_zones.SuspendLayout();
             this.ZoneGrp_flowLayoutPanel.SuspendLayout();
             this.zone_flowLayoutPanel.SuspendLayout();
@@ -519,7 +526,7 @@ namespace ste.pa.pamanager
             // 
             // groupBox_Prerecmsg
             // 
-            this.groupBox_Prerecmsg.Controls.Add(this.listBox_prerecorded_msg);
+            this.groupBox_Prerecmsg.Controls.Add(this.tabControl_prerecorded_msg);
             this.groupBox_Prerecmsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_Prerecmsg.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox_Prerecmsg.Location = new System.Drawing.Point(10, 354);
@@ -528,18 +535,62 @@ namespace ste.pa.pamanager
             this.groupBox_Prerecmsg.TabIndex = 73;
             this.groupBox_Prerecmsg.TabStop = false;
             this.groupBox_Prerecmsg.Text = "Pre-recorded Messages";
+            //
+            // tabControl_prerecorded_msg
+            //
+            this.tabControl_prerecorded_msg.Controls.Add(this.tabPage_normal_msg);
+            this.tabControl_prerecorded_msg.Controls.Add(this.tabPage_emergency_msg);
+            this.tabControl_prerecorded_msg.Location = new System.Drawing.Point(6, 30);
+            this.tabControl_prerecorded_msg.Name = "tabControl_prerecorded_msg";
+            this.tabControl_prerecorded_msg.SelectedIndex = 0;
+            this.tabControl_prerecorded_msg.Size = new System.Drawing.Size(477, 384);
+            this.tabControl_prerecorded_msg.TabIndex = 0;
+            //
+            // tabPage_normal_msg
+            //
+            this.tabPage_normal_msg.Controls.Add(this.listBox_prerecorded_msg);
+            this.tabPage_normal_msg.Location = new System.Drawing.Point(4, 29);
+            this.tabPage_normal_msg.Name = "tabPage_normal_msg";
+            this.tabPage_normal_msg.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_normal_msg.Size = new System.Drawing.Size(469, 351);
+            this.tabPage_normal_msg.TabIndex = 0;
+            this.tabPage_normal_msg.Text = "Normal Messages";
+            this.tabPage_normal_msg.UseVisualStyleBackColor = true;
             // 
             // listBox_prerecorded_msg
             // 
             this.listBox_prerecorded_msg.FormattingEnabled = true;
             this.listBox_prerecorded_msg.ItemHeight = 20;
-            this.listBox_prerecorded_msg.Location = new System.Drawing.Point(6, 30);
+            this.listBox_prerecorded_msg.Location = new System.Drawing.Point(3, 3);
             this.listBox_prerecorded_msg.Name = "listBox_prerecorded_msg";
-            this.listBox_prerecorded_msg.Size = new System.Drawing.Size(477, 384);
+            this.listBox_prerecorded_msg.Size = new System.Drawing.Size(463, 344);
             this.listBox_prerecorded_msg.TabIndex = 0;
             this.listBox_prerecorded_msg.SelectedIndexChanged += new System.EventHandler(this.listBox_prerecorded_msg_SelectedIndexChanged);
             this.listBox_prerecorded_msg.MouseLeave += new System.EventHandler(this.listBox_prerecorded_msg_MouseLeave);
             this.listBox_prerecorded_msg.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox_prerecorded_msg_MouseMove);
+            //
+            // tabPage_emergency_msg
+            //
+            this.tabPage_emergency_msg.Controls.Add(this.listBox_emergency_msg);
+            this.tabPage_emergency_msg.Location = new System.Drawing.Point(4, 29);
+            this.tabPage_emergency_msg.Name = "tabPage_emergency_msg";
+            this.tabPage_emergency_msg.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_emergency_msg.Size = new System.Drawing.Size(469, 351);
+            this.tabPage_emergency_msg.TabIndex = 1;
+            this.tabPage_emergency_msg.Text = "Emergency Messages";
+            this.tabPage_emergency_msg.UseVisualStyleBackColor = true;
+            //
+            // listBox_emergency_msg
+            //
+            this.listBox_emergency_msg.FormattingEnabled = true;
+            this.listBox_emergency_msg.ItemHeight = 20;
+            this.listBox_emergency_msg.Location = new System.Drawing.Point(3, 3);
+            this.listBox_emergency_msg.Name = "listBox_emergency_msg";
+            this.listBox_emergency_msg.Size = new System.Drawing.Size(463, 344);
+            this.listBox_emergency_msg.TabIndex = 0;
+            this.listBox_emergency_msg.SelectedIndexChanged += new System.EventHandler(this.listBox_prerecorded_msg_SelectedIndexChanged);
+            this.listBox_emergency_msg.MouseLeave += new System.EventHandler(this.listBox_prerecorded_msg_MouseLeave);
+            this.listBox_emergency_msg.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox_prerecorded_msg_MouseMove);
             // 
             // button_selectall_zone
             // 
@@ -1156,6 +1207,9 @@ namespace ste.pa.pamanager
             this.groupBox_cyclicbroadcast.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_times)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sec)).EndInit();
+            this.tabPage_normal_msg.ResumeLayout(false);
+            this.tabPage_emergency_msg.ResumeLayout(false);
+            this.tabControl_prerecorded_msg.ResumeLayout(false);
             this.groupBox_Prerecmsg.ResumeLayout(false);
             this.groupBox_zones.ResumeLayout(false);
             this.ZoneGrp_flowLayoutPanel.ResumeLayout(false);
@@ -1218,6 +1272,10 @@ namespace ste.pa.pamanager
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.TextBox textBox_selected_msgcontent;
         private System.Windows.Forms.ListBox listBox_prerecorded_msg;
+        private System.Windows.Forms.ListBox listBox_emergency_msg;
+        private System.Windows.Forms.TabControl tabControl_prerecorded_msg;
+        private System.Windows.Forms.TabPage tabPage_normal_msg;
+        private System.Windows.Forms.TabPage tabPage_emergency_msg;
         private System.Windows.Forms.FlowLayoutPanel ZoneGrp_flowLayoutPanel;
         private System.Windows.Forms.CheckBox checkBox_zone_grp1;
         private System.Windows.Forms.NumericUpDown numericUpDown_times;

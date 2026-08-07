@@ -70,6 +70,8 @@ namespace ste.pa.pamanager
         private Dictionary<int, CheckBox> catIdToCbDic_ = new Dictionary<int, CheckBox>();
         private Dictionary<int, string> typeIdToNameDic_ = new Dictionary<int, string>();
         private BindingList<PreRecordedMessageStruct> preRecordedMsgs_ = new BindingList<PreRecordedMessageStruct>();
+        private BindingList<PreRecordedMessageStruct> normalPreRecordedMsgs_ = new BindingList<PreRecordedMessageStruct>();
+        private BindingList<PreRecordedMessageStruct> emergencyPreRecordedMsgs_ = new BindingList<PreRecordedMessageStruct>();
         private PreRecordedMessageStruct selectedPreRecordedMsg_ = null;
 
         private delegate void SetConnectionStatusCallback(Control oControl, bool paConnected);
@@ -199,6 +201,8 @@ namespace ste.pa.pamanager
                 groupBox_zones.Text = Localization.localize("GP_ZONES", groupBox_zones.Text);
                 groupBox_station.Text = Localization.localize("GP_STATION", groupBox_station.Text);
                 groupBox_Prerecmsg.Text = Localization.localize("GP_PREREC_MSG", groupBox_Prerecmsg.Text);
+                tabPage_normal_msg.Text = Localization.localize("LB_NORMAL_MSG", tabPage_normal_msg.Text);
+                tabPage_emergency_msg.Text = Localization.localize("LB_EMERG_MSG", tabPage_emergency_msg.Text);
                 groupBox_BCconfig.Text = Localization.localize("GP_BC_CONFIG", groupBox_BCconfig.Text);
                 groupBox_zonelist.Text = Localization.localize("GP_ZONE_LIST", groupBox_zonelist.Text);
 
@@ -395,8 +399,10 @@ namespace ste.pa.pamanager
 
                 #region Initialize dva configuration controls
 
-                listBox_prerecorded_msg.DataSource = preRecordedMsgs_;
+                listBox_prerecorded_msg.DataSource = normalPreRecordedMsgs_;
+                listBox_emergency_msg.DataSource = emergencyPreRecordedMsgs_;
                 listBox_prerecorded_msg.SelectedIndex = -1;
+                listBox_emergency_msg.SelectedIndex = -1;
                 textBox_selected_msgcontent.Text = string.Empty;
                 button_clearOne_msg.Enabled = false;
 
@@ -613,6 +619,8 @@ namespace ste.pa.pamanager
             {
                 dbConnEnum dbConn = dbConnEnum.ErrNoConn;
                 this.preRecordedMsgs_.Clear();
+                this.normalPreRecordedMsgs_.Clear();
+                this.emergencyPreRecordedMsgs_.Clear();
                 string localSql = $"SELECT MSG_ID,MSG_LABEL,MSG_CONTENT FROM PA_PRERECORDED_MSG WHERE VERSION='{preRecordedMessageVersion_}' ORDER BY MSG_ID";
                 var queries = new List<SqlQuery> { new SqlQuery { CommandText = localSql } };
                 DataSet ds = Program.dbLock.FetchData(queries, ref dbConn);
@@ -628,6 +636,14 @@ namespace ste.pa.pamanager
                             MsgContent = retrievedRow[2].ToString()
                         };
                         preRecordedMsgs_.Add(msg);
+                        if (msg.MsgId < 666)
+                        {
+                            emergencyPreRecordedMsgs_.Add(msg);
+                        }
+                        else
+                        {
+                            normalPreRecordedMsgs_.Add(msg);
+                        }
                     }
                 }
             }
@@ -3013,13 +3029,23 @@ namespace ste.pa.pamanager
 
         private void listBox_prerecorded_msg_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedPreRecordedMsg_ = listBox_prerecorded_msg.SelectedItem as PreRecordedMessageStruct;
+            ListBox messageListBox = sender as ListBox;
+            selectedPreRecordedMsg_ = messageListBox?.SelectedItem as PreRecordedMessageStruct;
             if (selectedPreRecordedMsg_ != null)
             {
+                if (messageListBox == listBox_prerecorded_msg)
+                {
+                    listBox_emergency_msg.SelectedIndex = -1;
+                }
+                else
+                {
+                    listBox_prerecorded_msg.SelectedIndex = -1;
+                }
+
                 textBox_selected_msgcontent.Text = selectedPreRecordedMsg_.MsgContent;
                 setClearButton();
-                toolTip_msg.SetToolTip(listBox_prerecorded_msg, string.Empty);
-                toolTip_msg.Hide(listBox_prerecorded_msg);
+                toolTip_msg.SetToolTip(messageListBox, string.Empty);
+                toolTip_msg.Hide(messageListBox);
             }
         }
 
@@ -3369,32 +3395,45 @@ namespace ste.pa.pamanager
         }
 
         int lastIndex_ = -1;
+        ListBox lastToolTipListBox_ = null;
         private void listBox_prerecorded_msg_MouseMove(object sender, MouseEventArgs e)
         {
-            int index = listBox_prerecorded_msg.IndexFromPoint(e.Location);
+            ListBox messageListBox = sender as ListBox;
+            if (messageListBox == null)
+            {
+                return;
+            }
 
-            if (index >= 0 && index != listBox_prerecorded_msg.SelectedIndex)
+            if (messageListBox != lastToolTipListBox_)
+            {
+                lastToolTipListBox_ = messageListBox;
+                lastIndex_ = -1;
+            }
+
+            int index = messageListBox.IndexFromPoint(e.Location);
+
+            if (index >= 0 && index != messageListBox.SelectedIndex)
             {
                 if (index != lastIndex_)
                 {
                     lastIndex_ = index;
 
-                    string text = listBox_prerecorded_msg.Items[index].ToString();
-                    Rectangle itemRect = listBox_prerecorded_msg.GetItemRectangle(index);
+                    string text = messageListBox.Items[index].ToString();
+                    Rectangle itemRect = messageListBox.GetItemRectangle(index);
 
-                    if(isTextTruncated(listBox_prerecorded_msg, text, itemRect))
+                    if(isTextTruncated(messageListBox, text, itemRect))
                     {
-                        toolTip_msg.Show(text, listBox_prerecorded_msg, e.X + 15, e.Y + 10);
+                        toolTip_msg.Show(text, messageListBox, e.X + 15, e.Y + 10);
                     }
                     else
                     {
-                        toolTip_msg.Hide(listBox_prerecorded_msg);
+                        toolTip_msg.Hide(messageListBox);
                     }               
                 }
             }
             else
             {
-                toolTip_msg.Hide(listBox_prerecorded_msg);
+                toolTip_msg.Hide(messageListBox);
             }
         }
 
@@ -3402,15 +3441,19 @@ namespace ste.pa.pamanager
         {
             using (Graphics g = listBox.CreateGraphics())
             {
-                Size textSize = TextRenderer.MeasureText(g, text, listBox_prerecorded_msg.Font);
+                Size textSize = TextRenderer.MeasureText(g, text, listBox.Font);
                 return textSize.Width > itemRect.Width;
             }
         }
 
         private void listBox_prerecorded_msg_MouseLeave(object sender, EventArgs e)
         {
-            toolTip_msg.SetToolTip(listBox_prerecorded_msg, string.Empty);
-            toolTip_msg.Hide(listBox_prerecorded_msg);
+            ListBox messageListBox = sender as ListBox;
+            if (messageListBox != null)
+            {
+                toolTip_msg.SetToolTip(messageListBox, string.Empty);
+                toolTip_msg.Hide(messageListBox);
+            }
         }
     }
 }
