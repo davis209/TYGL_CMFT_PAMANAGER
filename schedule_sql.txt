@@ -22,8 +22,6 @@ CREATE TABLE IF NOT EXISTS pa_broadcast_schedule
 
     schedule_type         ENUM('ONCE', 'DAILY', 'WEEKLY') NOT NULL,
     start_at              DATETIME(3) NOT NULL,
-    end_at                DATETIME(3) NULL,
-
     /* 每 N 天或每 N 周执行一次 */
     repeat_interval       SMALLINT UNSIGNED NOT NULL DEFAULT 1,
 
@@ -50,9 +48,6 @@ CREATE TABLE IF NOT EXISTS pa_broadcast_schedule
 
     CONSTRAINT chk_pa_bc_schedule_play_count
         CHECK (play_count BETWEEN 1 AND 255),
-
-    CONSTRAINT chk_pa_bc_schedule_end_at
-        CHECK (end_at IS NULL OR end_at >= start_at),
 
     CONSTRAINT chk_pa_bc_schedule_repeat_interval
         CHECK (repeat_interval >= 1),

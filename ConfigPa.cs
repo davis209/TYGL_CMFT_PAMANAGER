@@ -215,7 +215,7 @@ namespace ste.pa.pamanager
                 string sql = "SELECT SCHEDULE_ID AS 'ID', SCHEDULE_NAME AS 'Name', " +
                     "CASE WHEN ENABLED=1 THEN 'Enabled' ELSE 'Disabled' END AS 'Status', " +
                     "MSG_ID AS 'Message ID', STATIONS AS 'Stations', ZONES AS 'Zones', " +
-                    "SCHEDULE_TYPE AS 'Type', START_AT AS 'Start Time', END_AT AS 'End Time', NEXT_RUN_AT AS 'Next Run' " +
+                    "SCHEDULE_TYPE AS 'Type', START_AT AS 'Start Time', NEXT_RUN_AT AS 'Next Run' " +
                     "FROM pa_broadcast_schedule WHERE LOCATION_ID=" + Program.profileLocIndex + " ORDER BY SCHEDULE_ID DESC";
                 var queries = new List<SqlQuery> { new SqlQuery { CommandText = sql } };
                 DataSet ds = Program.dbLock.FetchData(queries, ref dbConn);
