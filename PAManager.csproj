@@ -144,6 +144,7 @@
     <Compile Include="ConfigPa.designer.cs">
       <DependentUpon>ConfigPa.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleConfigForm.cs" />
     <Compile Include="Base\EnumType.cs" />
     <Compile Include="Exceptions\SocketNotConnException.cs" />
     <Compile Include="Exceptions\TableException.cs" />

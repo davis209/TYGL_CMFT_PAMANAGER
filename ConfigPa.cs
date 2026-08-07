@@ -103,6 +103,9 @@ namespace ste.pa.pamanager
 
         private static string CmfDelZone_ = "Delete Zone from station?";
 
+        private TabPage tabPage_schedule_;
+        private DataGridView dataGridView_schedule_;
+
         /// <summary>
         /// Static constructor 
         /// </summary>
@@ -116,6 +119,7 @@ namespace ste.pa.pamanager
         public ConfigPa()
         {
             InitializeComponent();
+            InitializeScheduleTab();
         }
 
         /// <summary>
@@ -142,6 +146,7 @@ namespace ste.pa.pamanager
                 saveCurrPasTab();
 
                 initStationWeekdaySchedul();
+                LoadBroadcastSchedules();
 
             }
             catch (NoOracleDBException ex)
@@ -155,6 +160,137 @@ namespace ste.pa.pamanager
                 Program.WriteEventLog("[ERROR] [Exception] " + ex.ToString(), fileName_ + " -> " + MethodInfo.GetCurrentMethod().Name + "()");
                 Program.MessageBox_Error(Program.MB_FormEx, sysErr_);
                 this.Close();
+            }
+        }
+
+        private void InitializeScheduleTab()
+        {
+            tabPage_schedule_ = new TabPage("Message Schedule")
+            {
+                BackColor = System.Drawing.SystemColors.Control,
+                Padding = new Padding(6)
+            };
+            tabControl_Config.TabPages.Add(tabPage_schedule_);
+
+            var layout = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2 };
+            layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+
+            var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true };
+            var addButton = new Button { Text = "New", AutoSize = true };
+            var editButton = new Button { Text = "Edit", AutoSize = true };
+            var enabledButton = new Button { Text = "Enable / Disable", AutoSize = true };
+            var deleteButton = new Button { Text = "Delete", AutoSize = true };
+            var refreshButton = new Button { Text = "Refresh", AutoSize = true };
+            addButton.Click += (s, e) => CreateSchedule();
+            editButton.Click += (s, e) => EditSelectedSchedule();
+            enabledButton.Click += (s, e) => ToggleScheduleEnabled();
+            deleteButton.Click += (s, e) => DeleteSchedule();
+            refreshButton.Click += (s, e) => LoadBroadcastSchedules();
+            buttons.Controls.AddRange(new Control[] { addButton, editButton, enabledButton, deleteButton, refreshButton });
+
+            dataGridView_schedule_ = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                AutoGenerateColumns = true,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                MultiSelect = false,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                BackgroundColor = System.Drawing.SystemColors.Window
+            };
+            dataGridView_schedule_.CellDoubleClick += (s, e) => EditSelectedSchedule();
+            layout.Controls.Add(buttons, 0, 0);
+            layout.Controls.Add(dataGridView_schedule_, 0, 1);
+            tabPage_schedule_.Controls.Add(layout);
+        }
+
+        private void LoadBroadcastSchedules()
+        {
+            if (dataGridView_schedule_ == null) return;
+            try
+            {
+                dbConnEnum dbConn = dbConnEnum.ErrNoConn;
+                string sql = "SELECT SCHEDULE_ID AS 'ID', SCHEDULE_NAME AS 'Name', " +
+                    "CASE WHEN ENABLED=1 THEN 'Enabled' ELSE 'Disabled' END AS 'Status', " +
+                    "MSG_ID AS 'Message ID', STATIONS AS 'Stations', ZONES AS 'Zones', " +
+                    "SCHEDULE_TYPE AS 'Type', START_AT AS 'Start Time', END_AT AS 'End Time', NEXT_RUN_AT AS 'Next Run' " +
+                    "FROM pa_broadcast_schedule WHERE LOCATION_ID=" + Program.profileLocIndex + " ORDER BY SCHEDULE_ID DESC";
+                var queries = new List<SqlQuery> { new SqlQuery { CommandText = sql } };
+                DataSet ds = Program.dbLock.FetchData(queries, ref dbConn);
+                dataGridView_schedule_.DataSource = ds != null && ds.Tables.Count > 0 ? ds.Tables[0] : null;
+                if (dataGridView_schedule_.Columns.Contains("ID")) dataGridView_schedule_.Columns["ID"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Program.WriteEventLog("[ERROR] Load broadcast schedules: " + ex, fileName_ + "." + MethodBase.GetCurrentMethod().Name + "()");
+                MessageBox.Show("Unable to load message schedules. Confirm that PA_BROADCAST_SCHEDULE has been created.", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private long? SelectedScheduleId()
+        {
+            if (dataGridView_schedule_ == null || dataGridView_schedule_.CurrentRow == null) return null;
+            object value = dataGridView_schedule_.CurrentRow.Cells["ID"].Value;
+            return value == null || value == DBNull.Value ? (long?)null : Convert.ToInt64(value);
+        }
+
+        private void CreateSchedule()
+        {
+            OpenScheduleEditor(null);
+        }
+
+        private void EditSelectedSchedule()
+        {
+            long? scheduleId = SelectedScheduleId();
+            if (!scheduleId.HasValue)
+            {
+                MessageBox.Show("Select a schedule to edit.", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            OpenScheduleEditor(scheduleId);
+        }
+
+        private void OpenScheduleEditor(long? scheduleId)
+        {
+            using (var form = new ScheduleConfigForm(scheduleId, LoadBroadcastSchedules))
+            {
+                form.ShowDialog(this);
+            }
+        }
+
+        private void ToggleScheduleEnabled()
+        {
+            long? id = SelectedScheduleId();
+            if (!id.HasValue) { MessageBox.Show("Select a schedule first.", sysErr_); return; }
+            object current = dataGridView_schedule_.CurrentRow.Cells["Status"].Value;
+            bool enabled = current != null && current.ToString() == "Enabled";
+            ExecuteScheduleCommand("UPDATE pa_broadcast_schedule SET ENABLED=" + (enabled ? 0 : 1) + ", UPDATED_AT=NOW(3) WHERE SCHEDULE_ID=" + id.Value);
+        }
+
+        private void DeleteSchedule()
+        {
+            long? id = SelectedScheduleId();
+            if (!id.HasValue) { MessageBox.Show("Select a schedule first.", sysErr_); return; }
+            if (MessageBox.Show("Delete the selected schedule?", sysErr_, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            ExecuteScheduleCommand("DELETE FROM pa_broadcast_schedule WHERE SCHEDULE_ID=" + id.Value);
+        }
+
+        private void ExecuteScheduleCommand(string sql)
+        {
+            try
+            {
+                dbConnEnum dbConn = dbConnEnum.ErrNoConn;
+                var queries = new List<SqlQuery> { new SqlQuery { CommandText = sql } };
+                if (Program.dbLock.ExcuteNoneResultQuery(queries, ref dbConn) < 1)
+                    throw new InvalidOperationException("No record was changed.");
+                LoadBroadcastSchedules();
+            }
+            catch (Exception ex)
+            {
+                Program.WriteEventLog("[ERROR] Update broadcast schedule: " + ex, fileName_ + "." + MethodBase.GetCurrentMethod().Name + "()");
+                MessageBox.Show("Unable to update the schedule. Schedules with execution logs must be disabled instead of deleted.", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
