@@ -3030,9 +3030,22 @@ namespace ste.pa.pamanager
         private void listBox_prerecorded_msg_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListBox messageListBox = sender as ListBox;
-            selectedPreRecordedMsg_ = messageListBox?.SelectedItem as PreRecordedMessageStruct;
+
+            PreRecordedMessageStruct selectedMessage = messageListBox?.SelectedItem as PreRecordedMessageStruct;
+
+            if(selectedMessage == null)
+            {
+                return;
+            }
+
+            selectedPreRecordedMsg_ = selectedMessage;
             if (selectedPreRecordedMsg_ != null)
             {
+                textBox_selected_msgcontent.Text = selectedPreRecordedMsg_.MsgContent;
+                setClearButton();
+                toolTip_msg.SetToolTip(messageListBox, string.Empty);
+                toolTip_msg.Hide(messageListBox);
+
                 if (messageListBox == listBox_prerecorded_msg)
                 {
                     listBox_emergency_msg.SelectedIndex = -1;
@@ -3041,11 +3054,6 @@ namespace ste.pa.pamanager
                 {
                     listBox_prerecorded_msg.SelectedIndex = -1;
                 }
-
-                textBox_selected_msgcontent.Text = selectedPreRecordedMsg_.MsgContent;
-                setClearButton();
-                toolTip_msg.SetToolTip(messageListBox, string.Empty);
-                toolTip_msg.Hide(messageListBox);
             }
         }
 
