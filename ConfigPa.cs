@@ -198,6 +198,8 @@ namespace ste.pa.pamanager
                 AllowUserToDeleteRows = false,
                 MultiSelect = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing,
+                ColumnHeadersHeight = 32,
                 BackgroundColor = System.Drawing.SystemColors.Window
             };
             dataGridView_schedule_.CellDoubleClick += (s, e) => EditSelectedSchedule();

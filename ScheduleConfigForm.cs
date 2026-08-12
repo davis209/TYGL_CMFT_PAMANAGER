@@ -64,8 +64,8 @@ namespace ste.pa.pamanager
             Text = scheduleId.HasValue ? "編輯廣播排程" : "新增廣播排程";
             StartPosition = FormStartPosition.CenterParent;
             Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MinimumSize = new System.Drawing.Size(900, 650);
-            Size = new System.Drawing.Size(1040, 730);
+            MinimumSize = new System.Drawing.Size(900, 700);
+            Size = new System.Drawing.Size(1040, 780);
             BuildLayout();
             Load += ScheduleConfigForm_Load;
         }
@@ -115,6 +115,8 @@ namespace ste.pa.pamanager
 
             var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.RightToLeft, AutoSize = true };
             var cancel = new Button { Text = "取消", DialogResult = DialogResult.Cancel };
+            cancel.MinimumSize = new System.Drawing.Size(0, 40);
+            saveButton_.MinimumSize = new System.Drawing.Size(0, 40);
             saveButton_.Click += saveButton_Click;
             buttons.Controls.Add(cancel);
             buttons.Controls.Add(saveButton_);
