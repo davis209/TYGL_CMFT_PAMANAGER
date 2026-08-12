@@ -63,6 +63,7 @@ namespace ste.pa.pamanager
             saved_ = saved;
             Text = scheduleId.HasValue ? "編輯廣播排程" : "新增廣播排程";
             StartPosition = FormStartPosition.CenterParent;
+            Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             MinimumSize = new System.Drawing.Size(900, 650);
             Size = new System.Drawing.Size(1040, 730);
             BuildLayout();
@@ -124,6 +125,8 @@ namespace ste.pa.pamanager
 
             normalMessages_.Dock = DockStyle.Fill;
             emergencyMessages_.Dock = DockStyle.Fill;
+            normalMessages_.ItemHeight = 28;
+            emergencyMessages_.ItemHeight = 28;
             normalMessages_.SelectedIndexChanged += message_SelectedIndexChanged;
             emergencyMessages_.SelectedIndexChanged += message_SelectedIndexChanged;
             selectAllStations_.CheckedChanged += (s, e) => SetAllItemsChecked(stations_, selectAllStations_.Checked);
