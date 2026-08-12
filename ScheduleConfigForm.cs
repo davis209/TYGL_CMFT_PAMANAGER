@@ -12,26 +12,26 @@ namespace ste.pa.pamanager
         private readonly long? scheduleId_;
         private readonly Action saved_;
         private readonly TextBox nameBox_ = new TextBox();
-        private readonly CheckBox enabledBox_ = new CheckBox { Text = "Enabled" };
+        private readonly CheckBox enabledBox_ = new CheckBox { Text = "啟用" };
         private readonly ListBox normalMessages_ = new ListBox();
         private readonly ListBox emergencyMessages_ = new ListBox();
         private readonly TextBox messageContent_ = new TextBox { Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical };
         private readonly CheckedListBox stations_ = new CheckedListBox();
         private readonly CheckedListBox zones_ = new CheckedListBox();
-        private readonly CheckBox selectAllStations_ = new CheckBox { Text = "Select all stations" };
-        private readonly CheckBox selectAllZones_ = new CheckBox { Text = "Select all zones" };
+        private readonly CheckBox selectAllStations_ = new CheckBox { Text = "全選車站" };
+        private readonly CheckBox selectAllZones_ = new CheckBox { Text = "全選區域" };
         private readonly ComboBox seatBox_ = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList };
-        private readonly CheckBox chineseBox_ = new CheckBox { Text = "Chinese" };
-        private readonly CheckBox taiwaneseBox_ = new CheckBox { Text = "Taiwanese" };
-        private readonly CheckBox hakkaBox_ = new CheckBox { Text = "Hakka" };
-        private readonly CheckBox englishBox_ = new CheckBox { Text = "English" };
+        private readonly CheckBox chineseBox_ = new CheckBox { Text = "國語" };
+        private readonly CheckBox taiwaneseBox_ = new CheckBox { Text = "臺語" };
+        private readonly CheckBox hakkaBox_ = new CheckBox { Text = "客語" };
+        private readonly CheckBox englishBox_ = new CheckBox { Text = "英語" };
         private readonly NumericUpDown playCount_ = new NumericUpDown { Minimum = 1, Maximum = 255, Value = 1 };
         private readonly NumericUpDown playInterval_ = new NumericUpDown { Minimum = 0, Maximum = 255 };
         private readonly ComboBox scheduleType_ = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList };
         private readonly DateTimePicker startAt_ = new DateTimePicker { Format = DateTimePickerFormat.Custom, CustomFormat = "yyyy-MM-dd HH:mm" };
         private readonly NumericUpDown repeatInterval_ = new NumericUpDown { Minimum = 1, Maximum = 999, Value = 1 };
         private readonly CheckedListBox weekdays_ = new CheckedListBox();
-        private readonly Button saveButton_ = new Button { Text = "Save" };
+        private readonly Button saveButton_ = new Button { Text = "儲存" };
         private bool synchronizingSelectAll_;
 
         private sealed class MessageItem
@@ -50,11 +50,18 @@ namespace ste.pa.pamanager
             public override string ToString() { return Name; }
         }
 
+        private sealed class ScheduleTypeItem
+        {
+            public string Value;
+            public string Name;
+            public override string ToString() { return Name; }
+        }
+
         public ScheduleConfigForm(long? scheduleId, Action saved)
         {
             scheduleId_ = scheduleId;
             saved_ = saved;
-            Text = scheduleId.HasValue ? "Edit Broadcast Schedule" : "New Broadcast Schedule";
+            Text = scheduleId.HasValue ? "編輯廣播排程" : "新增廣播排程";
             StartPosition = FormStartPosition.CenterParent;
             MinimumSize = new System.Drawing.Size(900, 650);
             Size = new System.Drawing.Size(1040, 730);
@@ -71,42 +78,42 @@ namespace ste.pa.pamanager
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             Controls.Add(root);
 
-            var messageGroup = new GroupBox { Text = "Message", Dock = DockStyle.Fill };
+            var messageGroup = new GroupBox { Text = "訊息", Dock = DockStyle.Fill };
             var messageLayout = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2 };
             messageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 58));
             messageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 42));
             var messageTabs = new TabControl { Dock = DockStyle.Fill };
-            messageTabs.TabPages.Add(CreateMessagePage("Normal Messages", normalMessages_));
-            messageTabs.TabPages.Add(CreateMessagePage("Emergency Messages", emergencyMessages_));
+            messageTabs.TabPages.Add(CreateMessagePage("一般訊息", normalMessages_));
+            messageTabs.TabPages.Add(CreateMessagePage("緊急訊息", emergencyMessages_));
             messageContent_.Dock = DockStyle.Fill;
             messageLayout.Controls.Add(messageTabs, 0, 0);
             messageLayout.Controls.Add(messageContent_, 0, 1);
             messageGroup.Controls.Add(messageLayout);
             root.Controls.Add(messageGroup, 0, 0);
 
-            var configGroup = new GroupBox { Text = "Schedule Configuration", Dock = DockStyle.Fill };
+            var configGroup = new GroupBox { Text = "排程設定", Dock = DockStyle.Fill };
             var config = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, AutoScroll = true, Padding = new Padding(8) };
             config.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 125));
             config.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            AddRow(config, "Name", nameBox_);
+            AddRow(config, "名稱", nameBox_);
             AddRow(config, "", enabledBox_);
-            AddRow(config, "Stations", selectAllStations_);
+            AddRow(config, "車站", selectAllStations_);
             AddRow(config, "", stations_, 105);
-            AddRow(config, "Zones", selectAllZones_);
+            AddRow(config, "區域", selectAllZones_);
             AddRow(config, "", zones_, 85);
-            AddRow(config, "Seat", seatBox_);
-            AddRow(config, "Languages", CreateLanguagePanel());
-            AddRow(config, "Play count", playCount_);
-            AddRow(config, "Interval (sec)", playInterval_);
-            AddRow(config, "Schedule type", scheduleType_);
-            AddRow(config, "Start time", startAt_);
-            AddRow(config, "Repeat every", repeatInterval_);
-            AddRow(config, "Weekdays", weekdays_, 85);
+            AddRow(config, "席位", seatBox_);
+            AddRow(config, "語言", CreateLanguagePanel());
+            AddRow(config, "播放次數", playCount_);
+            AddRow(config, "間隔（秒）", playInterval_);
+            AddRow(config, "排程類型", scheduleType_);
+            AddRow(config, "開始時間", startAt_);
+            AddRow(config, "重複間隔", repeatInterval_);
+            AddRow(config, "星期", weekdays_, 85);
             configGroup.Controls.Add(config);
             root.Controls.Add(configGroup, 1, 0);
 
             var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.RightToLeft, AutoSize = true };
-            var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel };
+            var cancel = new Button { Text = "取消", DialogResult = DialogResult.Cancel };
             saveButton_.Click += saveButton_Click;
             buttons.Controls.Add(cancel);
             buttons.Controls.Add(saveButton_);
@@ -123,10 +130,14 @@ namespace ste.pa.pamanager
             selectAllZones_.CheckedChanged += (s, e) => SetAllItemsChecked(zones_, selectAllZones_.Checked);
             stations_.ItemCheck += (s, e) => BeginInvoke(new Action(UpdateSelectAllCheckBoxes));
             zones_.ItemCheck += (s, e) => BeginInvoke(new Action(UpdateSelectAllCheckBoxes));
-            scheduleType_.Items.AddRange(new object[] { "ONCE", "DAILY", "WEEKLY" });
+            scheduleType_.Items.AddRange(new object[] {
+                new ScheduleTypeItem { Value = "ONCE", Name = "單次" },
+                new ScheduleTypeItem { Value = "DAILY", Name = "每日" },
+                new ScheduleTypeItem { Value = "WEEKLY", Name = "每週" }
+            });
             scheduleType_.SelectedIndex = 0;
             scheduleType_.SelectedIndexChanged += scheduleType_SelectedIndexChanged;
-            weekdays_.Items.AddRange(new object[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" });
+            weekdays_.Items.AddRange(new object[] { "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日" });
         }
 
         private static TabPage CreateMessagePage(string title, ListBox list)
@@ -218,7 +229,7 @@ namespace ste.pa.pamanager
             SetLanguage(Convert.ToInt32(row["LANGUAGE"]));
             playCount_.Value = Convert.ToDecimal(row["PLAY_COUNT"]);
             playInterval_.Value = Convert.ToDecimal(row["PLAY_INTERVAL_SEC"]);
-            scheduleType_.SelectedItem = row["SCHEDULE_TYPE"].ToString();
+            SelectScheduleType(row["SCHEDULE_TYPE"].ToString());
             startAt_.Value = Convert.ToDateTime(row["START_AT"]);
             repeatInterval_.Value = Convert.ToDecimal(row["REPEAT_INTERVAL"]);
             if (row["WEEKDAY_MASK"] != DBNull.Value) CheckWeekdays(Convert.ToInt32(row["WEEKDAY_MASK"]));
@@ -235,8 +246,8 @@ namespace ste.pa.pamanager
 
         private void scheduleType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            weekdays_.Enabled = scheduleType_.SelectedItem != null && scheduleType_.SelectedItem.ToString() == "WEEKLY";
-            repeatInterval_.Enabled = scheduleType_.SelectedItem == null || scheduleType_.SelectedItem.ToString() != "ONCE";
+            weekdays_.Enabled = ScheduleTypeValue() == "WEEKLY";
+            repeatInterval_.Enabled = ScheduleTypeValue() != "ONCE";
         }
 
         private MessageItem SelectedMessage()
@@ -249,18 +260,18 @@ namespace ste.pa.pamanager
             MessageItem message = SelectedMessage();
             if (string.IsNullOrWhiteSpace(nameBox_.Text) || message == null || stations_.CheckedItems.Count == 0 || zones_.CheckedItems.Count == 0 || seatBox_.SelectedItem == null)
             {
-                MessageBox.Show("Name, message, station and zone are required.", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("名稱、訊息、車站和區域為必填項目。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (scheduleType_.SelectedItem.ToString() == "WEEKLY" && weekdays_.CheckedItems.Count == 0)
+            if (ScheduleTypeValue() == "WEEKLY" && weekdays_.CheckedItems.Count == 0)
             {
-                MessageBox.Show("Select at least one weekday for a weekly schedule.", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("每週排程至少要選擇一個星期。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             string stationIds = string.Join(",", stations_.CheckedItems.Cast<SelectionItem>().Select(x => x.Id.ToString()).OrderBy(x => int.Parse(x)));
             int zoneMask = zones_.CheckedItems.Cast<SelectionItem>().Aggregate(0, (mask, x) => mask | (1 << (x.Id - 1)));
-            int weekdayMask = scheduleType_.SelectedItem.ToString() == "WEEKLY" ? weekdays_.CheckedIndices.Cast<int>().Aggregate(0, (mask, x) => mask | (1 << x)) : 0;
+            int weekdayMask = ScheduleTypeValue() == "WEEKLY" ? weekdays_.CheckedIndices.Cast<int>().Aggregate(0, (mask, x) => mask | (1 << x)) : 0;
             int language = (chineseBox_.Checked ? 1 : 0) | (taiwaneseBox_.Checked ? 2 : 0) | (hakkaBox_.Checked ? 4 : 0) | (englishBox_.Checked ? 8 : 0);
             int seatId = ((SelectionItem)seatBox_.SelectedItem).Id;
             string escapedName = Escape(nameBox_.Text.Trim());
@@ -270,19 +281,19 @@ namespace ste.pa.pamanager
                 sql = "UPDATE pa_broadcast_schedule SET SCHEDULE_NAME='" + escapedName + "', ENABLED=" + (enabledBox_.Checked ? 1 : 0) +
                     ", MSG_ID=" + message.Id + ", MSG_VERSION='" + Escape(message.Version) + "', STATIONS='" + stationIds + "', ZONES=" + zoneMask +
                     ", SEAT_ID=" + seatId + ", LANGUAGE=" + language + ", PLAY_COUNT=" + playCount_.Value + ", PLAY_INTERVAL_SEC=" + playInterval_.Value +
-                    ", SCHEDULE_TYPE='" + scheduleType_.SelectedItem + "', START_AT='" + DateSql(startAt_.Value) + "'" +
+                    ", SCHEDULE_TYPE='" + ScheduleTypeValue() + "', START_AT='" + DateSql(startAt_.Value) + "'" +
                     ", REPEAT_INTERVAL=" + repeatInterval_.Value + ", WEEKDAY_MASK=" + weekdayMask + ", NEXT_RUN_AT='" + DateSql(startAt_.Value) + "', UPDATED_AT=NOW(3) WHERE SCHEDULE_ID=" + scheduleId_.Value;
             }
             else
             {
                 sql = "INSERT INTO pa_broadcast_schedule (LOCATION_ID,SCHEDULE_NAME,ENABLED,MSG_ID,MSG_VERSION,STATIONS,ZONES,SEAT_ID,LANGUAGE,PLAY_COUNT,PLAY_INTERVAL_SEC,SCHEDULE_TYPE,START_AT,REPEAT_INTERVAL,WEEKDAY_MASK,NEXT_RUN_AT,CREATED_AT,UPDATED_AT) VALUES (" +
-                    Program.profileLocIndex + ",'" + escapedName + "'," + (enabledBox_.Checked ? 1 : 0) + "," + message.Id + ",'" + Escape(message.Version) + "','" + stationIds + "'," + zoneMask + "," + seatId + "," + language + "," + playCount_.Value + "," + playInterval_.Value + ",'" + scheduleType_.SelectedItem + "','" + DateSql(startAt_.Value) + "'," + repeatInterval_.Value + "," + weekdayMask + ",'" + DateSql(startAt_.Value) + "',NOW(3),NOW(3))";
+                    Program.profileLocIndex + ",'" + escapedName + "'," + (enabledBox_.Checked ? 1 : 0) + "," + message.Id + ",'" + Escape(message.Version) + "','" + stationIds + "'," + zoneMask + "," + seatId + "," + language + "," + playCount_.Value + "," + playInterval_.Value + ",'" + ScheduleTypeValue() + "','" + DateSql(startAt_.Value) + "'," + repeatInterval_.Value + "," + weekdayMask + ",'" + DateSql(startAt_.Value) + "',NOW(3),NOW(3))";
             }
             dbConnEnum dbConn = dbConnEnum.ErrNoConn;
             var queries = new List<SqlQuery> { new SqlQuery { CommandText = sql } };
             if (Program.dbLock.ExcuteNoneResultQuery(queries, ref dbConn) < 1)
             {
-                MessageBox.Show("Unable to save the schedule.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("無法儲存排程。", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             saved_?.Invoke();
@@ -298,6 +309,8 @@ namespace ste.pa.pamanager
 
         private static string Escape(string value) { return (value ?? string.Empty).Replace("'", "''"); }
         private static string DateSql(DateTime value) { return value.ToString("yyyy-MM-dd HH:mm:ss"); }
+        private string ScheduleTypeValue() { var item = scheduleType_.SelectedItem as ScheduleTypeItem; return item == null ? "ONCE" : item.Value; }
+        private void SelectScheduleType(string value) { for (int i = 0; i < scheduleType_.Items.Count; i++) if (((ScheduleTypeItem)scheduleType_.Items[i]).Value == value) { scheduleType_.SelectedIndex = i; return; } }
         private void SelectMessage(int id, string version) { SelectMessage(normalMessages_, id, version); SelectMessage(emergencyMessages_, id, version); }
         private static void SelectMessage(ListBox list, int id, string version) { for (int i = 0; i < list.Items.Count; i++) { var item = (MessageItem)list.Items[i]; if (item.Id == id && item.Version == version) { list.SelectedIndex = i; return; } } }
         private void CheckStations(string ids) { var set = new HashSet<string>(ids.Split(',')); for (int i = 0; i < stations_.Items.Count; i++) stations_.SetItemChecked(i, set.Contains(((SelectionItem)stations_.Items[i]).Id.ToString())); }

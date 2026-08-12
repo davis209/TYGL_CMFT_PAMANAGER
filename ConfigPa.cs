@@ -165,7 +165,7 @@ namespace ste.pa.pamanager
 
         private void InitializeScheduleTab()
         {
-            tabPage_schedule_ = new TabPage("Message Schedule")
+            tabPage_schedule_ = new TabPage("訊息排程")
             {
                 BackColor = System.Drawing.SystemColors.Control,
                 Padding = new Padding(6)
@@ -177,11 +177,11 @@ namespace ste.pa.pamanager
             layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
             var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true };
-            var addButton = new Button { Text = "New", AutoSize = true };
-            var editButton = new Button { Text = "Edit", AutoSize = true };
-            var enabledButton = new Button { Text = "Enable / Disable", AutoSize = true };
-            var deleteButton = new Button { Text = "Delete", AutoSize = true };
-            var refreshButton = new Button { Text = "Refresh", AutoSize = true };
+            var addButton = new Button { Text = "新增", AutoSize = true };
+            var editButton = new Button { Text = "編輯", AutoSize = true };
+            var enabledButton = new Button { Text = "啟用 / 停用", AutoSize = true };
+            var deleteButton = new Button { Text = "刪除", AutoSize = true };
+            var refreshButton = new Button { Text = "重新整理", AutoSize = true };
             addButton.Click += (s, e) => CreateSchedule();
             editButton.Click += (s, e) => EditSelectedSchedule();
             enabledButton.Click += (s, e) => ToggleScheduleEnabled();
@@ -212,27 +212,27 @@ namespace ste.pa.pamanager
             try
             {
                 dbConnEnum dbConn = dbConnEnum.ErrNoConn;
-                string sql = "SELECT SCHEDULE_ID AS 'ID', SCHEDULE_NAME AS 'Name', " +
-                    "CASE WHEN ENABLED=1 THEN 'Enabled' ELSE 'Disabled' END AS 'Status', " +
-                    "MSG_ID AS 'Message ID', STATIONS AS 'Stations', ZONES AS 'Zones', " +
-                    "SCHEDULE_TYPE AS 'Type', START_AT AS 'Start Time', NEXT_RUN_AT AS 'Next Run' " +
+                string sql = "SELECT SCHEDULE_ID AS '識別碼', SCHEDULE_NAME AS '名稱', " +
+                    "CASE WHEN ENABLED=1 THEN '啟用' ELSE '停用' END AS '狀態', " +
+                    "MSG_ID AS '訊息編號', STATIONS AS '車站', ZONES AS '區域', " +
+                    "SCHEDULE_TYPE AS '類型', START_AT AS '開始時間', NEXT_RUN_AT AS '下次執行時間' " +
                     "FROM pa_broadcast_schedule WHERE LOCATION_ID=" + Program.profileLocIndex + " ORDER BY SCHEDULE_ID DESC";
                 var queries = new List<SqlQuery> { new SqlQuery { CommandText = sql } };
                 DataSet ds = Program.dbLock.FetchData(queries, ref dbConn);
                 dataGridView_schedule_.DataSource = ds != null && ds.Tables.Count > 0 ? ds.Tables[0] : null;
-                if (dataGridView_schedule_.Columns.Contains("ID")) dataGridView_schedule_.Columns["ID"].Visible = false;
+                if (dataGridView_schedule_.Columns.Contains("識別碼")) dataGridView_schedule_.Columns["識別碼"].Visible = false;
             }
             catch (Exception ex)
             {
                 Program.WriteEventLog("[ERROR] Load broadcast schedules: " + ex, fileName_ + "." + MethodBase.GetCurrentMethod().Name + "()");
-                MessageBox.Show("Unable to load message schedules. Confirm that PA_BROADCAST_SCHEDULE has been created.", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("無法載入訊息排程，請確認已建立 PA_BROADCAST_SCHEDULE 資料表。", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private long? SelectedScheduleId()
         {
             if (dataGridView_schedule_ == null || dataGridView_schedule_.CurrentRow == null) return null;
-            object value = dataGridView_schedule_.CurrentRow.Cells["ID"].Value;
+            object value = dataGridView_schedule_.CurrentRow.Cells["識別碼"].Value;
             return value == null || value == DBNull.Value ? (long?)null : Convert.ToInt64(value);
         }
 
@@ -246,7 +246,7 @@ namespace ste.pa.pamanager
             long? scheduleId = SelectedScheduleId();
             if (!scheduleId.HasValue)
             {
-                MessageBox.Show("Select a schedule to edit.", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("請先選擇要編輯的排程。", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             OpenScheduleEditor(scheduleId);
@@ -263,17 +263,17 @@ namespace ste.pa.pamanager
         private void ToggleScheduleEnabled()
         {
             long? id = SelectedScheduleId();
-            if (!id.HasValue) { MessageBox.Show("Select a schedule first.", sysErr_); return; }
-            object current = dataGridView_schedule_.CurrentRow.Cells["Status"].Value;
-            bool enabled = current != null && current.ToString() == "Enabled";
+            if (!id.HasValue) { MessageBox.Show("請先選擇排程。", sysErr_); return; }
+            object current = dataGridView_schedule_.CurrentRow.Cells["狀態"].Value;
+            bool enabled = current != null && current.ToString() == "啟用";
             ExecuteScheduleCommand("UPDATE pa_broadcast_schedule SET ENABLED=" + (enabled ? 0 : 1) + ", UPDATED_AT=NOW(3) WHERE SCHEDULE_ID=" + id.Value);
         }
 
         private void DeleteSchedule()
         {
             long? id = SelectedScheduleId();
-            if (!id.HasValue) { MessageBox.Show("Select a schedule first.", sysErr_); return; }
-            if (MessageBox.Show("Delete the selected schedule?", sysErr_, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            if (!id.HasValue) { MessageBox.Show("請先選擇排程。", sysErr_); return; }
+            if (MessageBox.Show("確定要刪除選取的排程？", sysErr_, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             ExecuteScheduleCommand("DELETE FROM pa_broadcast_schedule WHERE SCHEDULE_ID=" + id.Value);
         }
 
@@ -290,7 +290,7 @@ namespace ste.pa.pamanager
             catch (Exception ex)
             {
                 Program.WriteEventLog("[ERROR] Update broadcast schedule: " + ex, fileName_ + "." + MethodBase.GetCurrentMethod().Name + "()");
-                MessageBox.Show("Unable to update the schedule. Schedules with execution logs must be disabled instead of deleted.", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("無法更新排程。已有執行紀錄的排程應停用，而非刪除。", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
