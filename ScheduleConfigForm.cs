@@ -265,12 +265,12 @@ namespace ste.pa.pamanager
             MessageItem message = SelectedMessage();
             if (string.IsNullOrWhiteSpace(nameBox_.Text) || message == null || stations_.CheckedItems.Count == 0 || zones_.CheckedItems.Count == 0 || seatBox_.SelectedItem == null)
             {
-                MessageBox.Show("名稱、訊息、車站和區域為必填項目。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Program.MessageBox_Normal("名稱、訊息、車站和區域為必填項目。", Text, this);
                 return;
             }
             if (ScheduleTypeValue() == "WEEKLY" && weekdays_.CheckedItems.Count == 0)
             {
-                MessageBox.Show("每週排程至少要選擇一個星期。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Program.MessageBox_Normal("每週排程至少要選擇一個星期。", Text, this);
                 return;
             }
 
@@ -298,7 +298,7 @@ namespace ste.pa.pamanager
             var queries = new List<SqlQuery> { new SqlQuery { CommandText = sql } };
             if (Program.dbLock.ExcuteNoneResultQuery(queries, ref dbConn) < 1)
             {
-                MessageBox.Show("無法儲存排程。", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Program.MessageBox_Normal("無法儲存排程。", Text, this);
                 return;
             }
             saved_?.Invoke();

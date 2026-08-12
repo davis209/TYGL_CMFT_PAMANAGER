@@ -227,7 +227,7 @@ namespace ste.pa.pamanager
             catch (Exception ex)
             {
                 Program.WriteEventLog("[ERROR] Load broadcast schedules: " + ex, fileName_ + "." + MethodBase.GetCurrentMethod().Name + "()");
-                MessageBox.Show("無法載入訊息排程，請確認已建立 PA_BROADCAST_SCHEDULE 資料表。", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Program.MessageBox_Normal("無法載入訊息排程，請確認已建立 PA_BROADCAST_SCHEDULE 資料表。", sysErr_, this);
             }
         }
 
@@ -248,7 +248,7 @@ namespace ste.pa.pamanager
             long? scheduleId = SelectedScheduleId();
             if (!scheduleId.HasValue)
             {
-                MessageBox.Show("請先選擇要編輯的排程。", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Program.MessageBox_Normal("請先選擇要編輯的排程。", sysErr_, this);
                 return;
             }
             OpenScheduleEditor(scheduleId);
@@ -265,7 +265,7 @@ namespace ste.pa.pamanager
         private void ToggleScheduleEnabled()
         {
             long? id = SelectedScheduleId();
-            if (!id.HasValue) { MessageBox.Show("請先選擇排程。", sysErr_); return; }
+            if (!id.HasValue) { Program.MessageBox_Normal("請先選擇排程。", sysErr_, this); return; }
             object current = dataGridView_schedule_.CurrentRow.Cells["狀態"].Value;
             bool enabled = current != null && current.ToString() == "啟用";
             ExecuteScheduleCommand("UPDATE pa_broadcast_schedule SET ENABLED=" + (enabled ? 0 : 1) + ", UPDATED_AT=NOW(3) WHERE SCHEDULE_ID=" + id.Value);
@@ -274,8 +274,8 @@ namespace ste.pa.pamanager
         private void DeleteSchedule()
         {
             long? id = SelectedScheduleId();
-            if (!id.HasValue) { MessageBox.Show("請先選擇排程。", sysErr_); return; }
-            if (MessageBox.Show("確定要刪除選取的排程？", sysErr_, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            if (!id.HasValue) { Program.MessageBox_Normal("請先選擇排程。", sysErr_, this); return; }
+            if (STEMessageBox.Show("確定要刪除選取的排程？", sysErr_, Program.defaultLanguage, MsgBoxButton.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             ExecuteScheduleCommand("DELETE FROM pa_broadcast_schedule WHERE SCHEDULE_ID=" + id.Value);
         }
 
@@ -292,7 +292,7 @@ namespace ste.pa.pamanager
             catch (Exception ex)
             {
                 Program.WriteEventLog("[ERROR] Update broadcast schedule: " + ex, fileName_ + "." + MethodBase.GetCurrentMethod().Name + "()");
-                MessageBox.Show("無法更新排程。已有執行紀錄的排程應停用，而非刪除。", sysErr_, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Program.MessageBox_Normal("無法更新排程。已有執行紀錄的排程應停用，而非刪除。", sysErr_, this);
             }
         }
 
