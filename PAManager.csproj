@@ -98,6 +98,8 @@
     <Compile Include="AirRaidBroadcast.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AirRaidPasswordForm.cs" />
+    <Compile Include="AirRaidPasswordService.cs" />
     <Compile Include="AirRaidBroadcast.Designer.cs">
       <DependentUpon>AirRaidBroadcast.cs</DependentUpon>
     </Compile>

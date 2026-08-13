@@ -149,6 +149,8 @@ namespace ste.pa.pamanager
         {
             try
             {
+                if (!RequestPasswordVerification()) return;
+
                 byte seatId = Convert.ToByte(comboBox_seats.SelectedValue);
                 byte voiceId = Convert.ToByte(comboBox_voice_id.SelectedItem);
 
@@ -157,6 +159,8 @@ namespace ste.pa.pamanager
                 M63 cmd = new M63(seatId, stationList);
 
                 bool result = await PaService.Instance.StartAirRaidAlarm(cmd);
+
+                WriteAirRaidAudit("START", seatId, result);
 
                 if (!result)
                 {
@@ -173,11 +177,15 @@ namespace ste.pa.pamanager
         {
             try
             {
+                if (!RequestPasswordVerification()) return;
+
                 byte seatId = Convert.ToByte(comboBox_seats.SelectedValue);
 
                 M64 cmd = new M64(seatId, stations_);
 
                 bool result = await PaService.Instance.EndAirRaidAlarm(cmd);
+
+                WriteAirRaidAudit("END", seatId, result);
 
                 if (!result)
                 {
@@ -193,6 +201,28 @@ namespace ste.pa.pamanager
         private void but_close_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private bool RequestPasswordVerification()
+        {
+            using (AirRaidPasswordForm dialog = new AirRaidPasswordForm())
+            {
+                bool verified = dialog.ShowDialog(this) == DialogResult.OK;
+                if (!verified)
+                {
+                    Program.WriteEventLog("[WARN] Air-raid command cancelled or password verification failed. Operator=[" + Program.localUser + "]",
+                        fileName_ + ".RequestPasswordVerification()");
+                }
+                return verified;
+            }
+        }
+
+        private void WriteAirRaidAudit(string operation, byte seatId, bool sendResult)
+        {
+            string stations = String.Join(",", stations_.Select(station => station.ToString()));
+            Program.WriteEventLog("[AUDIT] Air-raid command. Operator=[" + Program.localUser + "] Operation=[" + operation +
+                "] Seat=[" + seatId + "] Stations=[" + stations + "] SendResult=[" + sendResult + "]",
+                fileName_ + ".WriteAirRaidAudit()");
         }
 
     }
