@@ -166,9 +166,13 @@ namespace ste.pa.pamanager
         {
             var panel = new FlowLayoutPanel { Dock = DockStyle.Fill };
             chineseBox_.Margin = new Padding(0, 3, 4, 3);
+            chineseBox_.Width = 85;
             taiwaneseBox_.Margin = new Padding(0, 3, 4, 3);
+            taiwaneseBox_.Width = 85;
             hakkaBox_.Margin = new Padding(0, 3, 4, 3);
+            hakkaBox_.Width = 85;
             englishBox_.Margin = new Padding(0, 3, 0, 3);
+            englishBox_.Width = 85;
             panel.Controls.AddRange(new Control[] { chineseBox_, taiwaneseBox_, hakkaBox_, englishBox_ });
             chineseBox_.Checked = true;
             return panel;

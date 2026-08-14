@@ -181,7 +181,7 @@ namespace ste.pa.pamanager
             var editButton = new Button { Text = "編輯", AutoSize = true };
             var enabledButton = new Button { Text = "啟用 / 停用", AutoSize = true };
             var deleteButton = new Button { Text = "刪除", AutoSize = true };
-            var refreshButton = new Button { Text = "重新整理", AutoSize = true };
+            var refreshButton = new Button { Text = "重新載入", AutoSize = true };
             addButton.Click += (s, e) => CreateSchedule();
             editButton.Click += (s, e) => EditSelectedSchedule();
             enabledButton.Click += (s, e) => ToggleScheduleEnabled();
