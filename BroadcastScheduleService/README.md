@@ -47,6 +47,10 @@ Optional protocol header parameters mirror `PaTcpClient`: `--pa-server-id` (defa
 
 `Start()` and `Stop()` are thread-safe, idempotent lifecycle APIs. `Stop()` stops new dispatches, requests cancellation from every executor, and waits for current executions to return. The command adapter cannot forcibly terminate a child process; a custom executor should honor its `stopRequested` argument for immediate protocol-level cancellation.
 
+## Database TLS certificate verification
+
+The service verifies the database server certificate by default. Use `--db-tls-verify 0` only for an internal database using a self-signed certificate; this avoids the certificate-chain error but does not authenticate the server certificate. The bundled `start_service.bat` sets this to `0` as an editable deployment default. Set `DB_TLS_VERIFY=1` after the database CA certificate is trusted on the service host.
+
 ## Scheduling and safety
 
 - Only `LOCATION_ID = --location-id` rows are selected.

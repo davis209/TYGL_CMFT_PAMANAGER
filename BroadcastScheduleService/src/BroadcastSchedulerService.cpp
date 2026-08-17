@@ -24,6 +24,8 @@ public:
         if (connection_ == nullptr) throw std::runtime_error("mysql_init failed");
         unsigned int timeout = 5;
         mysql_options(connection_, MYSQL_OPT_CONNECT_TIMEOUT, &timeout);
+        const bool verifyCertificate = config.tlsVerifyServerCertificate;
+        mysql_options(connection_, MYSQL_OPT_SSL_VERIFY_SERVER_CERT, &verifyCertificate);
         if (mysql_real_connect(connection_, config.host.c_str(), config.user.c_str(), config.password.c_str(),
                                config.database.c_str(), config.port, nullptr, 0) == nullptr) {
             const std::string error = mysql_error(connection_);
