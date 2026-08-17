@@ -2,7 +2,7 @@
 
 Cross-platform C++17 service that executes due rows in `pa_broadcast_schedule` for one configured `LOCATION_ID` only. It supports concurrent execution of multiple due schedules, records each run in `pa_broadcast_schedule_log`, and advances `NEXT_RUN_AT` transactionally before dispatching work.
 
-The default executor implements PAManager's M44 prerecorded-message protocol directly: it connects to the configured PA device, sends M44, and records success only after receiving A44. The C++ `IBroadcastExecutor` interface remains available for a future protocol variant.
+The default executor implements PAManager's M44 prerecorded-message protocol directly. It maintains one shared TCP connection to the configured PA device, sends an initial and 60-second heartbeat, serializes M44 requests, and records success only after receiving A44. The C++ `IBroadcastExecutor` interface remains available for a future protocol variant.
 
 ## Prerequisites
 
@@ -56,4 +56,4 @@ The service verifies the database server certificate by default. Use `--db-tls-v
 - Only `LOCATION_ID = --location-id` rows are selected.
 - A transaction locks due rows, advances `NEXT_RUN_AT`, and creates an `IN_PROGRESS` log row before execution. This prevents duplicate dispatch by multiple service processes using the same database.
 - `ONCE` schedules are cleared after dispatch. `DAILY` and `WEEKLY` schedules use `REPEAT_INTERVAL`; weekly schedules use Monday-to-Sunday bits 0–6 of `WEEKDAY_MASK`.
-- Jobs from a polling batch run asynchronously, so multiple due schedules can execute at the same time. Each job uses its own PA TCP connection, making M44 request/response handling independent.
+- Jobs from a polling batch run asynchronously, so multiple due schedules can execute at the same time. M44 device requests are serialized over the shared PA TCP connection, matching PAManager's single-session behavior.
