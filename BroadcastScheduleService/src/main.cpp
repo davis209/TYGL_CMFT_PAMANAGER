@@ -18,7 +18,7 @@ void OnSignal(int) { g_stopRequested.store(true); }
 void PrintUsage() {
     std::cout << "Usage: BroadcastScheduleService --location-id <id> --db-user <user> --db-name <database> "
                  "--pa-host <ip-or-hostname> --pa-port <port> [--db-host <host>] [--db-port <port>] "
-                 "[--db-password <password>] [--poll-seconds <seconds>] [--pa-console-id <id>]\n";
+                 "[--db-password <password>] [--db-tls-verify <0|1>] [--poll-seconds <seconds>] [--pa-console-id <id>]\n";
 }
 
 const char* ValueAfter(int& index, int argc, char* argv[], const std::string& option) {
@@ -40,6 +40,7 @@ int main(int argc, char* argv[]) {
             else if (option == "--db-port") config.database.port = static_cast<unsigned int>(std::stoul(ValueAfter(index, argc, argv, option)));
             else if (option == "--db-user") config.database.user = ValueAfter(index, argc, argv, option);
             else if (option == "--db-password") config.database.password = ValueAfter(index, argc, argv, option);
+            else if (option == "--db-tls-verify") config.database.tlsVerifyServerCertificate = std::stoul(ValueAfter(index, argc, argv, option)) != 0;
             else if (option == "--db-name") config.database.database = ValueAfter(index, argc, argv, option);
             else if (option == "--poll-seconds") config.pollIntervalSeconds = static_cast<unsigned int>(std::stoul(ValueAfter(index, argc, argv, option)));
             else if (option == "--pa-host") paDevice.host = ValueAfter(index, argc, argv, option);
@@ -78,6 +79,7 @@ int main(int argc, char* argv[]) {
         pa_scheduler::BroadcastSchedulerService service(config, executor);
         pa_scheduler::ServiceLogger::Info("Starting scheduler for location " + std::to_string(config.locationId) +
             "; database=" + config.database.host + ":" + std::to_string(config.database.port) + "/" + config.database.database +
+            "; TLS certificate verification=" + (config.database.tlsVerifyServerCertificate ? "enabled" : "disabled") +
             "; PA device=" + paDevice.host + ":" + std::to_string(paDevice.port));
         service.Start();
         while (!g_stopRequested.load()) std::this_thread::sleep_for(std::chrono::milliseconds(200));

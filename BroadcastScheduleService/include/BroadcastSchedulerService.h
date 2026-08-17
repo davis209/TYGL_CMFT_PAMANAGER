@@ -17,6 +17,7 @@ struct DatabaseConfig {
     std::string user;
     std::string password;
     std::string database;
+    bool tlsVerifyServerCertificate = true;
 };
 
 struct BroadcastSchedule {
