@@ -196,6 +196,7 @@ void BroadcastSchedulerService::Start() {
     bool expected = false;
     if (!running_.compare_exchange_strong(expected, true)) return;
     stopRequested_.store(false);
+    executor_->Start();
     ServiceLogger::Info("Scheduler worker started");
     worker_ = std::thread(&BroadcastSchedulerService::WorkerLoop, this);
 }
@@ -203,6 +204,7 @@ void BroadcastSchedulerService::Start() {
 void BroadcastSchedulerService::Stop() {
     if (!running_.exchange(false) && !worker_.joinable()) return;
     stopRequested_.store(true);
+    executor_->Stop();
     ServiceLogger::Info("Scheduler worker stopping");
     if (worker_.joinable()) worker_.join();
     std::vector<std::future<void>> jobs;

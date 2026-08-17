@@ -89,6 +89,14 @@ bool IsConnectionPending() {
 #endif
 }
 
+bool IsWouldBlock() {
+#ifdef _WIN32
+    return WSAGetLastError() == WSAEWOULDBLOCK;
+#else
+    return errno == EWOULDBLOCK || errno == EAGAIN;
+#endif
+}
+
 void SetNonBlocking(Socket socket) {
 #ifdef _WIN32
     u_long enabled = 1;
@@ -222,14 +230,13 @@ void CopyAscii(std::array<unsigned char, 16>& header, std::size_t offset, std::s
     for (std::size_t index = 0; index < count; ++index) header[offset + index] = static_cast<unsigned char>(value[index]);
 }
 
-std::vector<unsigned char> BuildFrame(const PaDeviceConfig& config, const BroadcastSchedule& schedule) {
+std::vector<unsigned char> BuildFrame(const PaDeviceConfig& config, const std::vector<unsigned char>& packet) {
     std::array<unsigned char, 16> header = {};
     header[0] = config.serverId;
     header[1] = config.consoleId;
     CopyAscii(header, 2, 5, config.version);
     CopyAscii(header, 7, 3, config.lineId);
     CopyAscii(header, 10, 6, config.stationId);
-    const auto packet = BuildM44Payload(schedule);
     std::vector<unsigned char> data(header.begin(), header.end());
     data.insert(data.end(), packet.begin(), packet.end());
     if (data.size() > 65535) throw std::runtime_error("M44 frame exceeds protocol length limit");
@@ -245,37 +252,127 @@ std::vector<unsigned char> BuildFrame(const PaDeviceConfig& config, const Broadc
 
 } // namespace
 
-M44BroadcastExecutor::M44BroadcastExecutor(PaDeviceConfig config) : config_(std::move(config)) {
+class M44BroadcastExecutor::Session {
+public:
+    SocketRuntime runtime;
+    SocketHandle socket;
+    std::mutex mutex;
+    std::vector<unsigned char> received;
+    std::chrono::steady_clock::time_point lastHeartbeat = std::chrono::steady_clock::time_point::min();
+};
+
+namespace {
+void CloseSession(M44BroadcastExecutor::Session& session) {
+    session.socket.Reset(InvalidSocket);
+    session.received.clear();
+    session.lastHeartbeat = std::chrono::steady_clock::time_point::min();
+}
+
+void EnsureConnected(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
+                     const std::atomic_bool& stopRequested) {
+    if (session.socket.get() != InvalidSocket) return;
+    session.socket.Reset(Connect(config, stopRequested));
+    ServiceLogger::Info("Connected to PA device " + config.host + ":" + std::to_string(config.port));
+}
+
+void SendHeartbeat(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
+                   const std::atomic_bool& stopRequested) {
+    const std::vector<unsigned char> heartbeat = {0};
+    SendAll(session.socket.get(), BuildFrame(config, heartbeat), stopRequested, config.connectTimeoutMilliseconds);
+    session.lastHeartbeat = std::chrono::steady_clock::now();
+    ServiceLogger::Info("Sent PA heartbeat");
+}
+
+void EnsureHeartbeat(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
+                     const std::atomic_bool& stopRequested) {
+    const auto now = std::chrono::steady_clock::now();
+    if (session.lastHeartbeat == std::chrono::steady_clock::time_point::min() ||
+        now - session.lastHeartbeat >= std::chrono::seconds(60)) {
+        SendHeartbeat(session, config, stopRequested);
+    }
+}
+} // namespace
+
+M44BroadcastExecutor::M44BroadcastExecutor(PaDeviceConfig config)
+    : config_(std::move(config)), session_(new Session()) {
     if (config_.host.empty() || config_.port == 0) throw std::invalid_argument("PA device host and port are required");
 }
 
+M44BroadcastExecutor::~M44BroadcastExecutor() { Stop(); }
+
+void M44BroadcastExecutor::Start() {
+    if (heartbeatThread_.joinable()) return;
+    heartbeatStopRequested_.store(false);
+    heartbeatThread_ = std::thread(&M44BroadcastExecutor::HeartbeatLoop, this);
+}
+
+void M44BroadcastExecutor::Stop() {
+    heartbeatStopRequested_.store(true);
+    if (heartbeatThread_.joinable()) heartbeatThread_.join();
+    std::lock_guard<std::mutex> lock(session_->mutex);
+    CloseSession(*session_);
+}
+
+void M44BroadcastExecutor::HeartbeatLoop() {
+    while (!heartbeatStopRequested_.load()) {
+        bool connected = false;
+        try {
+            std::lock_guard<std::mutex> lock(session_->mutex);
+            EnsureConnected(*session_, config_, heartbeatStopRequested_);
+            EnsureHeartbeat(*session_, config_, heartbeatStopRequested_);
+            connected = session_->socket.get() != InvalidSocket;
+        } catch (const std::exception& error) {
+            std::lock_guard<std::mutex> lock(session_->mutex);
+            CloseSession(*session_);
+            ServiceLogger::Error("PA connection maintenance failed: " + std::string(error.what()));
+        }
+
+        const unsigned int waitSeconds = connected ? 1U : 5U;
+        for (unsigned int second = 0; second < waitSeconds && !heartbeatStopRequested_.load(); ++second)
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
 ExecutionResult M44BroadcastExecutor::Execute(const BroadcastSchedule& schedule, const std::atomic_bool& stopRequested) {
+    std::lock_guard<std::mutex> lock(session_->mutex);
     try {
         if (stopRequested.load()) return {ExecutionStatus::Cancelled, 0, "STOP_REQUESTED", "Service stop requested"};
-        ServiceLogger::Info("Sending M44 for schedule " + std::to_string(schedule.scheduleId) + " to " + config_.host + ":" + std::to_string(config_.port));
-        SocketRuntime runtime;
-        SocketHandle socket(Connect(config_, stopRequested));
-        SendAll(socket.get(), BuildFrame(config_, schedule), stopRequested, config_.connectTimeoutMilliseconds);
+        EnsureConnected(*session_, config_, stopRequested);
+        EnsureHeartbeat(*session_, config_, stopRequested);
+        ServiceLogger::Info("Sending M44 for schedule " + std::to_string(schedule.scheduleId) + " through shared PA connection");
+        SendAll(session_->socket.get(), BuildFrame(config_, BuildM44Payload(schedule)), stopRequested, config_.connectTimeoutMilliseconds);
 
-        std::vector<unsigned char> received;
         const auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(config_.responseTimeoutMilliseconds);
-        while (!stopRequested.load() && WaitFor(socket.get(), false, stopRequested, deadline)) {
+        while (!stopRequested.load() && WaitFor(session_->socket.get(), false, stopRequested, deadline)) {
             unsigned char buffer[2048];
-            const int length = recv(socket.get(), reinterpret_cast<char*>(buffer), sizeof(buffer), 0);
-            if (length <= 0) return {ExecutionStatus::Failed, 0, "CONNECTION_CLOSED", "PA device closed the connection before A44"};
-            received.insert(received.end(), buffer, buffer + length);
+            const int length = recv(session_->socket.get(), reinterpret_cast<char*>(buffer), sizeof(buffer), 0);
+            if (length == 0) {
+                CloseSession(*session_);
+                return {ExecutionStatus::Failed, 0, "CONNECTION_CLOSED", "PA device closed the persistent connection before A44"};
+            }
+            if (length < 0) {
+                if (IsWouldBlock()) continue;
+                const std::string error = SocketError("recv");
+                CloseSession(*session_);
+                return {ExecutionStatus::Failed, 0, "SOCKET_RECEIVE", error};
+            }
+            session_->received.insert(session_->received.end(), buffer, buffer + length);
             std::vector<unsigned char> payload;
-            while (ExtractFrame(received, payload)) {
-                if (payload.size() > 16 && payload[16] == A44) {
+            while (ExtractFrame(session_->received, payload)) {
+                if (payload.size() <= 16) continue;
+                if (payload[16] == A44) {
                     ServiceLogger::Info("Received A44 for schedule " + std::to_string(schedule.scheduleId));
                     return {ExecutionStatus::Success, 0, std::string(), std::string()};
                 }
+                if (payload[16] == 0x64) ServiceLogger::Info("Received PA heartbeat acknowledgement");
+                else ServiceLogger::Info("Received PA packet " + std::to_string(payload[16]) + " while waiting for A44");
             }
         }
         return stopRequested.load()
             ? ExecutionResult{ExecutionStatus::Cancelled, 0, "STOP_REQUESTED", "Service stop requested"}
             : ExecutionResult{ExecutionStatus::Failed, 0, "A44_TIMEOUT", "Timed out waiting for PA A44 response"};
     } catch (const std::exception& error) {
+        CloseSession(*session_);
         ServiceLogger::Error("M44 failed for schedule " + std::to_string(schedule.scheduleId) + ": " + error.what());
         return {ExecutionStatus::Failed, 0, "M44_TRANSPORT", error.what()};
     }

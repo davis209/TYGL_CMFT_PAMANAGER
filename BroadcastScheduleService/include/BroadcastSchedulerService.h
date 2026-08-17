@@ -53,6 +53,8 @@ struct ExecutionResult {
 class IBroadcastExecutor {
 public:
     virtual ~IBroadcastExecutor() = default;
+    virtual void Start() {}
+    virtual void Stop() {}
     virtual ExecutionResult Execute(const BroadcastSchedule& schedule,
                                     const std::atomic_bool& stopRequested) = 0;
 };
@@ -84,12 +86,20 @@ struct PaDeviceConfig {
 // Native implementation of PAManager's M44 prerecorded-message protocol.
 class M44BroadcastExecutor final : public IBroadcastExecutor {
 public:
+    class Session;
     explicit M44BroadcastExecutor(PaDeviceConfig config);
+    ~M44BroadcastExecutor() override;
+    void Start() override;
+    void Stop() override;
     ExecutionResult Execute(const BroadcastSchedule& schedule,
                             const std::atomic_bool& stopRequested) override;
 
 private:
+    void HeartbeatLoop();
     PaDeviceConfig config_;
+    std::unique_ptr<Session> session_;
+    std::atomic_bool heartbeatStopRequested_{false};
+    std::thread heartbeatThread_;
 };
 
 struct SchedulerConfig {
