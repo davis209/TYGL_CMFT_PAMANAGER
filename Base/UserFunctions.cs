@@ -955,7 +955,7 @@ namespace ste.pa.pamanager
 
             try
             {
-                string localSql = $"select * from  pa_dva_msg_status where location_id={locationId} order by SENT_TIME desc";
+                string localSql = $"select * from  pa_dva_msg_status where location_id={locationId} order by SENT_TIME desc limit 1";
 
                 var queries = new List<SqlQuery> { new SqlQuery { CommandText = localSql } };
                 DataSet ds = Program.dbLock.FetchData(queries, ref dbConn);
