@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>core.data_access_interface.pa</ProjectName>
+    <ProjectGuid>{D3A253C7-0841-41E4-A74A-44819F679163}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\ConfigPaAtsTriggeredBroadcast.cpp" />
+    <ClCompile Include="Src\ConfigPaDvaMessage.cpp" />
+    <ClCompile Include="Src\ConfigPaDvaMessageVersion.cpp" />
+    <ClCompile Include="src\ConfigPaStation.cpp" />
+    <ClCompile Include="Src\ConfigPaTrainDvaMessage.cpp" />
+    <ClCompile Include="Src\ConfigPaZone.cpp" />
+    <ClCompile Include="Src\ConfigPaZoneGroup.cpp" />
+    <ClCompile Include="Src\DatabaseQueryHelper.cpp" />
+    <ClCompile Include="Src\PaAtsTriggeredBroadcast.cpp" />
+    <ClCompile Include="Src\PaAtsTriggeredBroadcastAccessFactory.cpp" />
+    <ClCompile Include="Src\PaAtsTriggeredBroadcastHelper.cpp" />
+    <ClCompile Include="Src\PaDvaMessage.cpp" />
+    <ClCompile Include="Src\PaDvaMessageAccessFactory.cpp" />
+    <ClCompile Include="Src\PaDvaMessageHelper.cpp" />
+    <ClCompile Include="Src\PaDvaMessageVersion.cpp" />
+    <ClCompile Include="Src\PaDvaMessageVersionAccessFactory.cpp" />
+    <ClCompile Include="Src\PaDvaMessageVersionHelper.cpp" />
+    <ClCompile Include="src\PaStation.cpp" />
+    <ClCompile Include="src\PaStationAccessFactory.cpp" />
+    <ClCompile Include="src\PaStationHelper.cpp" />
+    <ClCompile Include="Src\PaTrainDvaMessage.cpp" />
+    <ClCompile Include="Src\PaTrainDvaMessageAccessFactory.cpp" />
+    <ClCompile Include="Src\PaTrainDvaMessageHelper.cpp" />
+    <ClCompile Include="Src\PaZone.cpp" />
+    <ClCompile Include="Src\PaZoneAccessFactory.cpp" />
+    <ClCompile Include="Src\PaZoneGroup.cpp" />
+    <ClCompile Include="Src\PaZoneGroupAccessFactory.cpp" />
+    <ClCompile Include="Src\PaZoneGroupHelper.cpp" />
+    <ClCompile Include="Src\PaZoneHelper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\ConfigPaAtsTriggeredBroadcast.h" />
+    <ClInclude Include="Src\ConfigPaDvaMessage.h" />
+    <ClInclude Include="Src\ConfigPaDvaMessageVersion.h" />
+    <ClInclude Include="src\ConfigPaStation.h" />
+    <ClInclude Include="Src\ConfigPaTrainDvaMessage.h" />
+    <ClInclude Include="Src\ConfigPaZone.h" />
+    <ClInclude Include="Src\ConfigPaZoneGroup.h" />
+    <ClInclude Include="Src\DatabaseQueryHelper.h" />
+    <ClInclude Include="src\GenericDaiHelper.h" />
+    <ClInclude Include="Src\IConfigPaAtsTriggeredBroadcast.h" />
+    <ClInclude Include="Src\IConfigPaDvaMessage.h" />
+    <ClInclude Include="Src\IConfigPaDvaMessageVersion.h" />
+    <ClInclude Include="src\IConfigPaStation.h" />
+    <ClInclude Include="Src\IConfigPaTrainDvaMessage.h" />
+    <ClInclude Include="Src\IConfigPaZone.h" />
+    <ClInclude Include="Src\IConfigPaZoneGroup.h" />
+    <ClInclude Include="Src\IPaAtsTriggeredBroadcast.h" />
+    <ClInclude Include="Src\IPaDvaMessage.h" />
+    <ClInclude Include="Src\IPaDvaMessageVersion.h" />
+    <ClInclude Include="src\IPaStation.h" />
+    <ClInclude Include="Src\IPaTrainDvaMessage.h" />
+    <ClInclude Include="Src\IPaZone.h" />
+    <ClInclude Include="Src\IPaZoneGroup.h" />
+    <ClInclude Include="Src\PaAtsTriggeredBroadcast.h" />
+    <ClInclude Include="Src\PaAtsTriggeredBroadcastAccessFactory.h" />
+    <ClInclude Include="Src\PaAtsTriggeredBroadcastHelper.h" />
+    <ClInclude Include="Src\PaDvaMessage.h" />
+    <ClInclude Include="Src\PaDvaMessageAccessFactory.h" />
+    <ClInclude Include="Src\PaDvaMessageHelper.h" />
+    <ClInclude Include="Src\PaDvaMessageVersion.h" />
+    <ClInclude Include="Src\PaDvaMessageVersionAccessFactory.h" />
+    <ClInclude Include="Src\PaDvaMessageVersionHelper.h" />
+    <ClInclude Include="src\PaStation.h" />
+    <ClInclude Include="src\PaStationAccessFactory.h" />
+    <ClInclude Include="src\PaStationHelper.h" />
+    <ClInclude Include="Src\PaTrainDvaMessage.h" />
+    <ClInclude Include="Src\PaTrainDvaMessageAccessFactory.h" />
+    <ClInclude Include="Src\PaTrainDvaMessageHelper.h" />
+    <ClInclude Include="Src\PaZone.h" />
+    <ClInclude Include="Src\PaZoneAccessFactory.h" />
+    <ClInclude Include="Src\PaZoneGroup.h" />
+    <ClInclude Include="Src\PaZoneGroupAccessFactory.h" />
+    <ClInclude Include="Src\PaZoneGroupHelper.h" />
+    <ClInclude Include="Src\PaZoneHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\GenericDaiHelper.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

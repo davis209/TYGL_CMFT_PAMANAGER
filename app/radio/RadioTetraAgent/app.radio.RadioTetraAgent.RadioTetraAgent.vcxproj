@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Optimize|Win32">
+      <Configuration>Optimize</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>app.radio.RadioTetraAgent</ProjectName>
+    <ProjectGuid>{556EE48D-168C-4024-9649-1A41CA69B21F}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;Rpcrt4.lib;WS2_32.lib;winmm.lib;ACEXMLD.lib;TA_Base_Core_d.lib;TA_Base_Bus_d.lib;TA_IRS_Core_d.lib;TA_IRS_Bus_d.lib;RadioProtocolLibrary_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;Rpcrt4.lib;WS2_32.lib;winmm.lib;ACEXML.lib;TA_Base_Core.lib;TA_Base_Bus.lib;TA_IRS_Core.lib;TA_IRS_Bus.lib;RadioProtocolLibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;Rpcrt4.lib;WS2_32.lib;winmm.lib;ACEXML.lib;TA_Base_Core.lib;TA_Base_Bus.lib;TA_IRS_Core.lib;TA_IRS_Bus.lib;RadioProtocolLibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\IMTLogHelper.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ObservedSocket.cpp" />
+    <ClCompile Include="src\Radio.cpp" />
+    <ClCompile Include="src\RadioAgentConstants.cpp" />
+    <ClCompile Include="src\RadioAuthorisationManager.cpp" />
+    <ClCompile Include="src\RadioBackgroundProcessor.cpp" />
+    <ClCompile Include="src\RadioCallStackUpdateTask.cpp" />
+    <ClCompile Include="src\RadioCircuitModeManager.cpp" />
+    <ClCompile Include="src\RadioCircuitTransfer.cpp" />
+    <ClCompile Include="src\RadioConfigurationException.cpp" />
+    <ClCompile Include="src\RadioConnectionException.cpp" />
+    <ClCompile Include="src\RadioConnectionManager.cpp" />
+    <ClCompile Include="src\RadioCorbaTypeConverter.cpp" />
+    <ClCompile Include="src\RadioDeleteReferenceTask.cpp" />
+    <ClCompile Include="src\RadioDirectory.cpp" />
+    <ClCompile Include="src\RadioDirectoryServant.cpp" />
+    <ClCompile Include="src\RadioDirectorySynchronisation.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="src\RadioEventSubscriber.cpp" />
+    <ClCompile Include="src\RadioException.cpp" />
+    <ClCompile Include="src\RadioFallbackException.cpp" />
+    <ClCompile Include="src\RadioFullStateReceiver.cpp" />
+    <ClCompile Include="src\RadioGroupCallAckTask.cpp" />
+    <ClCompile Include="src\RadioHelper.cpp" />
+    <ClCompile Include="src\RadioKeepAliveHandlerThread.cpp" />
+    <ClCompile Include="src\RadioMethodTimeoutException.cpp" />
+    <ClCompile Include="src\RadioResetConnectionTask.cpp" />
+    <ClCompile Include="src\RadioResetSessionTask.cpp" />
+    <ClCompile Include="src\RadioResetSocketTask.cpp" />
+    <ClCompile Include="src\RadioResourceManager.cpp" />
+    <ClCompile Include="src\RadioSDSDetailsUpdateTask.cpp" />
+    <ClCompile Include="src\RadioServant.cpp" />
+    <ClCompile Include="src\RadioServerLinkStatusUpdateThread.cpp" />
+    <ClCompile Include="src\RadioSession.cpp" />
+    <ClCompile Include="src\RadioSessionException.cpp" />
+    <ClCompile Include="src\RadioSessionHelper.cpp" />
+    <ClCompile Include="src\RadioSessionInitialisationThread.cpp" />
+    <ClCompile Include="src\RadioSessionNotInitialisedException.cpp" />
+    <ClCompile Include="src\RadioSessionServant.cpp" />
+    <ClCompile Include="src\RadioSessionTask.cpp" />
+    <ClCompile Include="src\RadioStateMessageConverter.cpp" />
+    <ClCompile Include="src\RadioStateSynchronisationServant.cpp" />
+    <ClCompile Include="src\RadioStateUpdateBroadcaster.cpp" />
+    <ClCompile Include="src\RadioStateUpdateReceiver.cpp" />
+    <ClCompile Include="src\RadioStatusSummary.cpp" />
+    <ClCompile Include="src\RadioSubscriberActivityTask.cpp" />
+    <ClCompile Include="src\RadioSubscriberMonitor.cpp" />
+    <ClCompile Include="src\RadioSystemErrorTask.cpp" />
+    <ClCompile Include="src\RadioTask.cpp" />
+    <ClCompile Include="src\RadioTaskFactory.cpp" />
+    <ClCompile Include="src\RadioTCPConnection.cpp" />
+    <ClCompile Include="src\RadioTcpServer.cpp" />
+    <ClCompile Include="src\RadioTetraAgent.cpp" />
+    <ClCompile Include="src\RadioTimedEvent.cpp" />
+    <ClCompile Include="src\RadioTransactionManager.cpp" />
+    <ClCompile Include="src\VersionGen.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CallForwardingDetails.h" />
+    <ClInclude Include="src\IMTLogHelper.h" />
+    <ClInclude Include="src\IRadioCallback.h" />
+    <ClInclude Include="src\IRadioConnectionObserver.h" />
+    <ClInclude Include="src\IRadioDirectoryCallback.h" />
+    <ClInclude Include="src\IRadioSessionServant.h" />
+    <ClInclude Include="src\IRadioTetraAgentPeerState.h" />
+    <ClInclude Include="src\IRadioTetraAgentState.h" />
+    <ClInclude Include="src\ISocketObserver.h" />
+    <ClInclude Include="src\ObservedSocket.h" />
+    <ClInclude Include="src\Radio.h" />
+    <ClInclude Include="src\RadioAgentConstants.h" />
+    <ClInclude Include="src\RadioAuthorisationManager.h" />
+    <ClInclude Include="src\RadioBackgroundProcessor.h" />
+    <ClInclude Include="src\RadioCallStackUpdateTask.h" />
+    <ClInclude Include="src\RadioCircuitModeManager.h" />
+    <ClInclude Include="src\RadioCircuitTransfer.h" />
+    <ClInclude Include="src\RadioConfigurationException.h" />
+    <ClInclude Include="src\RadioConnectionException.h" />
+    <ClInclude Include="src\RadioConnectionManager.h" />
+    <ClInclude Include="src\RadioCorbaTypeConverter.h" />
+    <ClInclude Include="src\RadioDeleteReferenceTask.h" />
+    <ClInclude Include="src\RadioDirectory.h" />
+    <ClInclude Include="src\RadioDirectoryServant.h" />
+    <ClInclude Include="src\RadioDirectorySynchronisation.h" />
+    <ClInclude Include="src\RadioEventSubscriber.h" />
+    <ClInclude Include="src\RadioException.h" />
+    <ClInclude Include="src\RadioFallbackException.h" />
+    <ClInclude Include="src\RadioFullStateReceiver.h" />
+    <ClInclude Include="src\RadioGroupCallAckTask.h" />
+    <ClInclude Include="src\RadioHelper.h" />
+    <ClInclude Include="src\RadioKeepAliveHandlerThread.h" />
+    <ClInclude Include="src\RadioMethodTimeoutException.h" />
+    <ClInclude Include="src\RadioResetConnectionTask.h" />
+    <ClInclude Include="src\RadioResetSessionTask.h" />
+    <ClInclude Include="src\RadioResetSocketTask.h" />
+    <ClInclude Include="src\RadioResourceManager.h" />
+    <ClInclude Include="src\RadioSDSDetailsUpdateTask.h" />
+    <ClInclude Include="src\RadioServant.h" />
+    <ClInclude Include="src\RadioServerLinkStatusUpdateThread.h" />
+    <ClInclude Include="src\RadioSession.h" />
+    <ClInclude Include="src\RadioSessionException.h" />
+    <ClInclude Include="src\RadioSessionHelper.h" />
+    <ClInclude Include="src\RadioSessionInitialisationThread.h" />
+    <ClInclude Include="src\RadioSessionNotInitialisedException.h" />
+    <ClInclude Include="src\RadioSessionServant.h" />
+    <ClInclude Include="src\RadioSessionTask.h" />
+    <ClInclude Include="src\RadioStateMessageConverter.h" />
+    <ClInclude Include="src\RadioStateSynchronisationServant.h" />
+    <ClInclude Include="src\RadioStateUpdateBroadcaster.h" />
+    <ClInclude Include="src\RadioStateUpdateReceiver.h" />
+    <ClInclude Include="src\RadioStatusSummary.h" />
+    <ClInclude Include="src\RadioSubscriberActivityTask.h" />
+    <ClInclude Include="src\RadioSubscriberMonitor.h" />
+    <ClInclude Include="src\RadioSynchronisationTypes.h" />
+    <ClInclude Include="src\RadioSystemErrorTask.h" />
+    <ClInclude Include="src\RadioTask.h" />
+    <ClInclude Include="src\RadioTaskFactory.h" />
+    <ClInclude Include="src\RadioTCPConnection.h" />
+    <ClInclude Include="src\RadioTcpServer.h" />
+    <ClInclude Include="src\RadioTetraAgent.h" />
+    <ClInclude Include="src\RadioTimedEvent.h" />
+    <ClInclude Include="src\RadioTransactionManager.h" />
+    <ClInclude Include="src\RadioTypes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="RadioProtocolLibrary\app.radio.RadioTetraAgent.RadioProtocolLibrary.RadioProtocolLibrary.vcxproj">
+      <Project>{1fe2ea1e-75f9-4695-8191-a09a2f023c66}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

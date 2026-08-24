@@ -1,0 +1,152 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "RadioTetraAgentModuleTest"=.\RadioTetraAgentModuleTest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Data Access Interface
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DataAccessLib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name EntityAccess
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MiSynchronisation
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MiThread
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MiUtil
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MiVersion
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name RadioAgentCorbaDef
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_CorbaDef
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_CorbaUtil
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_Exceptions
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_Logging_Library
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_Message
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_MessageCorbaDef
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_Naming
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TA_NamingCorbaDef
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TAuuid
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name tstfwk
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PTTMonitorLibrary
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name app.radio.RadioTetraAgent.RadioProtocolLibrary.RadioProtocolLibrary
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name app.radio.RadioTetraAgent.RadioTetraAgent
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "RadioTetraAgentUnitTest"=.\RadioTetraAgentUnitTest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name tstfwk
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name app.radio.RadioTetraAgent.RadioProtocolLibrary.RadioProtocolLibrary
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name app.radio.RadioTetraAgent.RadioTetraAgent
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name RadioTetraAgentModuleTest
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "app.radio.RadioTetraAgent.RadioProtocolLibrary.RadioProtocolLibrary"=..\RadioProtocolLibrary\app.radio.RadioTetraAgent.RadioProtocolLibrary.RadioProtocolLibrary.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "app.radio.RadioTetraAgent.RadioTetraAgent"=..\app.radio.RadioTetraAgent.RadioTetraAgent.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "tstfwk"=..\..\..\..\..\cots\CppUnit\CppUnit.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

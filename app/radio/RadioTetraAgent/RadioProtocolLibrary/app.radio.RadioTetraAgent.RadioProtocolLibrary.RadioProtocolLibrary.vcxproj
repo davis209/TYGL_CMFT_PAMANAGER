@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Optimize|Win32">
+      <Configuration>Optimize</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>app.radio.RadioTetraAgent.RadioProtocolLibrary</ProjectName>
+    <ProjectGuid>{1FE2EA1E-75F9-4695-8191-A09A2F023C66}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AttachMonitorAudioEventReader.cpp" />
+    <ClCompile Include="src\AttachSessionExtEventReader.cpp" />
+    <ClCompile Include="src\AttachToGroupEventReader.cpp" />
+    <ClCompile Include="src\CallStatusEventReader.cpp" />
+    <ClCompile Include="src\CeaseTXEventReader.cpp" />
+    <ClCompile Include="src\ChangePasswordEventReader.cpp" />
+    <ClCompile Include="src\ChangeReferenceEventReader.cpp" />
+    <ClCompile Include="src\CheckConnectionEventReader.cpp" />
+    <ClCompile Include="src\CircuitDataCapacityEventReader.cpp" />
+    <ClCompile Include="src\ConvertToDBTimeEventReader.cpp" />
+    <ClCompile Include="src\DeleteReferenceEventReader.cpp" />
+    <ClCompile Include="src\DemandTXEventReader.cpp" />
+    <ClCompile Include="src\DetachMonitorAudioEventReader.cpp" />
+    <ClCompile Include="src\DetachSessionEventReader.cpp" />
+    <ClCompile Include="src\DisconnectEventReader.cpp" />
+    <ClCompile Include="src\ForceCallTerminationEventReader.cpp" />
+    <ClCompile Include="src\GetGroupDetailsEventReader.cpp" />
+    <ClCompile Include="src\GetLastErrorEventReader.cpp" />
+    <ClCompile Include="src\GroupCallAckEventReader.cpp" />
+    <ClCompile Include="src\IncludeEventReader.cpp" />
+    <ClCompile Include="src\IncomingCallEventReader.cpp" />
+    <ClCompile Include="src\IncomingCircuitDataEventReader.cpp" />
+    <ClCompile Include="src\IncomingSDSEventReader.cpp" />
+    <ClCompile Include="src\IncomingSDSTLAckEventReader.cpp" />
+    <ClCompile Include="src\IncomingSDSTLReportEventReader.cpp" />
+    <ClCompile Include="src\IncomingSDSTLTransferEventReader.cpp" />
+    <ClCompile Include="src\IncomingSDSTLTransferExtendedEventReader.cpp" />
+    <ClCompile Include="src\IncomingSimpleTextSDSEventReader.cpp" />
+    <ClCompile Include="src\IncomingUserDefinedSDSEventReader.cpp" />
+    <ClCompile Include="src\ITcpEvent.cpp" />
+    <ClCompile Include="src\ITcpMethod.cpp" />
+    <ClCompile Include="src\JoinEventReader.cpp" />
+    <ClCompile Include="src\KeepAliveEventReader.cpp" />
+    <ClCompile Include="src\LoginEventReader.cpp" />
+    <ClCompile Include="src\MonitorCallEventReader.cpp" />
+    <ClCompile Include="src\MonitorSubscriberEventReader.cpp" />
+    <ClCompile Include="src\NewReferenceEventReader.cpp" />
+    <ClCompile Include="src\PttStatusEventReader.cpp" />
+    <ClCompile Include="src\QueryReferenceEventReader.cpp" />
+    <ClCompile Include="src\RadioEvent.cpp" />
+    <ClCompile Include="src\RadioEventReader.cpp" />
+    <ClCompile Include="src\RadioMethod.cpp" />
+    <ClCompile Include="src\RadioMethodAnswerCall.cpp" />
+    <ClCompile Include="src\RadioMethodAttachAudio.cpp" />
+    <ClCompile Include="src\RadioMethodAttachMonitorAudio.cpp" />
+    <ClCompile Include="src\RadioMethodAttachSession.cpp" />
+    <ClCompile Include="src\RadioMethodAttachSessionExt.cpp" />
+    <ClCompile Include="src\RadioMethodAttachToGroup.cpp" />
+    <ClCompile Include="src\RadioMethodAuthoriseCall.cpp" />
+    <ClCompile Include="src\RadioMethodCallReference.cpp" />
+    <ClCompile Include="src\RadioMethodCeaseTX.cpp" />
+    <ClCompile Include="src\RadioMethodChangeReference.cpp" />
+    <ClCompile Include="src\RadioMethodCheckConnection.cpp" />
+    <ClCompile Include="src\RadioMethodConvertToDBTime.cpp" />
+    <ClCompile Include="src\RadioMethodDeleteReference.cpp" />
+    <ClCompile Include="src\RadioMethodDeleteSubscriber.cpp" />
+    <ClCompile Include="src\RadioMethodDemandTX.cpp" />
+    <ClCompile Include="src\RadioMethodDeselect.cpp" />
+    <ClCompile Include="src\RadioMethodDetachAudio.cpp" />
+    <ClCompile Include="src\RadioMethodDetachMonitorAudio.cpp" />
+    <ClCompile Include="src\RadioMethodDetachSession.cpp" />
+    <ClCompile Include="src\RadioMethodDisconnect.cpp" />
+    <ClCompile Include="src\RadioMethodForceCallTermination.cpp" />
+    <ClCompile Include="src\RadioMethodGetGroupDetails.cpp" />
+    <ClCompile Include="src\RadioMethodGetLastError.cpp" />
+    <ClCompile Include="src\RadioMethodInclude.cpp" />
+    <ClCompile Include="src\RadioMethodInitialise.cpp" />
+    <ClCompile Include="src\RadioMethodJoin.cpp" />
+    <ClCompile Include="src\RadioMethodLogin.cpp" />
+    <ClCompile Include="src\RadioMethodLogout.cpp" />
+    <ClCompile Include="src\RadioMethodMonitorCall.cpp" />
+    <ClCompile Include="src\RadioMethodMonitorSubscriber.cpp" />
+    <ClCompile Include="src\RadioMethodNewReference.cpp" />
+    <ClCompile Include="src\RadioMethodChangePassword.cpp" />
+    <ClCompile Include="src\RadioMethodQueryReference.cpp" />
+    <ClCompile Include="src\RadioMethodSearchSubscribers.cpp" />
+    <ClCompile Include="src\RadioMethodSelect.cpp" />
+    <ClCompile Include="src\RadioMethodSendCircuitData.cpp" />
+    <ClCompile Include="src\RadioMethodSendSDS.cpp" />
+    <ClCompile Include="src\RadioMethodSetupCall.cpp" />
+    <ClCompile Include="src\RadioMethodSimpleTextSDS.cpp" />
+    <ClCompile Include="src\RadioMethodText2SubscriberReference.cpp" />
+    <ClCompile Include="src\RadioMethodTextToReference.cpp" />
+    <ClCompile Include="src\RadioMethodTLSDSAck.cpp" />
+    <ClCompile Include="src\RadioMethodTLSDSReport.cpp" />
+    <ClCompile Include="src\RadioMethodTLSDSTransfer.cpp" />
+    <ClCompile Include="src\RadioMethodUserDefinedSDS.cpp" />
+    <ClCompile Include="src\RadioProtocolException.cpp" />
+    <ClCompile Include="src\RequestAuthoriseEventReader.cpp" />
+    <ClCompile Include="src\SDSTLAckEventReader.cpp" />
+    <ClCompile Include="src\SDSTLReportEventReader.cpp" />
+    <ClCompile Include="src\SDSTLTransferEventReader.cpp" />
+    <ClCompile Include="src\SearchSubscribersEventReader.cpp" />
+    <ClCompile Include="src\SelectEventReader.cpp" />
+    <ClCompile Include="src\SendCircuitDataEventReader.cpp" />
+    <ClCompile Include="src\SimpleTextSDSEventReader.cpp" />
+    <ClCompile Include="src\SubscriberActivityEventReader.cpp" />
+    <ClCompile Include="src\SystemErrorEventReader.cpp" />
+    <ClCompile Include="src\Text2SubscriberReferenceEventReader.cpp" />
+    <ClCompile Include="src\TextToReferenceEventReader.cpp" />
+    <ClCompile Include="src\UserDefinedSDSEventReader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\AttachMonitorAudioEventReader.h" />
+    <ClInclude Include="src\AttachSessionExtEventReader.h" />
+    <ClInclude Include="src\AttachToGroupEventReader.h" />
+    <ClInclude Include="src\CallStatusEventReader.h" />
+    <ClInclude Include="src\CeaseTXEventReader.h" />
+    <ClInclude Include="src\ChangePasswordEventReader.h" />
+    <ClInclude Include="src\ChangeReferenceEventReader.h" />
+    <ClInclude Include="src\CheckConnectionEventReader.h" />
+    <ClInclude Include="src\CircuitDataCapacityEventReader.h" />
+    <ClInclude Include="src\ConvertToDBTimeEventReader.h" />
+    <ClInclude Include="src\DeleteReferenceEventReader.h" />
+    <ClInclude Include="src\DemandTXEventReader.h" />
+    <ClInclude Include="src\DetachMonitorAudioEventReader.h" />
+    <ClInclude Include="src\DetachSessionEventReader.h" />
+    <ClInclude Include="src\DisconnectEventReader.h" />
+    <ClInclude Include="src\ForceCallTerminationEventReader.h" />
+    <ClInclude Include="src\GetGroupDetailsEventReader.h" />
+    <ClInclude Include="src\GetLastErrorEventReader.h" />
+    <ClInclude Include="src\GroupCallAckEventReader.h" />
+    <ClInclude Include="src\IncludeEventReader.h" />
+    <ClInclude Include="src\IncomingCallEventReader.h" />
+    <ClInclude Include="src\IncomingCircuitDataEventReader.h" />
+    <ClInclude Include="src\IncomingSDSEventReader.h" />
+    <ClInclude Include="src\IncomingSDSTLAckEventReader.h" />
+    <ClInclude Include="src\IncomingSDSTLReportEventReader.h" />
+    <ClInclude Include="src\IncomingSDSTLTransferEventReader.h" />
+    <ClInclude Include="src\IncomingSDSTLTransferExtendedEventReader.h" />
+    <ClInclude Include="src\IncomingSimpleTextSDSEventReader.h" />
+    <ClInclude Include="src\IncomingUserDefinedSDSEventReader.h" />
+    <ClInclude Include="src\ITcpEvent.h" />
+    <ClInclude Include="src\ITcpMethod.h" />
+    <ClInclude Include="src\JoinEventReader.h" />
+    <ClInclude Include="src\KeepAliveEventReader.h" />
+    <ClInclude Include="src\LoginEventReader.h" />
+    <ClInclude Include="src\MonitorCallEventReader.h" />
+    <ClInclude Include="src\MonitorSubscriberEventReader.h" />
+    <ClInclude Include="src\NewReferenceEventReader.h" />
+    <ClInclude Include="src\PttStatusEventReader.h" />
+    <ClInclude Include="src\QueryReferenceEventReader.h" />
+    <ClInclude Include="src\RadioEvent.h" />
+    <ClInclude Include="src\RadioEventReader.h" />
+    <ClInclude Include="src\RadioFields.h" />
+    <ClInclude Include="src\RadioMethod.h" />
+    <ClInclude Include="src\RadioMethodAnswerCall.h" />
+    <ClInclude Include="src\RadioMethodAttachAudio.h" />
+    <ClInclude Include="src\RadioMethodAttachMonitorAudio.h" />
+    <ClInclude Include="src\RadioMethodAttachSession.h" />
+    <ClInclude Include="src\RadioMethodAttachSessionExt.h" />
+    <ClInclude Include="src\RadioMethodAttachToGroup.h" />
+    <ClInclude Include="src\RadioMethodAuthoriseCall.h" />
+    <ClInclude Include="src\RadioMethodCallReference.h" />
+    <ClInclude Include="src\RadioMethodCeaseTX.h" />
+    <ClInclude Include="src\RadioMethodChangeReference.h" />
+    <ClInclude Include="src\RadioMethodCheckConnection.h" />
+    <ClInclude Include="src\RadioMethodConvertToDBTime.h" />
+    <ClInclude Include="src\RadioMethodDeleteReference.h" />
+    <ClInclude Include="src\RadioMethodDeleteSubscriber.h" />
+    <ClInclude Include="src\RadioMethodDemandTX.h" />
+    <ClInclude Include="src\RadioMethodDeselect.h" />
+    <ClInclude Include="src\RadioMethodDetachAudio.h" />
+    <ClInclude Include="src\RadioMethodDetachMonitorAudio.h" />
+    <ClInclude Include="src\RadioMethodDetachSession.h" />
+    <ClInclude Include="src\RadioMethodDisconnect.h" />
+    <ClInclude Include="src\RadioMethodForceCallTermination.h" />
+    <ClInclude Include="src\RadioMethodGetGroupDetails.h" />
+    <ClInclude Include="src\RadioMethodGetLastError.h" />
+    <ClInclude Include="src\RadioMethodInclude.h" />
+    <ClInclude Include="src\RadioMethodInitialise.h" />
+    <ClInclude Include="src\RadioMethodJoin.h" />
+    <ClInclude Include="src\RadioMethodLogin.h" />
+    <ClInclude Include="src\RadioMethodLogout.h" />
+    <ClInclude Include="src\RadioMethodMonitorCall.h" />
+    <ClInclude Include="src\RadioMethodMonitorSubscriber.h" />
+    <ClInclude Include="src\RadioMethodNewReference.h" />
+    <ClInclude Include="src\RadioMethodChangePassword.h" />
+    <ClInclude Include="src\RadioMethodQueryReference.h" />
+    <ClInclude Include="src\RadioMethodSearchSubscribers.h" />
+    <ClInclude Include="src\RadioMethodSelect.h" />
+    <ClInclude Include="src\RadioMethodSendCircuitData.h" />
+    <ClInclude Include="src\RadioMethodSendSDS.h" />
+    <ClInclude Include="src\RadioMethodSetupCall.h" />
+    <ClInclude Include="src\RadioMethodSimpleTextSDS.h" />
+    <ClInclude Include="src\RadioMethodText2SubscriberReference.h" />
+    <ClInclude Include="src\RadioMethodTextToReference.h" />
+    <ClInclude Include="src\RadioMethodTLSDSAck.h" />
+    <ClInclude Include="src\RadioMethodTLSDSReport.h" />
+    <ClInclude Include="src\RadioMethodTLSDSTransfer.h" />
+    <ClInclude Include="src\RadioMethodUserDefinedSDS.h" />
+    <ClInclude Include="src\RadioProtocol.h" />
+    <ClInclude Include="src\RadioProtocolException.h" />
+    <ClInclude Include="src\RadioProtocolLibrary.h" />
+    <ClInclude Include="src\RadioSDSTLTypes.h" />
+    <ClInclude Include="src\RequestAuthoriseEventReader.h" />
+    <ClInclude Include="src\SDSTLAckEventReader.h" />
+    <ClInclude Include="src\SDSTLReportEventReader.h" />
+    <ClInclude Include="src\SDSTLTransferEventReader.h" />
+    <ClInclude Include="src\SearchSubscribersEventReader.h" />
+    <ClInclude Include="src\SelectEventReader.h" />
+    <ClInclude Include="src\SendCircuitDataEventReader.h" />
+    <ClInclude Include="src\SimpleTextSDSEventReader.h" />
+    <ClInclude Include="src\SubscriberActivityEventReader.h" />
+    <ClInclude Include="src\SubscriberDataTypes.h" />
+    <ClInclude Include="src\SystemErrorEventReader.h" />
+    <ClInclude Include="src\Text2SubscriberReferenceEventReader.h" />
+    <ClInclude Include="src\TextToReferenceEventReader.h" />
+    <ClInclude Include="src\UserDefinedSDSEventReader.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
