@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Optimize|Win32">
+      <Configuration>Optimize</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>core.dai</ProjectName>
+    <ProjectGuid>{C3E85347-A8EC-4FA5-BE93-1C687BFEA597}</ProjectGuid>
+    <RootNamespace>core.dai</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="PropertySheets">
+    <Import Project="..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>TA_DAI_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>PROJECT_4669;TA_ASSERT_LOG=1;BOOST_FILESYSTEM_DEPRECATED;TA_DEBUGUTIL_USE_MACROS_LOG_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>PROJECT_4669;NDEBUG;TA_ASSERT_LOG=1;TA_DEBUGUTIL_USE_MACROS_LOG_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>PROJECT_4669;NDEBUG;TA_ASSERT_LOG=1;TA_DEBUGUTIL_USE_MACROS_LOG_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Action.cpp" />
+    <ClCompile Include="src\ActionAccessFactory.cpp" />
+    <ClCompile Include="src\ActionAccessFactoryEx.cpp" />
+    <ClCompile Include="src\ActionGroup.cpp" />
+    <ClCompile Include="src\ActionGroupAccessFactoryEx.cpp" />
+    <ClCompile Include="src\ActionGroupAccessFactory.cpp" />
+    <ClCompile Include="src\ActionGroupHelper.cpp" />
+    <ClCompile Include="src\ActionHelper.cpp" />
+    <ClCompile Include="src\AlarmAccessFactory.cpp" />
+    <ClCompile Include="src\AlarmBatchData.cpp" />
+    <ClCompile Include="src\AlarmDashboardAccessFactory.cpp" />
+    <ClCompile Include="src\AlarmData.cpp" />
+    <ClCompile Include="src\AlarmDisplayFilterAccessFactory.cpp" />
+    <ClCompile Include="src\AlarmDisplayFilterData.cpp" />
+    <ClCompile Include="src\AlarmSeverityAccessFactory.cpp" />
+    <ClCompile Include="src\AlarmSeverityData.cpp" />
+    <ClCompile Include="src\AlarmSeverityHelper.cpp" />
+    <ClCompile Include="src\AlarmStateAccessFactory.cpp" />
+    <ClCompile Include="src\AlarmStateData.cpp" />
+    <ClCompile Include="src\AlarmTypeAccessFactory.cpp" />
+    <ClCompile Include="src\AlarmTypeData.cpp" />
+    <ClCompile Include="src\AlarmTypeHelper.cpp" />
+    <ClCompile Include="src\CombinedEventAccessFactory.cpp" />
+    <ClCompile Include="src\CombinedEventData.cpp" />
+    <ClCompile Include="src\ConfigActionGroup.cpp" />
+    <ClCompile Include="src\ConfigAlarmSeverityData.cpp" />
+    <ClCompile Include="src\ConfigAlarmType.cpp" />
+    <ClCompile Include="src\ConfigChangesTypes.cpp" />
+    <ClCompile Include="src\ConfigECSStationColourData.cpp" />
+    <ClCompile Include="src\ConfigEquipReport.cpp" />
+    <ClCompile Include="src\ConfigEquipReportData.cpp" />
+    <ClCompile Include="src\ConfigEventColourData.cpp" />
+    <ClCompile Include="src\ConfigGlobalParameter.cpp" />
+    <ClCompile Include="src\ConfigGui.cpp" />
+    <ClCompile Include="src\ConfigLocation.cpp" />
+    <ClCompile Include="src\ConfigMessageType.cpp" />
+    <ClCompile Include="src\ConfigOnlinePrintCfg.cpp" />
+    <ClCompile Include="src\ConfigOnlinePrinter.cpp" />
+    <ClCompile Include="src\ConfigOperator.cpp" />
+    <ClCompile Include="src\ConfigProfile.cpp" />
+    <ClCompile Include="src\ConfigProfileGroup.cpp" />
+    <ClCompile Include="src\ConfigRights.cpp" />
+    <ClCompile Include="src\ConfigScadaDisplay.cpp" />
+    <ClCompile Include="src\ConfigSubsystem.cpp" />
+    <ClCompile Include="src\DatabaseFactory.cpp" />
+    <ClCompile Include="src\DataPointStateChangeAccessFactory.cpp" />
+    <ClCompile Include="src\DataPointStateChangeData.cpp" />
+    <ClCompile Include="src\DbConnection.cpp" />
+    <ClCompile Include="src\DbConnectionStrings.cpp" />
+    <ClCompile Include="src\DbConnectionStringsImpl.cpp" />
+    <ClCompile Include="src\DbStatus.cpp" />
+    <ClCompile Include="src\ECSStationColourAccessFactory.cpp" />
+    <ClCompile Include="src\ECSStationColourData.cpp" />
+    <ClCompile Include="src\ECSStationColourHelper.cpp" />
+    <ClCompile Include="src\EquipReport.cpp" />
+    <ClCompile Include="src\EquipReportAccessFactory.cpp" />
+    <ClCompile Include="src\EquipReportData.cpp" />
+    <ClCompile Include="src\EquipReportDataAccessFactory.cpp" />
+    <ClCompile Include="src\EquipReportDataHelper.cpp" />
+    <ClCompile Include="src\EquipReportHelper.cpp" />
+    <ClCompile Include="src\EventBatchData.cpp" />
+    <ClCompile Include="src\EventColourAccessFactory.cpp" />
+    <ClCompile Include="src\EventColourData.cpp" />
+    <ClCompile Include="src\EventColourHelper.cpp" />
+    <ClCompile Include="src\EventData.cpp" />
+    <ClCompile Include="src\GlobalParameter.cpp" />
+    <ClCompile Include="src\GlobalParameterAccessFactory.cpp" />
+    <ClCompile Include="src\GlobalParameterHelper.cpp" />
+    <ClCompile Include="src\GlobalStatusAccessFactory.cpp" />
+    <ClCompile Include="src\SeSecuritySettingTable.cpp" />
+    <ClCompile Include="src\OperatorTable.cpp" />
+    <ClCompile Include="src\OperatorPasswordTable.cpp" />
+    <ClCompile Include="src\GroupMonitorTable.cpp" />
+    <ClCompile Include="src\Gui.cpp" />
+    <ClCompile Include="src\GuiAccessFactoryEx.cpp" />
+    <ClCompile Include="src\GuiAccessFactory.cpp" />
+    <ClCompile Include="src\GuiHelper.cpp" />
+    <ClCompile Include="src\Location.cpp" />
+    <ClCompile Include="src\LocationAccessFactoryEx.cpp" />
+    <ClCompile Include="src\LocationAccessFactory.cpp" />
+    <ClCompile Include="src\LocationHelper.cpp" />
+    <ClCompile Include="src\ManagedProcessTable.cpp" />
+    <ClCompile Include="src\MessageAccessFactory.cpp" />
+    <ClCompile Include="src\MessageData.cpp" />
+    <ClCompile Include="src\MessageTypeAccessFactory.cpp" />
+    <ClCompile Include="src\MessageTypeData.cpp" />
+    <ClCompile Include="src\MessageTypeHelper.cpp" />
+    <ClCompile Include="src\MmsRequestAccessFactory.cpp" />
+    <ClCompile Include="src\MmsRequestAlarmData.cpp" />
+    <ClCompile Include="src\MmsRequestScheduledData.cpp" />
+    <ClCompile Include="src\MmsRequestSchematicData.cpp" />
+    <ClCompile Include="src\NamedFilter.cpp" />
+    <ClCompile Include="src\NamedFilterAccessFactory.cpp" />
+    <ClCompile Include="src\NamingPort.cpp" />
+    <ClCompile Include="src\NamingPortAccessFactory.cpp" />
+    <ClCompile Include="src\OnlinePrintCfg.cpp" />
+    <ClCompile Include="src\OnlinePrintCfgAccessFactory.cpp" />
+    <ClCompile Include="src\OnlinePrintCfgHelper.cpp" />
+    <ClCompile Include="src\OnlinePrinter.cpp" />
+    <ClCompile Include="src\OnlinePrinterAccessFactory.cpp" />
+    <ClCompile Include="src\OnlinePrinterHelper.cpp" />
+    <ClCompile Include="src\OPCEntityDataAccessFactory.cpp" />
+    <ClCompile Include="src\Operator.cpp" />
+    <ClCompile Include="src\OperatorAccessFactoryEx.cpp" />
+    <ClCompile Include="src\OperatorAccessFactory.cpp" />
+    <ClCompile Include="src\OperatorHelper.cpp" />
+    <ClCompile Include="src\OperatorPassword.cpp" />
+    <ClCompile Include="src\OperatorPasswordAccessFactory.cpp" />
+    <ClCompile Include="src\PowerDemandAccessFactory.cpp" />
+    <ClCompile Include="src\PowerDemandData.cpp" />
+    <ClCompile Include="src\Profile.cpp" />
+    <ClCompile Include="src\ProfileAccessFactoryEx.cpp" />
+    <ClCompile Include="src\ProfileAccessFactory.cpp" />
+    <ClCompile Include="src\ProfileGroup.cpp" />
+    <ClCompile Include="src\ProfileGroupAccessFactory.cpp" />
+    <ClCompile Include="src\ProfileGroupHelper.cpp" />
+    <ClCompile Include="src\ProfileHelper.cpp" />
+    <ClCompile Include="src\Region.cpp" />
+    <ClCompile Include="src\RegionAccessFactoryEx.cpp" />
+    <ClCompile Include="src\RegionAccessFactory.cpp" />
+    <ClCompile Include="src\RegionHelper.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\ResourceAccessFactoryEx.cpp" />
+    <ClCompile Include="src\ResourceAccessFactory.cpp" />
+    <ClCompile Include="src\ResourceHelper.cpp" />
+    <ClCompile Include="src\RightsAccessFactory.cpp" />
+    <ClCompile Include="src\ScadaBusinessItem.cpp" />
+    <ClCompile Include="src\ScadaBusinessManagerAccessFactory.cpp" />
+    <ClCompile Include="src\ScadaBusinessManagerAccessFactoryImpl.cpp" />
+    <ClCompile Include="src\ScadaDisplay.cpp" />
+    <ClCompile Include="src\ScadaDisplayAccessFactory.cpp" />
+    <ClCompile Include="src\ScadaDisplayHelper.cpp" />
+    <ClCompile Include="src\SecuritySettingAccessFactory.cpp" />
+    <ClCompile Include="src\DAIUtil.cpp" />
+    <ClCompile Include="src\SeResourceVTable.cpp" />
+    <ClCompile Include="src\SeRegSubVTable.cpp" />
+    <ClCompile Include="src\Session.cpp" />
+    <ClCompile Include="src\SessionAccessFactory.cpp" />
+    <ClCompile Include="src\SimpleDbData.cpp" />
+    <ClCompile Include="src\SimpleDbDatabase.cpp" />
+    <ClCompile Include="src\SQLCode.cpp" />
+    <ClCompile Include="src\SQLFileHelper.cpp" />
+    <ClCompile Include="src\SQLParamsHelper.cpp" />
+    <ClCompile Include="src\SQLTypeAdapter.cpp" />
+    <ClCompile Include="src\SQLVarParms.cpp" />
+    <ClCompile Include="src\Subsystem.cpp" />
+    <ClCompile Include="src\SubsystemAccessFactoryEx.cpp" />
+    <ClCompile Include="src\SubsystemAccessFactory.cpp" />
+    <ClCompile Include="src\SubsystemHelper.cpp" />
+    <ClCompile Include="src\SubsystemState.cpp" />
+    <ClCompile Include="src\SubsystemStateAccessFactory.cpp" />
+    <ClCompile Include="src\SystemAccessFactory.cpp" />
+    <ClCompile Include="src\SystemControllerGroupTable.cpp" />
+    <ClCompile Include="src\SystemControllerTable.cpp" />
+    <ClCompile Include="src\SystemData.cpp" />
+    <ClCompile Include="src\T6AccessFactory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scheduling_agent\src\IConfigJobData.h" />
+    <ClInclude Include="scheduling_agent\src\IConfigScheduleData.h" />
+    <ClInclude Include="scheduling_agent\src\IJobData.h" />
+    <ClInclude Include="src\Action.h" />
+    <ClInclude Include="src\ActionAccessFactory.h" />
+    <ClInclude Include="src\ActionAccessFactoryEx.h" />
+    <ClInclude Include="src\ActionGroup.h" />
+    <ClInclude Include="src\ActionGroupAccessFactoryEx.h" />
+    <ClInclude Include="src\ActionGroupAccessFactory.h" />
+    <ClInclude Include="src\ActionGroupHelper.h" />
+    <ClInclude Include="src\ActionHelper.h" />
+    <ClInclude Include="src\AlarmAccessFactory.h" />
+    <ClInclude Include="src\AlarmBatchData.h" />
+    <ClInclude Include="src\AlarmDashboardAccessFactory.h" />
+    <ClInclude Include="src\AlarmData.h" />
+    <ClInclude Include="src\AlarmDisplayFilterAccessFactory.h" />
+    <ClInclude Include="src\AlarmDisplayFilterData.h" />
+    <ClInclude Include="src\AlarmSeverityAccessFactory.h" />
+    <ClInclude Include="src\AlarmSeverityData.h" />
+    <ClInclude Include="src\AlarmSeverityHelper.h" />
+    <ClInclude Include="src\AlarmStateAccessFactory.h" />
+    <ClInclude Include="src\AlarmStateData.h" />
+    <ClInclude Include="src\AlarmTopLocData.h" />
+    <ClInclude Include="src\AlarmTypeAccessFactory.h" />
+    <ClInclude Include="src\AlarmTypeData.h" />
+    <ClInclude Include="src\AlarmTypeHelper.h" />
+    <ClInclude Include="src\ColumnNames.h" />
+    <ClInclude Include="src\CombinedEventAccessFactory.h" />
+    <ClInclude Include="src\CombinedEventData.h" />
+    <ClInclude Include="src\ConfigActionGroup.h" />
+    <ClInclude Include="src\ConfigAlarmSeverityData.h" />
+    <ClInclude Include="src\ConfigAlarmType.h" />
+    <ClInclude Include="src\ConfigChangesTypes.h" />
+    <ClInclude Include="src\ConfigECSStationColourData.h" />
+    <ClInclude Include="src\ConfigEquipReport.h" />
+    <ClInclude Include="src\ConfigEquipReportData.h" />
+    <ClInclude Include="src\ConfigEventColourData.h" />
+    <ClInclude Include="src\ConfigGlobalParameter.h" />
+    <ClInclude Include="src\ConfigGui.h" />
+    <ClInclude Include="src\ConfigLocation.h" />
+    <ClInclude Include="src\ConfigMessageType.h" />
+    <ClInclude Include="src\ConfigOnlinePrintCfg.h" />
+    <ClInclude Include="src\ConfigOnlinePrinter.h" />
+    <ClInclude Include="src\ConfigOperator.h" />
+    <ClInclude Include="src\ConfigProfile.h" />
+    <ClInclude Include="src\ConfigProfileGroup.h" />
+    <ClInclude Include="src\ConfigRights.h" />
+    <ClInclude Include="src\ConfigScadaDisplay.h" />
+    <ClInclude Include="src\ConfigSubsystem.h" />
+    <ClInclude Include="src\DatabaseFactory.h" />
+    <ClInclude Include="src\DataPointStateChangeAccessFactory.h" />
+    <ClInclude Include="src\DataPointStateChangeData.h" />
+    <ClInclude Include="src\DataTypeEnums.h" />
+    <ClInclude Include="src\DataTypesLookup.h" />
+    <ClInclude Include="src\DbConnection.h" />
+    <ClInclude Include="src\DbConnectionString.h" />
+    <ClInclude Include="src\DbConnectionStrings.h" />
+    <ClInclude Include="src\DbConnectionStringsImpl.h" />
+    <ClInclude Include="src\DBCounterTypes.h" />
+    <ClInclude Include="src\DbStatus.h" />
+    <ClInclude Include="src\ECSStationColourAccessFactory.h" />
+    <ClInclude Include="src\ECSStationColourData.h" />
+    <ClInclude Include="src\ECSStationColourHelper.h" />
+    <ClInclude Include="src\EquipReport.h" />
+    <ClInclude Include="src\EquipReportAccessFactory.h" />
+    <ClInclude Include="src\EquipReportData.h" />
+    <ClInclude Include="src\EquipReportDataAccessFactory.h" />
+    <ClInclude Include="src\EquipReportDataHelper.h" />
+    <ClInclude Include="src\EquipReportHelper.h" />
+    <ClInclude Include="src\EventBatchData.h" />
+    <ClInclude Include="src\EventColourAccessFactory.h" />
+    <ClInclude Include="src\EventColourData.h" />
+    <ClInclude Include="src\EventColourHelper.h" />
+    <ClInclude Include="src\EventData.h" />
+    <ClInclude Include="src\GlobalParameter.h" />
+    <ClInclude Include="src\GlobalParameterAccessFactory.h" />
+    <ClInclude Include="src\GlobalParameterHelper.h" />
+    <ClInclude Include="src\GlobalStatusAccessFactory.h" />
+    <ClInclude Include="src\SeSecuritySettingTable.h" />
+    <ClInclude Include="src\OperatorTable.h" />
+    <ClInclude Include="src\OperatorPasswordTable.h" />
+    <ClInclude Include="src\GroupMonitorTable.h" />
+    <ClInclude Include="src\Gui.h" />
+    <ClInclude Include="src\GuiAccessFactoryEx.h" />
+    <ClInclude Include="src\GuiAccessFactory.h" />
+    <ClInclude Include="src\GuiHelper.h" />
+    <ClInclude Include="src\IAction.h" />
+    <ClInclude Include="src\IActionGroup.h" />
+    <ClInclude Include="src\IAlarmData.h" />
+    <ClInclude Include="src\IAlarmDisplayFilterData.h" />
+    <ClInclude Include="src\IAlarmSeverityData.h" />
+    <ClInclude Include="src\IAlarmTypeData.h" />
+    <ClInclude Include="src\IApplicationObserver.h" />
+    <ClInclude Include="src\ICombinedEventData.h" />
+    <ClInclude Include="src\IConfigAlarmType.h" />
+    <ClInclude Include="src\IConfigECSStationColourData.h" />
+    <ClInclude Include="src\IConfigEquipReport.h" />
+    <ClInclude Include="src\IConfigEquipReportData.h" />
+    <ClInclude Include="src\IConfigEventColourData.h" />
+    <ClInclude Include="src\IConfigGlobalParameter.h" />
+    <ClInclude Include="src\IConfigGui.h" />
+    <ClInclude Include="src\IConfigItem.h" />
+    <ClInclude Include="src\IConfigLocation.h" />
+    <ClInclude Include="src\IConfigMessageType.h" />
+    <ClInclude Include="src\IConfigOnlinePrintCfg.h" />
+    <ClInclude Include="src\IConfigOnlinePrinter.h" />
+    <ClInclude Include="src\IConfigOperator.h" />
+    <ClInclude Include="src\IConfigProfile.h" />
+    <ClInclude Include="src\IConfigProfileGroup.h" />
+    <ClInclude Include="src\IConfigRights.h" />
+    <ClInclude Include="src\IConfigScadaDisplay.h" />
+    <ClInclude Include="src\IConfigSubsystem.h" />
+    <ClInclude Include="src\IData.h" />
+    <ClInclude Include="src\IDatabase.h" />
+    <ClInclude Include="src\IDatabaseCallbackUser.h" />
+    <ClInclude Include="src\IDataPointStateChangeData.h" />
+    <ClInclude Include="src\IDbWritableData.h" />
+    <ClInclude Include="src\IECSStationColourData.h" />
+    <ClInclude Include="src\IEquipReport.h" />
+    <ClInclude Include="src\IEquipReportData.h" />
+    <ClInclude Include="src\IEventColourData.h" />
+    <ClInclude Include="src\IGlobalParameter.h" />
+    <ClInclude Include="src\IGui.h" />
+    <ClInclude Include="src\IItem.h" />
+    <ClInclude Include="src\LocationAccessFactoryEx.h" />
+    <ClInclude Include="src\ManagedProcessTable.h" />
+    <ClInclude Include="src\NullLocation.h" />
+    <ClInclude Include="src\ILocation.h" />
+    <ClInclude Include="src\IMessageData.h" />
+    <ClInclude Include="src\IMessageTypeData.h" />
+    <ClInclude Include="src\INamingPort.h" />
+    <ClInclude Include="src\IOnlinePrintCfg.h" />
+    <ClInclude Include="src\IOnlinePrinter.h" />
+    <ClInclude Include="src\IOperator.h" />
+    <ClInclude Include="src\IOperatorPassword.h" />
+    <ClInclude Include="src\IPowerDemandData.h" />
+    <ClInclude Include="src\IProfile.h" />
+    <ClInclude Include="src\IProfileGroup.h" />
+    <ClInclude Include="src\IRegion.h" />
+    <ClInclude Include="src\IReportDirectory.h" />
+    <ClInclude Include="src\IReportFile.h" />
+    <ClInclude Include="src\IResource.h" />
+    <ClInclude Include="src\IRights.h" />
+    <ClInclude Include="src\IScadaBusinessItem.h" />
+    <ClInclude Include="src\IScadaDisplay.h" />
+    <ClInclude Include="src\ISchematicDisplayMaps.h" />
+    <ClInclude Include="src\ISession.h" />
+    <ClInclude Include="src\ISubsystem.h" />
+    <ClInclude Include="src\ISubsystemState.h" />
+    <ClInclude Include="src\Location.h" />
+    <ClInclude Include="src\LocationAccessFactory.h" />
+    <ClInclude Include="src\LocationHelper.h" />
+    <ClInclude Include="src\MessageAccessFactory.h" />
+    <ClInclude Include="src\MessageData.h" />
+    <ClInclude Include="src\MessageTypeAccessFactory.h" />
+    <ClInclude Include="src\MessageTypeData.h" />
+    <ClInclude Include="src\MessageTypeHelper.h" />
+    <ClInclude Include="src\MmsRequestAccessFactory.h" />
+    <ClInclude Include="src\MmsRequestAlarmData.h" />
+    <ClInclude Include="src\MmsRequestScheduledData.h" />
+    <ClInclude Include="src\MmsRequestSchematicData.h" />
+    <ClInclude Include="src\NamedFilter.h" />
+    <ClInclude Include="src\NamedFilterAccessFactory.h" />
+    <ClInclude Include="src\NamingPort.h" />
+    <ClInclude Include="src\NamingPortAccessFactory.h" />
+    <ClInclude Include="src\OnlinePrintCfg.h" />
+    <ClInclude Include="src\OnlinePrintCfgAccessFactory.h" />
+    <ClInclude Include="src\OnlinePrintCfgHelper.h" />
+    <ClInclude Include="src\OnlinePrinter.h" />
+    <ClInclude Include="src\OnlinePrinterAccessFactory.h" />
+    <ClInclude Include="src\OnlinePrinterHelper.h" />
+    <ClInclude Include="src\OPCEntityDataAccessFactory.h" />
+    <ClInclude Include="src\Operator.h" />
+    <ClInclude Include="src\OperatorAccessFactoryEx.h" />
+    <ClInclude Include="src\OperatorAccessFactory.h" />
+    <ClInclude Include="src\OperatorHelper.h" />
+    <ClInclude Include="src\OperatorPassword.h" />
+    <ClInclude Include="src\OperatorPasswordAccessFactory.h" />
+    <ClInclude Include="src\PowerDemandAccessFactory.h" />
+    <ClInclude Include="src\PowerDemandData.h" />
+    <ClInclude Include="src\Profile.h" />
+    <ClInclude Include="src\ProfileAccessFactoryEx.h" />
+    <ClInclude Include="src\ProfileAccessFactory.h" />
+    <ClInclude Include="src\ProfileGroup.h" />
+    <ClInclude Include="src\ProfileGroupAccessFactory.h" />
+    <ClInclude Include="src\ProfileGroupHelper.h" />
+    <ClInclude Include="src\ProfileHelper.h" />
+    <ClInclude Include="src\Region.h" />
+    <ClInclude Include="src\RegionAccessFactoryEx.h" />
+    <ClInclude Include="src\RegionAccessFactory.h" />
+    <ClInclude Include="src\RegionHelper.h" />
+    <ClInclude Include="src\Resource.h" />
+    <ClInclude Include="src\ResourceAccessFactoryEx.h" />
+    <ClInclude Include="src\ResourceAccessFactory.h" />
+    <ClInclude Include="src\ResourceHelper.h" />
+    <ClInclude Include="src\RightsAccessFactory.h" />
+    <ClInclude Include="src\ScadaBusinessItem.h" />
+    <ClInclude Include="src\ScadaBusinessManagerAccessFactory.h" />
+    <ClInclude Include="src\ScadaBusinessManagerAccessFactoryImpl.h" />
+    <ClInclude Include="src\ScadaDisplay.h" />
+    <ClInclude Include="src\ScadaDisplayAccessFactory.h" />
+    <ClInclude Include="src\ScadaDisplayHelper.h" />
+    <ClInclude Include="src\SecuritySettingAccessFactory.h" />
+    <ClInclude Include="src\DAIUtil.h" />
+    <ClInclude Include="src\SeResourceVTable.h" />
+    <ClInclude Include="src\SeRegSubVTable.h" />
+    <ClInclude Include="src\Session.h" />
+    <ClInclude Include="src\SessionAccessFactory.h" />
+    <ClInclude Include="src\SimpleDbData.h" />
+    <ClInclude Include="src\SimpleDbDatabase.h" />
+    <ClInclude Include="src\sql.h" />
+    <ClInclude Include="src\SQLCode2.h" />
+    <ClInclude Include="src\SQLCode.h" />
+    <ClInclude Include="src\SQLCommonDef.h" />
+    <ClInclude Include="src\SQLFileHelper.h" />
+    <ClInclude Include="src\SQLMacroDef.h" />
+    <ClInclude Include="src\SQLParamsHelper.h" />
+    <ClInclude Include="src\SQLTypeAdapter.h" />
+    <ClInclude Include="src\SQLVarParms.h" />
+    <ClInclude Include="src\Subsystem.h" />
+    <ClInclude Include="src\SubsystemAccessFactoryEx.h" />
+    <ClInclude Include="src\SubsystemAccessFactory.h" />
+    <ClInclude Include="src\SubsystemHelper.h" />
+    <ClInclude Include="src\SubsystemState.h" />
+    <ClInclude Include="src\SubsystemStateAccessFactory.h" />
+    <ClInclude Include="src\SystemAccessFactory.h" />
+    <ClInclude Include="src\SystemControllerGroupTable.h" />
+    <ClInclude Include="src\SystemControllerTable.h" />
+    <ClInclude Include="src\SystemData.h" />
+    <ClInclude Include="src\T6AccessFactory.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
