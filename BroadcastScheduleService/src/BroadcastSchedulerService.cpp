@@ -1,64 +1,16 @@
 #include "BroadcastSchedulerService.h"
+#include "core/data_access_interface/pa/src/PaBroadcastScheduleAccessFactory.h"
 #include "ServiceLogger.h"
 
 #include <algorithm>
 #include <chrono>
-#include <cstdlib>
 #include <ctime>
 #include <iomanip>
 #include <sstream>
 #include <stdexcept>
 
-#ifdef _WIN32
-#include <winsock2.h>
-#endif
-#include <mysql.h>
-
 namespace pa_scheduler {
 namespace {
-
-class MysqlConnection {
-public:
-    explicit MysqlConnection(const DatabaseConfig& config) {
-        connection_ = mysql_init(nullptr);
-        if (connection_ == nullptr) throw std::runtime_error("mysql_init failed");
-        unsigned int timeout = 5;
-        mysql_options(connection_, MYSQL_OPT_CONNECT_TIMEOUT, &timeout);
-        const bool verifyCertificate = config.tlsVerifyServerCertificate;
-        mysql_options(connection_, MYSQL_OPT_SSL_VERIFY_SERVER_CERT, &verifyCertificate);
-        if (mysql_real_connect(connection_, config.host.c_str(), config.user.c_str(), config.password.c_str(),
-                               config.database.c_str(), config.port, nullptr, 0) == nullptr) {
-            const std::string error = mysql_error(connection_);
-            mysql_close(connection_);
-            connection_ = nullptr;
-            throw std::runtime_error("MySQL connection failed: " + error);
-        }
-    }
-
-    ~MysqlConnection() { if (connection_ != nullptr) mysql_close(connection_); }
-    MYSQL* get() const { return connection_; }
-
-private:
-    MYSQL* connection_ = nullptr;
-};
-
-void Execute(MYSQL* connection, const std::string& sql) {
-    if (mysql_query(connection, sql.c_str()) != 0)
-        throw std::runtime_error("MySQL query failed: " + std::string(mysql_error(connection)));
-}
-
-std::string Escape(MYSQL* connection, const std::string& value) {
-    std::string escaped(value.size() * 2 + 1, '\0');
-    const auto length = mysql_real_escape_string(connection, &escaped[0], value.c_str(), static_cast<unsigned long>(value.size()));
-    escaped.resize(length);
-    return escaped;
-}
-
-std::string Quote(MYSQL* connection, const std::string& value) { return "'" + Escape(connection, value) + "'"; }
-
-unsigned int ToUInt(const char* value) { return value == nullptr ? 0U : static_cast<unsigned int>(std::strtoul(value, nullptr, 10)); }
-std::uint64_t ToUInt64(const char* value) { return value == nullptr ? 0ULL : static_cast<std::uint64_t>(std::strtoull(value, nullptr, 10)); }
-std::string Text(const char* value) { return value == nullptr ? std::string() : std::string(value); }
 
 std::tm ParseDateTime(const std::string& value) {
     std::tm parsed = {};
@@ -230,62 +182,20 @@ void BroadcastSchedulerService::WorkerLoop() {
 }
 
 void BroadcastSchedulerService::DispatchDueSchedules() {
-    MysqlConnection database(config_.database);
-    MYSQL* connection = database.get();
-    Execute(connection, "START TRANSACTION");
-    try {
-        std::ostringstream query;
-        query << "SELECT SCHEDULE_ID,LOCATION_ID,SCHEDULE_NAME,MSG_ID,MSG_VERSION,STATIONS,ZONES,SEAT_ID,LANGUAGE,PLAY_COUNT,PLAY_INTERVAL_SEC,"
-              << "SCHEDULE_TYPE,START_AT,REPEAT_INTERVAL,WEEKDAY_MASK,NEXT_RUN_AT FROM pa_broadcast_schedule WHERE LOCATION_ID=" << config_.locationId
-              << " AND ENABLED=1 AND NEXT_RUN_AT IS NOT NULL AND NEXT_RUN_AT<=NOW(3) ORDER BY NEXT_RUN_AT LIMIT " << config_.maxDueSchedulesPerPoll << " FOR UPDATE";
-        Execute(connection, query.str());
-        MYSQL_RES* result = mysql_store_result(connection);
-        if (result == nullptr && mysql_field_count(connection) != 0) throw std::runtime_error(mysql_error(connection));
+    const std::time_t now = std::time(nullptr);
+    const auto due = TA_IRS_Core::PaBroadcastScheduleAccessFactory::getInstance().getDuePaBroadcastSchedules(
+        config_.locationId, config_.maxDueSchedulesPerPoll,
+        [now](const BroadcastSchedule& schedule) { return ComputeNextRun(schedule, now); });
+    if (!due.empty())
+        ServiceLogger::Info("Found " + std::to_string(due.size()) + " due schedule(s) for location " + std::to_string(config_.locationId));
 
-        std::vector<BroadcastSchedule> due;
-        MYSQL_ROW row;
-        while (result != nullptr && (row = mysql_fetch_row(result)) != nullptr) {
-            BroadcastSchedule schedule;
-            schedule.scheduleId = ToUInt64(row[0]); schedule.locationId = static_cast<int>(ToUInt(row[1])); schedule.scheduleName = Text(row[2]);
-            schedule.messageId = static_cast<int>(ToUInt(row[3])); schedule.messageVersion = Text(row[4]); schedule.stations = Text(row[5]);
-            schedule.zones = ToUInt(row[6]); schedule.seatId = static_cast<int>(ToUInt(row[7])); schedule.language = ToUInt(row[8]);
-            schedule.playCount = ToUInt(row[9]); schedule.playIntervalSeconds = ToUInt(row[10]); schedule.scheduleType = Text(row[11]);
-            schedule.startAt = Text(row[12]); schedule.repeatInterval = ToUInt(row[13]); schedule.weekdayMask = ToUInt(row[14]); schedule.plannedAt = Text(row[15]);
-            due.push_back(std::move(schedule));
-        }
-        if (result != nullptr) mysql_free_result(result);
-
-        if (!due.empty())
-            ServiceLogger::Info("Found " + std::to_string(due.size()) + " due schedule(s) for location " + std::to_string(config_.locationId));
-
-        const std::time_t now = std::time(nullptr);
-        for (auto& schedule : due) {
-            const std::string nextRun = ComputeNextRun(schedule, now);
-            std::ostringstream update;
-            update << "UPDATE pa_broadcast_schedule SET LAST_RUN_AT=NOW(3),NEXT_RUN_AT="
-                   << (nextRun.empty() ? "NULL" : Quote(connection, nextRun)) << ",UPDATED_AT=NOW(3) WHERE SCHEDULE_ID=" << schedule.scheduleId;
-            Execute(connection, update.str());
-
-            std::ostringstream log;
-            log << "INSERT INTO pa_broadcast_schedule_log (SCHEDULE_ID,PLANNED_AT,STARTED_AT,STATUS,MSG_ID,MSG_VERSION,STATIONS,ZONES,TRIGGERED_BY) VALUES ("
-                << schedule.scheduleId << ',' << Quote(connection, schedule.plannedAt) << ",NOW(3),'IN_PROGRESS'," << schedule.messageId << ','
-                << Quote(connection, schedule.messageVersion) << ',' << Quote(connection, schedule.stations) << ',' << schedule.zones << ",'SCHEDULER')";
-            Execute(connection, log.str());
-            schedule.runId = mysql_insert_id(connection);
-        }
-        Execute(connection, "COMMIT");
-
-        std::lock_guard<std::mutex> lock(jobsMutex_);
-        jobs_.erase(std::remove_if(jobs_.begin(), jobs_.end(), [](std::future<void>& job) {
-            if (job.wait_for(std::chrono::seconds(0)) != std::future_status::ready) return false;
-            job.get(); return true;
-        }), jobs_.end());
-        for (const auto& schedule : due)
-            jobs_.push_back(std::async(std::launch::async, &BroadcastSchedulerService::RunSchedule, this, schedule));
-    } catch (...) {
-        try { Execute(connection, "ROLLBACK"); } catch (...) {}
-        throw;
-    }
+    std::lock_guard<std::mutex> lock(jobsMutex_);
+    jobs_.erase(std::remove_if(jobs_.begin(), jobs_.end(), [](std::future<void>& job) {
+        if (job.wait_for(std::chrono::seconds(0)) != std::future_status::ready) return false;
+        job.get(); return true;
+    }), jobs_.end());
+    for (const auto& schedule : due)
+        jobs_.push_back(std::async(std::launch::async, &BroadcastSchedulerService::RunSchedule, this, schedule));
 }
 
 void BroadcastSchedulerService::RunSchedule(BroadcastSchedule schedule) {
@@ -300,14 +210,7 @@ void BroadcastSchedulerService::RunSchedule(BroadcastSchedule schedule) {
     else ServiceLogger::Error(completion + (execution.errorMessage.empty() ? std::string() : ": " + execution.errorMessage));
 
     try {
-        MysqlConnection database(config_.database);
-        MYSQL* connection = database.get();
-        std::ostringstream update;
-        update << "UPDATE pa_broadcast_schedule_log SET FINISHED_AT=NOW(3),STATUS='" << StatusSql(execution.status) << "',ANNOUNCE_ID="
-               << (execution.announceId == 0 ? "NULL" : std::to_string(execution.announceId)) << ",ERROR_CODE="
-               << (execution.errorCode.empty() ? "NULL" : Quote(connection, execution.errorCode)) << ",ERROR_MESSAGE="
-               << (execution.errorMessage.empty() ? "NULL" : Quote(connection, execution.errorMessage)) << " WHERE RUN_ID=" << schedule.runId;
-        Execute(connection, update.str());
+        TA_IRS_Core::PaBroadcastScheduleAccessFactory::getInstance().updatePaBroadcastScheduleLog(schedule.runId, execution);
     } catch (const std::exception& error) {
         ServiceLogger::Error("Unable to update execution log for schedule " + std::to_string(schedule.scheduleId) + ": " + error.what());
     } catch (...) {

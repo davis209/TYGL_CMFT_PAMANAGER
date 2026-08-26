@@ -71,6 +71,7 @@
     <ClCompile Include="Src\PaAtsTriggeredBroadcast.cpp" />
     <ClCompile Include="Src\PaAtsTriggeredBroadcastAccessFactory.cpp" />
     <ClCompile Include="Src\PaAtsTriggeredBroadcastHelper.cpp" />
+    <ClCompile Include="Src\PaBroadcastScheduleAccessFactory.cpp" />
     <ClCompile Include="Src\PaDvaMessage.cpp" />
     <ClCompile Include="Src\PaDvaMessageAccessFactory.cpp" />
     <ClCompile Include="Src\PaDvaMessageHelper.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Src\PaAtsTriggeredBroadcast.h" />
     <ClInclude Include="Src\PaAtsTriggeredBroadcastAccessFactory.h" />
     <ClInclude Include="Src\PaAtsTriggeredBroadcastHelper.h" />
+    <ClInclude Include="Src\PaBroadcastScheduleAccessFactory.h" />
     <ClInclude Include="Src\PaDvaMessage.h" />
     <ClInclude Include="Src\PaDvaMessageAccessFactory.h" />
     <ClInclude Include="Src\PaDvaMessageHelper.h" />

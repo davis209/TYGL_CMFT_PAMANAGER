@@ -6,12 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Threads REQUIRED)
-find_path(MYSQL_INCLUDE_DIR mysql.h PATH_SUFFIXES mysql mariadb)
-find_library(MYSQL_LIBRARY NAMES libmysql mysqlclient mariadb)
-
-if(NOT MYSQL_INCLUDE_DIR OR NOT MYSQL_LIBRARY)
-    message(FATAL_ERROR "MySQL Connector/C is required. Set MYSQL_INCLUDE_DIR and MYSQL_LIBRARY if it is installed in a non-standard location.")
-endif()
 
 add_executable(BroadcastScheduleService
     src/main.cpp
@@ -19,8 +13,11 @@ add_executable(BroadcastScheduleService
     src/M44BroadcastExecutor.cpp
     src/ServiceLogger.cpp)
 
-target_include_directories(BroadcastScheduleService PRIVATE include ${MYSQL_INCLUDE_DIR})
-target_link_libraries(BroadcastScheduleService PRIVATE ${MYSQL_LIBRARY} Threads::Threads)
+target_include_directories(BroadcastScheduleService PRIVATE include ${CMAKE_CURRENT_SOURCE_DIR}/..)
+target_link_libraries(BroadcastScheduleService PRIVATE Threads::Threads)
+
+# The service uses TA_IRS_Core::PaBroadcastScheduleAccessFactory and must be
+# linked with the existing TA_DAI/TA_PADAI libraries by the integrated build.
 
 if(WIN32)
     target_link_libraries(BroadcastScheduleService PRIVATE ws2_32)

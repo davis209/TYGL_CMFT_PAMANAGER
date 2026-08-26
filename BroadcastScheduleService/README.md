@@ -1,6 +1,6 @@
 # Broadcast Schedule Service
 
-Cross-platform C++17 service that executes due rows in `pa_broadcast_schedule` for one configured `LOCATION_ID` only. It supports concurrent execution of multiple due schedules, records each run in `pa_broadcast_schedule_log`, and advances `NEXT_RUN_AT` transactionally before dispatching work.
+Cross-platform C++17 service that executes due rows in `pa_broadcast_schedule` for one configured `LOCATION_ID` only. It supports concurrent execution of multiple due schedules, records each run in `pa_broadcast_schedule_log`, and advances `NEXT_RUN_AT` transactionally before dispatching work. Database access is provided by the existing `TA_IRS_Core::PaBroadcastScheduleAccessFactory` under `core/data_access_interface/pa/src`; its MySQL statements are registered under `[PaBroadcastSchedule]` in `core/data_access_interface/sqlcode.txt`.
 
 The default executor implements PAManager's M44 prerecorded-message protocol directly. It maintains one shared TCP connection to the configured PA device, sends an initial and 60-second heartbeat, serializes M44 requests, and records success only after receiving A44. The C++ `IBroadcastExecutor` interface remains available for a future protocol variant.
 
@@ -8,7 +8,7 @@ The default executor implements PAManager's M44 prerecorded-message protocol dir
 
 - CMake 3.10 or later
 - C++17 compiler: Visual Studio 2017 (15.7+) on Windows, or GCC 7+ / Clang 5+ on Ubuntu
-- MySQL Connector/C or MariaDB Connector/C development files
+- The existing Transactive `TA_DAI` and `TA_PADAI` data access libraries
 - The tables in `../schedule_sql.txt` applied to the target MySQL database
 
 Ubuntu installation example:
@@ -20,17 +20,13 @@ cmake ..
 cmake --build . -j
 ```
 
-Visual Studio 2017 example (Developer Command Prompt):
+Visual Studio 2017
 
-```bat
-mkdir build-vs2017 && cd build-vs2017
-cmake .. -G "Visual Studio 15 2017" -A x64 ^
-  -DMYSQL_INCLUDE_DIR=C:\mysql\include ^
-  -DMYSQL_LIBRARY=C:\mysql\lib\libmysql.lib
-cmake --build . --config Release
-```
+Open `build-vs2017/BroadcastScheduleService.sln` directly in Visual Studio 2017, select `Release | Win32`, then build. This is a native MSBuild project: source, include, library and output paths are all relative to `build-vs2017`, so the entire `BroadcastScheduleService` directory can be copied to another location and built without regenerating the solution.
 
-The generated Visual Studio 2017 project is `build-vs2017/BroadcastScheduleService.sln`. Its `Release` directory is a runnable Win32 package: `BroadcastScheduleService.exe`, `libmariadb.dll`, `MSVCP140.dll`, `VCRUNTIME140.dll`, `vc_redist.x86.exe`, and `start_service.bat` are kept together. Edit the variables at the top of `start_service.bat` before starting it. `vc_redist.x86.exe` is provided for machines without the Visual C++ runtime.
+The Visual Studio project must be included in the original Transactive build so it can link with `TA_DAI` and `TA_PADAI`; it no longer links with MariaDB Connector/C directly.
+
+The existing `build-vs2017/Release` directory is a runnable Win32 package: `BroadcastScheduleService.exe`, `libmariadb.dll`, `MSVCP140.dll`, `VCRUNTIME140.dll`, `vc_redist.x86.exe`, and `start_service.bat` are kept together. Edit the variables at the top of `start_service.bat` before starting it. `vc_redist.x86.exe` is provided for machines without the Visual C++ runtime.
 
 ## Run
 

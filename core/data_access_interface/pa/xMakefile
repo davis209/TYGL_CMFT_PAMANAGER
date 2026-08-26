@@ -26,6 +26,7 @@ DatabaseQueryHelper.cpp \
 PaAtsTriggeredBroadcast.cpp \
 PaAtsTriggeredBroadcastAccessFactory.cpp \
 PaAtsTriggeredBroadcastHelper.cpp \
+PaBroadcastScheduleAccessFactory.cpp \
 PaDvaMessage.cpp \
 PaDvaMessageAccessFactory.cpp \
 PaDvaMessageHelper.cpp \

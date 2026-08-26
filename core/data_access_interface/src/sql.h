@@ -34,7 +34,65 @@ static const st_sql_data  s_SQLArray[]=
 {   
 
 
-//[0][AlarmState]
+//[0][PaBroadcastSchedule]
+	{
+		/*SQLID*/("PABROADCASTSCHEDULE_BEGIN_TRANSACTION_90000"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("START TRANSACTION"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PABROADCASTSCHEDULE_SELECT_90001"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("SELECT schedule_id,location_id,schedule_name,msg_id,msg_version,stations,zones,seat_id,language,play_count,play_interval_sec,schedule_type,start_at,repeat_interval,weekday_mask,next_run_at FROM pa_broadcast_schedule WHERE location_id=%s AND enabled=1 AND next_run_at IS NOT NULL AND next_run_at<=NOW(3) ORDER BY next_run_at LIMIT %s FOR UPDATE"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PABROADCASTSCHEDULE_UPDATE_90002"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("UPDATE pa_broadcast_schedule SET last_run_at=NOW(3),next_run_at=NULLIF('%s',''),updated_at=NOW(3) WHERE schedule_id=%s"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PABROADCASTSCHEDULELOG_INSERT_90003"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("INSERT INTO pa_broadcast_schedule_log (schedule_id,planned_at,started_at,status,msg_id,msg_version,stations,zones,triggered_by) VALUES (%s,'%s',NOW(3),'IN_PROGRESS',%s,'%s','%s',%s,'SCHEDULER')"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PABROADCASTSCHEDULELOG_UPDATE_90004"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("UPDATE pa_broadcast_schedule_log SET finished_at=NOW(3),status='%s',announce_id=NULLIF(%s,0),error_code=NULLIF('%s',''),error_message=NULLIF('%s','') WHERE run_id=%s"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PABROADCASTSCHEDULELOG_SELECT_90005"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("SELECT LAST_INSERT_ID() AS run_id"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PABROADCASTSCHEDULE_COMMIT_90006"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("COMMIT"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PABROADCASTSCHEDULE_ROLLBACK_90007"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("ROLLBACK"),
+		/*SQLiteSQL*/("")
+	},
+
+//[1][AlarmState]
 	{
 		/*SQLID*/("ALARMSTATE_SELECT_71001"),
 		/*CommonSQL*/("SELECT Pkey,Name, DisplayName, TypeKey FROM AlarmState"),

@@ -1,1 +1,7 @@
 build1-*/
+build-*/
+!build-vs2017/
+build-vs2017/*
+!build-vs2017/BroadcastScheduleService.sln
+!build-vs2017/BroadcastScheduleService.vcxproj
+!build-vs2017/BroadcastScheduleService.vcxproj.filters
