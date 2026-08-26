@@ -62,8 +62,16 @@ public:
     void Close() {
         if (socket_ == InvalidSocket) return;
 #ifdef _WIN32
+        // Notify the PA server that this persistent session is ending before
+        // releasing the Windows socket handle. Ignore shutdown errors because
+        // the peer may already have closed the connection.
+        ::shutdown(socket_, SD_BOTH);
         closesocket(socket_);
 #else
+        // Notify the PA server that this persistent session is ending before
+        // releasing the POSIX socket descriptor. Ignore shutdown errors because
+        // the peer may already have closed the connection.
+        ::shutdown(socket_, SHUT_RDWR);
         close(socket_);
 #endif
         socket_ = InvalidSocket;
