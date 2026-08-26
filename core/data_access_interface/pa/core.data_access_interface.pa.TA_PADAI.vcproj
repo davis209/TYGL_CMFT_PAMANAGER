@@ -351,18 +351,6 @@
 			<File RelativePath="src\PaStationHelper.h">
 			</File>
 		</Filter>
-		<Filter Name="PA_BROADCAST_SCHEDULE">
-			<File RelativePath="Src\PaBroadcastScheduleAccessFactory.cpp">
-				<FileConfiguration Name="Debug|Win32">
-					<Tool Name="VCCLCompilerTool" AdditionalIncludeDirectories="" PreprocessorDefinitions=""/>
-				</FileConfiguration>
-				<FileConfiguration Name="Release|Win32">
-					<Tool Name="VCCLCompilerTool" AdditionalIncludeDirectories="" PreprocessorDefinitions=""/>
-				</FileConfiguration>
-			</File>
-			<File RelativePath="Src\PaBroadcastScheduleAccessFactory.h">
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

@@ -11,15 +11,6 @@
 
 namespace pa_scheduler {
 
-struct DatabaseConfig {
-    std::string host = "127.0.0.1";
-    unsigned int port = 3306;
-    std::string user;
-    std::string password;
-    std::string database;
-    bool tlsVerifyServerCertificate = true;
-};
-
 struct BroadcastSchedule {
     std::uint64_t scheduleId = 0;
     int locationId = 0;
@@ -103,7 +94,6 @@ private:
 };
 
 struct SchedulerConfig {
-    DatabaseConfig database;
     int locationId = 0;
     unsigned int pollIntervalSeconds = 2;
     unsigned int maxDueSchedulesPerPoll = 100;

@@ -49,11 +49,13 @@
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\BroadcastSchedulerService.cpp" />
+    <ClCompile Include="..\src\PaBroadcastScheduleAccessFactory.cpp" />
     <ClCompile Include="..\src\M44BroadcastExecutor.cpp" />
     <ClCompile Include="..\src\ServiceLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\BroadcastSchedulerService.h" />
+    <ClInclude Include="..\src\PaBroadcastScheduleAccessFactory.h" />
     <ClInclude Include="..\include\ServiceLogger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

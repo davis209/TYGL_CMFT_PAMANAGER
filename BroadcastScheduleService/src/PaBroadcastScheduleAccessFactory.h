@@ -10,7 +10,7 @@
 #include "core/data_access_interface/src/IDatabase.h"
 #include "core/data_access_interface/src/DatabaseFactory.h"
 #include "core/synchronisation/src/NonReEntrantThreadLockable.h"
-#include "BroadcastScheduleService/include/BroadcastSchedulerService.h"
+#include "../include/BroadcastSchedulerService.h"
 
 #include <functional>
 #include <string>

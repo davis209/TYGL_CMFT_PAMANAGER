@@ -7,9 +7,11 @@
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\src\BroadcastSchedulerService.cpp"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="..\src\PaBroadcastScheduleAccessFactory.cpp"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\src\M44BroadcastExecutor.cpp"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\src\ServiceLogger.cpp"><Filter>Source Files</Filter></ClCompile>
     <ClInclude Include="..\include\BroadcastSchedulerService.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="..\src\PaBroadcastScheduleAccessFactory.h"><Filter>Header Files</Filter></ClInclude>
     <ClInclude Include="..\include\ServiceLogger.h"><Filter>Header Files</Filter></ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #include "BroadcastSchedulerService.h"
-#include "core/data_access_interface/pa/src/PaBroadcastScheduleAccessFactory.h"
+#include "PaBroadcastScheduleAccessFactory.h"
 #include "ServiceLogger.h"
 
 #include <algorithm>

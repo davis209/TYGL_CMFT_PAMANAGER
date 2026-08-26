@@ -25,9 +25,6 @@
     <Filter Include="PA_STATION">
       <UniqueIdentifier>{a49d7e9d-2e9e-4ed1-a6d4-c30c470543c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PA_BROADCAST_SCHEDULE">
-      <UniqueIdentifier>{39B2D5D7-BA69-4DCA-9594-7A4848C06181}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\ConfigPaZone.cpp">
@@ -92,9 +89,6 @@
     </ClCompile>
     <ClCompile Include="Src\PaAtsTriggeredBroadcastHelper.cpp">
       <Filter>PA_ATS_TRIGGERED_BROADCAST</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\PaBroadcastScheduleAccessFactory.cpp">
-      <Filter>PA_BROADCAST_SCHEDULE</Filter>
     </ClCompile>
     <ClCompile Include="Src\ConfigPaDvaMessageVersion.cpp">
       <Filter>PA_DVA_MESSAGE_VERSION</Filter>
@@ -217,9 +211,6 @@
     </ClInclude>
     <ClInclude Include="Src\PaAtsTriggeredBroadcastHelper.h">
       <Filter>PA_ATS_TRIGGERED_BROADCAST</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\PaBroadcastScheduleAccessFactory.h">
-      <Filter>PA_BROADCAST_SCHEDULE</Filter>
     </ClInclude>
     <ClInclude Include="Src\ConfigPaDvaMessageVersion.h">
       <Filter>PA_DVA_MESSAGE_VERSION</Filter>

@@ -5,7 +5,7 @@
 #pragma warning(disable:4786 4290)
 
 #include "core/types/src/ta_types.h"
-#include "core/data_access_interface/pa/src/PaBroadcastScheduleAccessFactory.h"
+#include "PaBroadcastScheduleAccessFactory.h"
 #include "core/data_access_interface/src/IData.h"
 #include "core/data_access_interface/src/DatabaseFactory.h"
 #include "core/data_access_interface/src/SQLCode.h"

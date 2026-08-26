@@ -10,6 +10,7 @@ find_package(Threads REQUIRED)
 add_executable(BroadcastScheduleService
     src/main.cpp
     src/BroadcastSchedulerService.cpp
+    src/PaBroadcastScheduleAccessFactory.cpp
     src/M44BroadcastExecutor.cpp
     src/ServiceLogger.cpp)
 
