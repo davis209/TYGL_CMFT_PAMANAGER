@@ -5,6 +5,7 @@
 #include <array>
 #include <cerrno>
 #include <chrono>
+#include <cstddef>
 #include <cstring>
 #include <sstream>
 #include <stdexcept>
@@ -36,6 +37,8 @@ constexpr unsigned char STX = 0xBB;
 constexpr unsigned char ETX = 0xCC;
 constexpr unsigned char M44 = 44;
 constexpr unsigned char A44 = 0x90;
+constexpr unsigned char HEARTBEAT_ACK = 0x64;
+constexpr std::size_t MAX_PENDING_RECEIVE_BYTES = 64 * 1024;
 
 class SocketRuntime {
 public:
@@ -283,12 +286,70 @@ void EnsureConnected(M44BroadcastExecutor::Session& session, const PaDeviceConfi
     ServiceLogger::Info("Connected to PA device " + config.host + ":" + std::to_string(config.port));
 }
 
+void AppendReceivedBytes(M44BroadcastExecutor::Session& session, const unsigned char* bytes, const int length) {
+    if (length <= 0) return;
+    if (session.received.size() + static_cast<std::size_t>(length) > MAX_PENDING_RECEIVE_BYTES)
+        throw std::runtime_error("PA receive buffer limit exceeded");
+    session.received.insert(session.received.end(), bytes, bytes + length);
+}
+
+bool ConsumeHeartbeatAcknowledgement(M44BroadcastExecutor::Session& session) {
+    std::vector<unsigned char> payload;
+    bool acknowledged = false;
+    while (ExtractFrame(session.received, payload)) {
+        if (payload.size() <= 16) {
+            ServiceLogger::Info("Received short PA packet while waiting for heartbeat acknowledgement");
+            continue;
+        }
+        if (payload[16] == HEARTBEAT_ACK) {
+            acknowledged = true;
+            ServiceLogger::Info("Received PA heartbeat acknowledgement");
+        } else {
+            ServiceLogger::Info("Received PA packet " + std::to_string(payload[16]) + " while waiting for heartbeat acknowledgement");
+        }
+    }
+    return acknowledged;
+}
+
+void DrainIncomingPackets(M44BroadcastExecutor::Session& session) {
+    for (;;) {
+        unsigned char buffer[2048];
+        const int length = recv(session.socket.get(), reinterpret_cast<char*>(buffer), sizeof(buffer), 0);
+        if (length == 0) throw std::runtime_error("PA device closed the persistent connection");
+        if (length < 0) {
+            if (IsWouldBlock()) return;
+            throw std::runtime_error(SocketError("recv"));
+        }
+        AppendReceivedBytes(session, buffer, length);
+        ConsumeHeartbeatAcknowledgement(session);
+    }
+}
+
+void WaitForHeartbeatAcknowledgement(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
+                                     const std::atomic_bool& stopRequested) {
+    const auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(config.responseTimeoutMilliseconds);
+    while (!stopRequested.load() && WaitFor(session.socket.get(), false, stopRequested, deadline)) {
+        unsigned char buffer[2048];
+        const int length = recv(session.socket.get(), reinterpret_cast<char*>(buffer), sizeof(buffer), 0);
+        if (length == 0) throw std::runtime_error("PA device closed the persistent connection before heartbeat acknowledgement");
+        if (length < 0) {
+            if (IsWouldBlock()) continue;
+            throw std::runtime_error(SocketError("recv"));
+        }
+        AppendReceivedBytes(session, buffer, length);
+        if (ConsumeHeartbeatAcknowledgement(session)) return;
+    }
+    if (stopRequested.load()) throw std::runtime_error("Stop requested while waiting for PA heartbeat acknowledgement");
+    throw std::runtime_error("Timed out waiting for PA heartbeat acknowledgement");
+}
+
 void SendHeartbeat(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
                    const std::atomic_bool& stopRequested) {
     const std::vector<unsigned char> heartbeat = {0};
     SendAll(session.socket.get(), BuildFrame(config, heartbeat), stopRequested, config.connectTimeoutMilliseconds);
+    WaitForHeartbeatAcknowledgement(session, config, stopRequested);
     session.lastHeartbeat = std::chrono::steady_clock::now();
-    ServiceLogger::Info("Sent PA heartbeat");
+    ServiceLogger::Info("PA heartbeat acknowledged");
 }
 
 void EnsureHeartbeat(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
@@ -327,6 +388,7 @@ void M44BroadcastExecutor::HeartbeatLoop() {
         try {
             std::lock_guard<std::mutex> lock(session_->mutex);
             EnsureConnected(*session_, config_, heartbeatStopRequested_);
+            DrainIncomingPackets(*session_);
             EnsureHeartbeat(*session_, config_, heartbeatStopRequested_);
             connected = session_->socket.get() != InvalidSocket;
         } catch (const std::exception& error) {
@@ -346,6 +408,7 @@ ExecutionResult M44BroadcastExecutor::Execute(const BroadcastSchedule& schedule,
     try {
         if (stopRequested.load()) return {ExecutionStatus::Cancelled, 0, "STOP_REQUESTED", "Service stop requested"};
         EnsureConnected(*session_, config_, stopRequested);
+        DrainIncomingPackets(*session_);
         EnsureHeartbeat(*session_, config_, stopRequested);
         ServiceLogger::Info("Sending M44 for schedule " + std::to_string(schedule.scheduleId) + " through shared PA connection");
         SendAll(session_->socket.get(), BuildFrame(config_, BuildM44Payload(schedule)), stopRequested, config_.connectTimeoutMilliseconds);
@@ -364,7 +427,7 @@ ExecutionResult M44BroadcastExecutor::Execute(const BroadcastSchedule& schedule,
                 CloseSession(*session_);
                 return {ExecutionStatus::Failed, 0, "SOCKET_RECEIVE", error};
             }
-            session_->received.insert(session_->received.end(), buffer, buffer + length);
+            AppendReceivedBytes(*session_, buffer, length);
             std::vector<unsigned char> payload;
             while (ExtractFrame(session_->received, payload)) {
                 if (payload.size() <= 16) continue;
@@ -372,7 +435,7 @@ ExecutionResult M44BroadcastExecutor::Execute(const BroadcastSchedule& schedule,
                     ServiceLogger::Info("Received A44 for schedule " + std::to_string(schedule.scheduleId));
                     return {ExecutionStatus::Success, 0, std::string(), std::string()};
                 }
-                if (payload[16] == 0x64) ServiceLogger::Info("Received PA heartbeat acknowledgement");
+                if (payload[16] == HEARTBEAT_ACK) ServiceLogger::Info("Received PA heartbeat acknowledgement");
                 else ServiceLogger::Info("Received PA packet " + std::to_string(payload[16]) + " while waiting for A44");
             }
         }
