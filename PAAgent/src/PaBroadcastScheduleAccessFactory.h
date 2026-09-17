@@ -38,6 +38,13 @@ namespace TA_IRS_App
         void updatePaBroadcastScheduleLog(const long runId,
                                           const TA_IRS_App::ExecutionResult& execution);
 
+        // Keep PAAgent's DVA status records aligned with the records written
+        // by PAManager for an accepted M44 command.
+        void insertPaDvaMessageStatus(const TA_IRS_App::BroadcastSchedule& schedule,
+                                      const unsigned int consoleId);
+        bool updateLatestPaDvaMessageStatus(const int locationId,
+                                            const unsigned int status);
+
     private:
         static PaBroadcastScheduleAccessFactory* s_instance;
         static TA_Base_Core::NonReEntrantThreadLockable s_singletonLock;

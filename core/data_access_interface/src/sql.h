@@ -92,7 +92,30 @@ static const st_sql_data  s_SQLArray[]=
 		/*SQLiteSQL*/("")
 	},
 
-//[1][AlarmState]
+//[1][PaDvaMsgStatus]
+	{
+		/*SQLID*/("PADVAMSGSTATUS_INSERT_90010"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("INSERT INTO pa_dva_msg_status (location_id,console_id,msg_id,msg_version,recycle_time,interval_sec,zones,status,stations,seat_id,language) VALUES (%s,%s,%s,'%s',%s,%s,%s,0,'%s',%s,%s)"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PADVAMSGSTATUS_SELECT_90011"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("SELECT pkey FROM pa_dva_msg_status WHERE location_id=%s ORDER BY sent_time DESC LIMIT 1"),
+		/*SQLiteSQL*/("")
+	},
+	{
+		/*SQLID*/("PADVAMSGSTATUS_UPDATE_90012"),
+		/*CommonSQL*/(""),
+		/*OracleSQL*/(""),
+		/*MySQLSQL*/("UPDATE pa_dva_msg_status SET status=%s WHERE pkey=%s"),
+		/*SQLiteSQL*/("")
+	},
+
+//[2][AlarmState]
 	{
 		/*SQLID*/("ALARMSTATE_SELECT_71001"),
 		/*CommonSQL*/("SELECT Pkey,Name, DisplayName, TypeKey FROM AlarmState"),

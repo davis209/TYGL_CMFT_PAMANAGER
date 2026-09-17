@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "BroadcastSchedulerService.h"
+#include "PaBroadcastScheduleAccessFactory.h"
 
 #include <algorithm>
 #include <array>
@@ -40,6 +41,12 @@ constexpr unsigned char ETX = 0xCC;
 constexpr unsigned char M44 = 44;
 constexpr unsigned char A44 = 0x90;
 constexpr unsigned char HEARTBEAT_ACK = 0x64;
+constexpr unsigned char M31 = 0x83;
+constexpr unsigned char M46 = 0x92;
+constexpr unsigned char A31 = 31;
+constexpr unsigned char A46 = 46;
+constexpr unsigned int DVA_STATUS_INTERRUPTED = 1;
+constexpr unsigned int DVA_STATUS_COMPLETED = 2;
 constexpr std::size_t MAX_PENDING_RECEIVE_BYTES = 64 * 1024;
 
 class SocketRuntime{
@@ -272,6 +279,7 @@ public:
     std::mutex mutex;
     std::vector<unsigned char> received;
     std::chrono::steady_clock::time_point lastHeartbeat = std::chrono::steady_clock::time_point::min();
+    int activeDvaStatusLocationId = 0;
 };
 
 namespace {
@@ -279,6 +287,7 @@ void CloseSession(M44BroadcastExecutor::Session& session) {
     session.socket.Reset(InvalidSocket);
     session.received.clear();
     session.lastHeartbeat = std::chrono::steady_clock::time_point::min();
+    session.activeDvaStatusLocationId = 0;
 }
 
 void EnsureConnected(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
@@ -295,7 +304,43 @@ void AppendReceivedBytes(M44BroadcastExecutor::Session& session, const unsigned 
     session.received.insert(session.received.end(), bytes, bytes + length);
 }
 
-bool ConsumeHeartbeatAcknowledgement(M44BroadcastExecutor::Session& session) {
+void HandleDvaStatusNotification(M44BroadcastExecutor::Session& session,
+                                 const PaDeviceConfig& config,
+                                 const std::vector<unsigned char>& payload,
+                                 const std::atomic_bool& stopRequested) {
+    if (payload.size() <= 17) {
+        LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugError, "Received malformed PA DVA status packet");
+        return;
+    }
+
+    const unsigned char packetId = payload[16];
+    const unsigned char stationId = payload[17];
+    const unsigned char acknowledgementId = packetId == M31 ? A31 : A46;
+    SendAll(session.socket.get(), BuildFrame(config, std::vector<unsigned char>{acknowledgementId, stationId}),
+            stopRequested, config.connectTimeoutMilliseconds);
+
+    if (session.activeDvaStatusLocationId == 0) {
+        LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugError,
+            "Received PA DVA status packet without an active PAAgent M44 status record");
+        return;
+    }
+
+    const unsigned int status = packetId == M31 ? DVA_STATUS_INTERRUPTED : DVA_STATUS_COMPLETED;
+    try {
+        if (!PaBroadcastScheduleAccessFactory::getInstance().updateLatestPaDvaMessageStatus(
+                session.activeDvaStatusLocationId, status)) {
+            LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugError,
+                "Unable to find the latest PA DVA status record for location " +
+                std::to_string(session.activeDvaStatusLocationId));
+        }
+    } catch (const std::exception& error) {
+        LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugError,
+            "Unable to update PA DVA status record: " + std::string(error.what()));
+    }
+}
+
+bool ConsumeIncomingPackets(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
+                            const std::atomic_bool& stopRequested) {
     std::vector<unsigned char> payload;
     bool acknowledged = false;
     while (ExtractFrame(session.received, payload)) {
@@ -306,6 +351,8 @@ bool ConsumeHeartbeatAcknowledgement(M44BroadcastExecutor::Session& session) {
         if (payload[16] == HEARTBEAT_ACK) {
             acknowledged = true;
 			LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugDebug, "Received PA heartbeat acknowledgement");
+        } else if (payload[16] == M31 || payload[16] == M46) {
+            HandleDvaStatusNotification(session, config, payload, stopRequested);
         } else {
 			LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugDebug, "Received PA packet " + std::to_string(payload[16]) + " while waiting for heartbeat acknowledgement");
         }
@@ -313,7 +360,8 @@ bool ConsumeHeartbeatAcknowledgement(M44BroadcastExecutor::Session& session) {
     return acknowledged;
 }
 
-void DrainIncomingPackets(M44BroadcastExecutor::Session& session) {
+void DrainIncomingPackets(M44BroadcastExecutor::Session& session, const PaDeviceConfig& config,
+                          const std::atomic_bool& stopRequested) {
     for (;;) {
         unsigned char buffer[2048];
         const int length = recv(session.socket.get(), reinterpret_cast<char*>(buffer), sizeof(buffer), 0);
@@ -323,7 +371,7 @@ void DrainIncomingPackets(M44BroadcastExecutor::Session& session) {
             throw std::runtime_error(SocketError("recv"));
         }
         AppendReceivedBytes(session, buffer, length);
-        ConsumeHeartbeatAcknowledgement(session);
+        ConsumeIncomingPackets(session, config, stopRequested);
     }
 }
 
@@ -339,7 +387,7 @@ void WaitForHeartbeatAcknowledgement(M44BroadcastExecutor::Session& session, con
             throw std::runtime_error(SocketError("recv"));
         }
         AppendReceivedBytes(session, buffer, length);
-        if (ConsumeHeartbeatAcknowledgement(session)) return;
+        if (ConsumeIncomingPackets(session, config, stopRequested)) return;
     }
     if (stopRequested.load()) throw std::runtime_error("Stop requested while waiting for PA heartbeat acknowledgement");
     throw std::runtime_error("Timed out waiting for PA heartbeat acknowledgement");
@@ -390,7 +438,7 @@ void M44BroadcastExecutor::HeartbeatLoop() {
         try {
             std::lock_guard<std::mutex> lock(session_->mutex);
             EnsureConnected(*session_, config_, heartbeatStopRequested_);
-            DrainIncomingPackets(*session_);
+            DrainIncomingPackets(*session_, config_, heartbeatStopRequested_);
             EnsureHeartbeat(*session_, config_, heartbeatStopRequested_);
             connected = session_->socket.get() != InvalidSocket;
         } catch (const std::exception& error) {
@@ -410,7 +458,7 @@ ExecutionResult M44BroadcastExecutor::Execute(const BroadcastSchedule& schedule,
     try {
         if (stopRequested.load()) return {ExecutionStatus::Cancelled, 0, "STOP_REQUESTED", "Service stop requested"};
         EnsureConnected(*session_, config_, stopRequested);
-        DrainIncomingPackets(*session_);
+        DrainIncomingPackets(*session_, config_, stopRequested);
         EnsureHeartbeat(*session_, config_, stopRequested);
         LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugInfo,"Sending M44 for schedule " + std::to_string(schedule.scheduleId) + " through shared PA connection");
         SendAll(session_->socket.get(), BuildFrame(config_, BuildM44Payload(schedule)), stopRequested, config_.connectTimeoutMilliseconds);
@@ -435,7 +483,19 @@ ExecutionResult M44BroadcastExecutor::Execute(const BroadcastSchedule& schedule,
                 if (payload.size() <= 16) continue;
                 if (payload[16] == A44) {
                     LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugInfo,"Received A44 for schedule " + std::to_string(schedule.scheduleId));
+                    session_->activeDvaStatusLocationId = 0;
+                    try {
+                        PaBroadcastScheduleAccessFactory::getInstance().insertPaDvaMessageStatus(schedule, config_.consoleId);
+                        session_->activeDvaStatusLocationId = schedule.locationId;
+                    } catch (const std::exception& error) {
+                        LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugError,
+                            "Unable to insert PA DVA status record after A44: " + std::string(error.what()));
+                    }
                     return {ExecutionStatus::Success, 0, std::string(), std::string()};
+                }
+                if (payload[16] == M31 || payload[16] == M46) {
+                    HandleDvaStatusNotification(*session_, config_, payload, stopRequested);
+                    continue;
                 }
                 if (payload[16] == HEARTBEAT_ACK) 
 				LOG_GENERIC(SourceInfo, TA_Base_Core::DebugUtil::DebugInfo,"Received PA heartbeat acknowledgement");

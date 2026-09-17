@@ -36,6 +36,7 @@ namespace TA_IRS_App
     static const std::string REPEAT_INTERVAL_COL = "REPEAT_INTERVAL";
     static const std::string WEEKDAY_MASK_COL = "WEEKDAY_MASK";
     static const std::string NEXT_RUN_AT_COL = "NEXT_RUN_AT";
+    static const std::string PKEY_COL = "PKEY";
     namespace
     {
         std::string getStatusName(const TA_IRS_App::ExecutionStatus status)
@@ -203,6 +204,53 @@ namespace TA_IRS_App
             databaseConnection->escapeInsertString(execution.errorMessage),
             runId);
         databaseConnection->executeModification(sql);
+    }
+
+    void PaBroadcastScheduleAccessFactory::insertPaDvaMessageStatus(
+        const TA_IRS_App::BroadcastSchedule& schedule,
+        const unsigned int consoleId)
+    {
+        TA_Base_Core::IDatabase* databaseConnection =
+            TA_Base_Core::DatabaseFactory::getInstance().getDatabase(TA_Base_Core::Pa_Cd, TA_Base_Core::Write);
+
+        TA_Base_Core::SQLStatement sql;
+        databaseConnection->prepareSQLStatement(sql, PADVAMSGSTATUS_INSERT_90010,
+            schedule.locationId,
+            consoleId,
+            schedule.messageId,
+            databaseConnection->escapeInsertString(schedule.messageVersion),
+            schedule.playCount,
+            schedule.playIntervalSeconds,
+            schedule.zones,
+            databaseConnection->escapeInsertString(schedule.stations),
+            schedule.seatId,
+            schedule.language);
+        databaseConnection->executeModification(sql);
+    }
+
+    bool PaBroadcastScheduleAccessFactory::updateLatestPaDvaMessageStatus(
+        const int locationId,
+        const unsigned int status)
+    {
+        TA_Base_Core::IDatabase* databaseConnection =
+            TA_Base_Core::DatabaseFactory::getInstance().getDatabase(TA_Base_Core::Pa_Cd, TA_Base_Core::Write);
+
+        std::vector<std::string> columnNames;
+        columnNames.push_back(PKEY_COL);
+        TA_Base_Core::SQLStatement selectSql;
+        databaseConnection->prepareSQLStatement(selectSql, PADVAMSGSTATUS_SELECT_90011, locationId);
+        std::auto_ptr<TA_Base_Core::IData> data(databaseConnection->executeQuery(selectSql, columnNames));
+        if (data.get() == 0 || data->getNumRows() == 0)
+        {
+            return false;
+        }
+
+        TA_Base_Core::SQLStatement updateSql;
+        databaseConnection->prepareSQLStatement(updateSql, PADVAMSGSTATUS_UPDATE_90012,
+            status,
+            data->getUnsignedLongData(0, PKEY_COL));
+        databaseConnection->executeModification(updateSql);
+        return true;
     }
 
 }

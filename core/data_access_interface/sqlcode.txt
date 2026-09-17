@@ -25,6 +25,13 @@ PABROADCASTSCHEDULELOG_SELECT_90005=SELECT LAST_INSERT_ID() AS run_id
 PABROADCASTSCHEDULE_COMMIT_90006=COMMIT
 PABROADCASTSCHEDULE_ROLLBACK_90007=ROLLBACK
 
+[PaDvaMsgStatus]
+; Statements used by PAAgent to mirror PAManager's M44 status persistence.
+[[MySQL]]
+PADVAMSGSTATUS_INSERT_90010=INSERT INTO pa_dva_msg_status (location_id,console_id,msg_id,msg_version,recycle_time,interval_sec,zones,status,stations,seat_id,language) VALUES (%s,%s,%s,'%s',%s,%s,%s,0,'%s',%s,%s)
+PADVAMSGSTATUS_SELECT_90011=SELECT pkey FROM pa_dva_msg_status WHERE location_id=%s ORDER BY sent_time DESC LIMIT 1
+PADVAMSGSTATUS_UPDATE_90012=UPDATE pa_dva_msg_status SET status=%s WHERE pkey=%s
+
 [AlarmState]
 ; the following SQL Statements of the AlarmRule table used in source file: 
 ; AlarmStateAccessFactory.cpp
