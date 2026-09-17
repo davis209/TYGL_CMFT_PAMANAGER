@@ -1,0 +1,134 @@
+#pragma once
+
+#include <atomic>
+#include <cstdint>
+#include <future>
+#include <memory>
+#include <mutex>
+#include <string>
+#include <thread>
+#include <vector>
+
+namespace TA_IRS_App {
+
+struct BroadcastSchedule {
+    unsigned long scheduleId = 0;
+    int locationId = 0;
+    std::string scheduleName;
+    int messageId = 0;
+    std::string messageVersion;
+    std::string stations;
+    unsigned int zones = 0;
+    int seatId = 0;
+    unsigned int language = 1;
+    unsigned int playCount = 1;
+    unsigned int playIntervalSeconds = 0;
+    std::string scheduleType;
+    std::string startAt;
+    unsigned int repeatInterval = 1;
+    unsigned int weekdayMask = 0;
+    std::string plannedAt;
+    unsigned long runId = 0;
+};
+
+enum class ExecutionStatus { Success, PartialFailed, Failed, Cancelled };
+
+struct ExecutionResult {
+    ExecutionStatus status = ExecutionStatus::Failed;
+    int announceId = 0;
+    std::string errorCode;
+    std::string errorMessage;
+};
+
+// Implement this interface to call a PA protocol client directly. Execute may run concurrently.
+class IBroadcastExecutor {
+public:
+    virtual ~IBroadcastExecutor() = default;
+    virtual void Start() {}
+    virtual void Stop() {}
+    virtual ExecutionResult Execute(const BroadcastSchedule& schedule,
+                                    const std::atomic_bool& stopRequested) = 0;
+};
+
+// Invokes an existing broadcast client. Supported placeholders include 
+//{schedule_id}
+//{msg_id}
+// {msg_version}
+//{stations}
+//{zones}
+//{seat_id}
+//{language}
+//{play_count}
+//{play_interval_sec}
+class CommandBroadcastExecutor final : public IBroadcastExecutor {
+public:
+    explicit CommandBroadcastExecutor(std::string commandTemplate);
+    ExecutionResult Execute(const BroadcastSchedule& schedule,
+                            const std::atomic_bool& stopRequested) override;
+
+private:
+    std::string commandTemplate_;
+};
+
+struct PaDeviceConfig {
+    std::string host;
+    unsigned short port = 0;
+    unsigned char serverId = 1;
+    unsigned char consoleId = 54;
+    std::string version = "00001";
+    std::string lineId = "000";
+    std::string stationId = "50";
+    unsigned int connectTimeoutMilliseconds = 5000;
+    unsigned int responseTimeoutMilliseconds = 4000;
+};
+
+// Native implementation of M44 prerecorded-message protocol.
+class M44BroadcastExecutor final : public IBroadcastExecutor {
+public:
+    class Session;
+    explicit M44BroadcastExecutor(PaDeviceConfig config);
+    ~M44BroadcastExecutor() override;
+    void Start() override;
+    void Stop() override;
+    ExecutionResult Execute(const BroadcastSchedule& schedule,
+                            const std::atomic_bool& stopRequested) override;
+
+private:
+    void HeartbeatLoop();
+    PaDeviceConfig config_;
+    std::unique_ptr<Session> session_;
+    std::atomic_bool heartbeatStopRequested_{false};
+    std::thread heartbeatThread_;
+};
+
+struct SchedulerConfig {
+    int locationId = 1;
+    unsigned int pollIntervalSeconds = 2;
+    unsigned int maxDueSchedulesPerPoll = 100;
+};
+
+// Thread-safe lifecycle service. Start and Stop are idempotent; Stop waits for in-flight jobs.
+class BroadcastSchedulerService {
+public:
+    BroadcastSchedulerService(SchedulerConfig config, std::shared_ptr<IBroadcastExecutor> executor);
+    ~BroadcastSchedulerService();
+
+    void Start();
+    void Stop();
+    bool IsRunning() const;
+
+private:
+    void WorkerLoop();
+    void DispatchDueSchedules();
+    void RunSchedule(BroadcastSchedule schedule);
+
+    SchedulerConfig config_;
+    std::shared_ptr<IBroadcastExecutor> executor_;
+    std::atomic_bool running_{false};
+    std::atomic_bool stopRequested_{false};
+    std::thread worker_;
+    mutable std::mutex jobsMutex_;
+    std::vector<std::future<void>> jobs_;
+};
+
+}

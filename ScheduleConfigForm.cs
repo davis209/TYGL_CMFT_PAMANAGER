@@ -195,7 +195,7 @@ namespace ste.pa.pamanager
             foreach (DataRow row in ds.Tables[0].Rows)
             {
                 var item = new MessageItem { Id = Convert.ToInt32(row[0]), Label = row[1].ToString(), Content = row[2].ToString(), Version = row[3].ToString() };
-                (item.Id < 666 ? emergencyMessages_ : normalMessages_).Items.Add(item);
+                ( (item.Id <= 65030 && item.Id >= 65001) ? emergencyMessages_ : normalMessages_).Items.Add(item);
             }
         }
 

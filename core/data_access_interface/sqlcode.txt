@@ -15,7 +15,7 @@
 [PaBroadcastSchedule]
 ; Statements used by BroadcastScheduleService/PaBroadcastScheduleAccessFactory.cpp.
 ; The two existing pa_broadcast_schedule tables are used unchanged.
-[[MySQL]]
+[[common]]
 PABROADCASTSCHEDULE_BEGIN_TRANSACTION_90000=START TRANSACTION
 PABROADCASTSCHEDULE_SELECT_90001=SELECT schedule_id,location_id,schedule_name,msg_id,msg_version,stations,zones,seat_id,language,play_count,play_interval_sec,schedule_type,start_at,repeat_interval,weekday_mask,next_run_at FROM pa_broadcast_schedule WHERE location_id=%s AND enabled=1 AND next_run_at IS NOT NULL AND next_run_at<=NOW(3) ORDER BY next_run_at LIMIT %s FOR UPDATE
 PABROADCASTSCHEDULE_UPDATE_90002=UPDATE pa_broadcast_schedule SET last_run_at=NOW(3),next_run_at=NULLIF('%s',''),updated_at=NOW(3) WHERE schedule_id=%s

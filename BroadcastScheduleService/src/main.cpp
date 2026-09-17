@@ -59,6 +59,20 @@ int main(int argc, char* argv[]) {
         pa_scheduler::ServiceLogger::Info("Starting scheduler for location " + std::to_string(config.locationId) +
             "; PA device=" + paDevice.host + ":" + std::to_string(paDevice.port));
         service.Start();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(12000));
+		service.Stop();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(12000));
+		service.Start();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(12000));
+		service.Stop();
+
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(12000));
+		service.Start();
+
         while (!g_stopRequested.load()) std::this_thread::sleep_for(std::chrono::milliseconds(200));
         pa_scheduler::ServiceLogger::Info("Stop signal received; waiting for running broadcasts to finish");
         service.Stop();

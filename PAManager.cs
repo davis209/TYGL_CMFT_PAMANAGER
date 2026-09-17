@@ -366,7 +366,6 @@ namespace ste.pa.pamanager
                 Load_ZoneCategory();
                 Load_ZoneType();
                 Load_PreRecordedMessage();
-                Load_Pas_SourceCode();
                 loadSeats();
                 Load_station_device_name();
 
@@ -636,7 +635,7 @@ namespace ste.pa.pamanager
                             MsgContent = retrievedRow[2].ToString()
                         };
                         preRecordedMsgs_.Add(msg);
-                        if (msg.MsgId < 666)
+                        if (msg.MsgId <= 65030 && msg.MsgId >= 65001)
                         {
                             emergencyPreRecordedMsgs_.Add(msg);
                         }
@@ -841,33 +840,33 @@ namespace ste.pa.pamanager
         /// <summary>
         /// Load PA System source code from database
         /// </summary>
-        private void Load_Pas_SourceCode()
-        {
-            int sourceCode = 0;
+        //private void Load_Pas_SourceCode()
+        //{
+        //    int sourceCode = 0;
 
-            // Load sourcecode of DVA
-            localSql_ = " SELECT PA_DVA_SOURCECODE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex +
-                        " AND HOST_NAME='" + Program.hostName + "' ";
-            srcCodeDva_ = Program.mySqlQuery_SingleInt(localSql_);
-            Program.WriteDebugEventLog("[DEBUG] DVA SourceCode: " + srcCodeDva_, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
+        //    // Load sourcecode of DVA
+        //    localSql_ = " SELECT PA_DVA_SOURCECODE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex +
+        //                " AND HOST_NAME='" + Program.hostName + "' ";
+        //    srcCodeDva_ = Program.mySqlQuery_SingleInt(localSql_);
+        //    Program.WriteDebugEventLog("[DEBUG] DVA SourceCode: " + srcCodeDva_, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
 
-            // Only Station got BGM function
-            localSql_ = " SELECT PA_BGM_SOURCECODE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex +
-                        " AND HOST_NAME='" + Program.hostName + "' ";
-            srcCodeBgm_ = Program.mySqlQuery_SingleInt(localSql_);
-            Program.WriteDebugEventLog("[DEBUG] BGM SourceCode: " + srcCodeBgm_, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
+        //    //// Only Station got BGM function
+        //    //localSql_ = " SELECT PA_BGM_SOURCECODE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex +
+        //                " AND HOST_NAME='" + Program.hostName + "' ";
+        //    srcCodeBgm_ = Program.mySqlQuery_SingleInt(localSql_);
+        //    Program.WriteDebugEventLog("[DEBUG] BGM SourceCode: " + srcCodeBgm_, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
 
-            // PTT Source code - LIST 50
-            localSql_ = " SELECT PA_EQUIP_SOURCECODE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex + " AND HOST_NAME='" + Program.hostName + "'";
-            sourceCode = Program.mySqlQuery_SingleInt(localSql_);
-            Program.WriteDebugEventLog("[DEBUG] PA PTT SourceCode: " + sourceCode, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
-            DataObject.Set_PTT_Source_Code(sourceCode);
+        //    // PTT Source code - LIST 50
+        //    localSql_ = " SELECT PA_EQUIP_SOURCECODE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex + " AND HOST_NAME='" + Program.hostName + "'";
+        //    sourceCode = Program.mySqlQuery_SingleInt(localSql_);
+        //    Program.WriteDebugEventLog("[DEBUG] PA PTT SourceCode: " + sourceCode, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
+        //    DataObject.Set_PTT_Source_Code(sourceCode);
 
-            // PA Playback zone
-            localSql_ = " SELECT PA_PB_ZONE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex + " AND HOST_NAME='" + Program.hostName + "'";
-            srcCodePbZone_ = Program.mySqlQuery_SingleInt(localSql_);
-            Program.WriteDebugEventLog("[DEBUG] PA Playback Zone: " + srcCodePbZone_, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
-        }
+        //    // PA Playback zone
+        //    localSql_ = " SELECT PA_PB_ZONE FROM PA_SETTING WHERE LOCATION_ID=" + Program.profileLocIndex + " AND HOST_NAME='" + Program.hostName + "'";
+        //    srcCodePbZone_ = Program.mySqlQuery_SingleInt(localSql_);
+        //    Program.WriteDebugEventLog("[DEBUG] PA Playback Zone: " + srcCodePbZone_, fileName_ + "." + MethodInfo.GetCurrentMethod().Name + "()");
+        //}
 
         /// <summary>
         /// Load the images used in the checbox

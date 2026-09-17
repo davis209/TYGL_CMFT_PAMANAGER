@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\VersionGen.cpp" />
+    <ClCompile Include="src\PAAgent.cpp" />
+    <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\FireAbortMonitor.cpp" />
+    <ClCompile Include="src\BroadcastSchedulerService.cpp" />
+    <ClCompile Include="src\M44BroadcastExecutor.cpp" />
+    <ClCompile Include="src\PaBroadcastScheduleAccessFactory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\PAAgent.h" />
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\FireAbortMonitor.h" />
+    <ClInclude Include="src\BroadcastSchedulerService.h" />
+    <ClInclude Include="src\PaBroadcastScheduleAccessFactory.h" />
+  </ItemGroup>
+</Project>
