@@ -272,12 +272,14 @@ namespace ste.pa.pamanager
                 Program.MessageBox_Normal("名稱、訊息、車站和區域為必填項目。", Text, this);
                 return;
             }
-            if (ScheduleTypeValue() == "WEEKLY" && weekdays_.CheckedItems.Count == 0)
+            string scheduleType = ScheduleTypeValue();
+            DateTime now = DateTime.Now;
+            if (scheduleType == "WEEKLY" && weekdays_.CheckedItems.Count == 0)
             {
                 Program.MessageBox_Normal("每週排程至少要選擇一個星期。", Text, this);
                 return;
             }
-            if (ScheduleTypeValue() == "ONCE" && startAt_.Value <= DateTime.Now)
+            if (scheduleType == "ONCE" && startAt_.Value <= now)
             {
                 Program.MessageBox_Normal("單次排程的廣播時間必須晚於目前時間。", Text, this);
                 return;
@@ -285,23 +287,33 @@ namespace ste.pa.pamanager
 
             string stationIds = string.Join(",", stations_.CheckedItems.Cast<SelectionItem>().Select(x => x.Id.ToString()).OrderBy(x => int.Parse(x)));
             int zoneMask = zones_.CheckedItems.Cast<SelectionItem>().Aggregate(0, (mask, x) => mask | (1 << (x.Id - 1)));
-            int weekdayMask = ScheduleTypeValue() == "WEEKLY" ? weekdays_.CheckedIndices.Cast<int>().Aggregate(0, (mask, x) => mask | (1 << x)) : 0;
+            int weekdayMask = scheduleType == "WEEKLY" ? weekdays_.CheckedIndices.Cast<int>().Aggregate(0, (mask, x) => mask | (1 << x)) : 0;
             int language = (chineseBox_.Checked ? 1 : 0) | (taiwaneseBox_.Checked ? 2 : 0) | (hakkaBox_.Checked ? 4 : 0) | (englishBox_.Checked ? 8 : 0);
             int seatId = ((SelectionItem)seatBox_.SelectedItem).Id;
             string escapedName = Escape(nameBox_.Text.Trim());
+            DateTime nextRunAt;
+            try
+            {
+                nextRunAt = CalculateNextRunAt(scheduleType, startAt_.Value, Convert.ToInt32(repeatInterval_.Value), weekdayMask, now);
+            }
+            catch (InvalidOperationException)
+            {
+                Program.MessageBox_Normal("無法計算下一次排程時間。", Text, this);
+                return;
+            }
             string sql;
             if (scheduleId_.HasValue)
             {
                 sql = "UPDATE pa_broadcast_schedule SET SCHEDULE_NAME='" + escapedName + "', ENABLED=" + (enabledBox_.Checked ? 1 : 0) +
                     ", MSG_ID=" + message.Id + ", MSG_VERSION='" + Escape(message.Version) + "', STATIONS='" + stationIds + "', ZONES=" + zoneMask +
                     ", SEAT_ID=" + seatId + ", LANGUAGE=" + language + ", PLAY_COUNT=" + playCount_.Value + ", PLAY_INTERVAL_SEC=" + playInterval_.Value +
-                    ", SCHEDULE_TYPE='" + ScheduleTypeValue() + "', START_AT='" + DateSql(startAt_.Value) + "'" +
-                    ", REPEAT_INTERVAL=" + repeatInterval_.Value + ", WEEKDAY_MASK=" + weekdayMask + ", NEXT_RUN_AT='" + DateSql(startAt_.Value) + "', UPDATED_AT=NOW(3) WHERE SCHEDULE_ID=" + scheduleId_.Value;
+                    ", SCHEDULE_TYPE='" + scheduleType + "', START_AT='" + DateSql(startAt_.Value) + "'" +
+                    ", REPEAT_INTERVAL=" + repeatInterval_.Value + ", WEEKDAY_MASK=" + weekdayMask + ", NEXT_RUN_AT='" + DateSql(nextRunAt) + "', UPDATED_AT=NOW(3) WHERE SCHEDULE_ID=" + scheduleId_.Value;
             }
             else
             {
                 sql = "INSERT INTO pa_broadcast_schedule (LOCATION_ID,SCHEDULE_NAME,ENABLED,MSG_ID,MSG_VERSION,STATIONS,ZONES,SEAT_ID,LANGUAGE,PLAY_COUNT,PLAY_INTERVAL_SEC,SCHEDULE_TYPE,START_AT,REPEAT_INTERVAL,WEEKDAY_MASK,NEXT_RUN_AT,CREATED_AT,UPDATED_AT) VALUES (" +
-                    Program.profileLocIndex + ",'" + escapedName + "'," + (enabledBox_.Checked ? 1 : 0) + "," + message.Id + ",'" + Escape(message.Version) + "','" + stationIds + "'," + zoneMask + "," + seatId + "," + language + "," + playCount_.Value + "," + playInterval_.Value + ",'" + ScheduleTypeValue() + "','" + DateSql(startAt_.Value) + "'," + repeatInterval_.Value + "," + weekdayMask + ",'" + DateSql(startAt_.Value) + "',NOW(3),NOW(3))";
+                    Program.profileLocIndex + ",'" + escapedName + "'," + (enabledBox_.Checked ? 1 : 0) + "," + message.Id + ",'" + Escape(message.Version) + "','" + stationIds + "'," + zoneMask + "," + seatId + "," + language + "," + playCount_.Value + "," + playInterval_.Value + ",'" + scheduleType + "','" + DateSql(startAt_.Value) + "'," + repeatInterval_.Value + "," + weekdayMask + ",'" + DateSql(nextRunAt) + "',NOW(3),NOW(3))";
             }
             dbConnEnum dbConn = dbConnEnum.ErrNoConn;
             var queries = new List<SqlQuery> { new SqlQuery { CommandText = sql } };
@@ -323,6 +335,37 @@ namespace ste.pa.pamanager
 
         private static string Escape(string value) { return (value ?? string.Empty).Replace("'", "''"); }
         private static string DateSql(DateTime value) { return value.ToString("yyyy-MM-dd HH:mm:ss"); }
+        private static DateTime CalculateNextRunAt(string scheduleType, DateTime startAt, int repeatInterval, int weekdayMask, DateTime now)
+        {
+            if (scheduleType == "ONCE") return startAt;
+
+            int interval = Math.Max(1, repeatInterval);
+            if (scheduleType == "DAILY")
+            {
+                DateTime nextRunAt = startAt;
+                while (nextRunAt <= now) nextRunAt = nextRunAt.AddDays(interval);
+                return nextRunAt;
+            }
+
+            if (scheduleType == "WEEKLY")
+            {
+                DateTime anchorMonday = startAt.Date.AddDays(-(((int)startAt.DayOfWeek + 6) % 7));
+                DateTime candidateDate = startAt.Date > now.Date ? startAt.Date : now.Date;
+                for (int days = 0; days < 8000; days++, candidateDate = candidateDate.AddDays(1))
+                {
+                    DateTime candidate = candidateDate.Add(startAt.TimeOfDay);
+                    int weekday = ((int)candidate.DayOfWeek + 6) % 7;
+                    int weeksSinceAnchor = (candidate.Date.AddDays(-weekday) - anchorMonday).Days / 7;
+                    if (candidate >= startAt && candidate > now && weeksSinceAnchor >= 0 &&
+                        (weekdayMask & (1 << weekday)) != 0 && weeksSinceAnchor % interval == 0)
+                    {
+                        return candidate;
+                    }
+                }
+            }
+
+            throw new InvalidOperationException();
+        }
         private string ScheduleTypeValue() { var item = scheduleType_.SelectedItem as ScheduleTypeItem; return item == null ? "ONCE" : item.Value; }
         private void SelectScheduleType(string value) { for (int i = 0; i < scheduleType_.Items.Count; i++) if (((ScheduleTypeItem)scheduleType_.Items[i]).Value == value) { scheduleType_.SelectedIndex = i; return; } }
         private void SelectMessage(int id, string version) { SelectMessage(normalMessages_, id, version); SelectMessage(emergencyMessages_, id, version); }
