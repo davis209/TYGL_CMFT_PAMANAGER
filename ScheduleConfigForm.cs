@@ -277,6 +277,11 @@ namespace ste.pa.pamanager
                 Program.MessageBox_Normal("每週排程至少要選擇一個星期。", Text, this);
                 return;
             }
+            if (ScheduleTypeValue() == "ONCE" && startAt_.Value <= DateTime.Now)
+            {
+                Program.MessageBox_Normal("單次排程的廣播時間必須晚於目前時間。", Text, this);
+                return;
+            }
 
             string stationIds = string.Join(",", stations_.CheckedItems.Cast<SelectionItem>().Select(x => x.Id.ToString()).OrderBy(x => int.Parse(x)));
             int zoneMask = zones_.CheckedItems.Cast<SelectionItem>().Aggregate(0, (mask, x) => mask | (1 << (x.Id - 1)));
