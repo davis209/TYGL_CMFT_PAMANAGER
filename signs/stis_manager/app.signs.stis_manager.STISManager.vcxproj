@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Optimize|Win32">
+      <Configuration>Optimize</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>app.signs.stis_manager</ProjectName>
+    <ProjectGuid>{88831804-4FEA-440F-BEE6-D045386F0D38}</ProjectGuid>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>PIDSManager</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>/bus/signs_4669/tis_agent_access/src;$(TA_Cots_Path)\ssce\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>TA_Base_Core_d.lib;TA_Base_Bus_d.lib;TA_IRS_Core_d.lib;TA_IRS_Bus_d.lib;ssce5432.lib;Rpcrt4.lib;htmlhelp.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;TA_DEBUGUTIL_USE_MACROS_LOG_LEVEL;BOOST_ASIO_HAS_IOCP;BOOST_ASIO_HAS_WINDOWS_RANDOM_ACCESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>TA_SignsCommonLibrary.lib;TA_Base_Core.lib;TA_Base_Bus.lib;TA_IRS_Core.lib;TA_IRS_Bus.lib;libcurl.lib;Rpcrt4.lib;htmlhelp.lib;winmm.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(TA_Cots_Path)\ssce\sdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(TA_Cots_Path)\ssce\sdk\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_WIN32_IE=_WIN32_IE_WIN10;WINVER=_WIN32_WINNT_WIN10;NTDDI_VERSION=NTDDI_WIN10;TA_DEBUGUTIL_USE_MACROS_LOG_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>TA_SignsCommonLibrary.lib;TA_Base_Core.lib;TA_Base_Bus.lib;TA_IRS_Core.lib;TA_IRS_Bus.lib;libcurl.lib;ssce5432.lib;Rpcrt4.lib;htmlhelp.lib;winmm.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(TA_Cots_Path)\ssce\sdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\TemplatePreviewProcess.cpp" />
+    <ClCompile Include="src\PythonServer.cpp" />
+    <ClCompile Include="src\TemplateViewerProcess.cpp" />
+    <ClCompile Include="src\MessageViewerProcess.cpp" />
+    <ClCompile Include="src\MonitorInfo.cpp" />
+    <ClCompile Include="src\SimpleTreeFilterCtrl.cpp" />
+    <ClCompile Include="src\SimpleColorStatic.cpp" />
+    <ClCompile Include="src\CurrentDisplayMessagesDlg.cpp" />
+    <ClCompile Include="src\PidTreeCtrl.cpp" />
+    <ClCompile Include="src\SimpleUnicodeStatic.cpp" />
+    <ClCompile Include="src\SimpleUnicodeEdit.cpp" />
+    <ClCompile Include="src\PriorityManager.cpp" />
+    <ClCompile Include="src\STISTemplates.cpp" />
+    <ClCompile Include="src\CallbackButton.cpp" />
+    <ClCompile Include="src\CallbackDateTimeCtrl.cpp" />
+    <ClCompile Include="src\CreateNewGroupDlg.cpp" />
+    <ClCompile Include="src\DisplayPage.cpp" />
+    <ClCompile Include="src\FreeTextPage.cpp" />
+    <ClCompile Include="src\GraphworxComms.cpp" />
+    <ClCompile Include="src\helperfun.cpp" />
+    <ClCompile Include="src\InitProgressDlg.cpp" />
+    <ClCompile Include="src\LibraryVersionListCtrl.cpp" />
+    <ClCompile Include="src\LibraryVersionMonitor.cpp" />
+    <ClCompile Include="src\LibraryVersionPage.cpp" />
+    <ClCompile Include="src\MainTab.cpp" />
+    <ClCompile Include="src\MessageTypeTab.cpp" />
+    <ClCompile Include="src\PIDController.cpp" />
+    <ClCompile Include="src\PIDControlDlg.cpp" />
+    <ClCompile Include="src\PidGroupCombo.cpp" />
+    <ClCompile Include="src\PidListCtrl.cpp" />
+    <ClCompile Include="src\PidSelectionManager.cpp" />
+    <ClCompile Include="src\PredefinedPage.cpp" />
+    <ClCompile Include="src\REBProgressManager.cpp" />
+    <ClCompile Include="src\RightsManager.cpp" />
+    <ClCompile Include="src\StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\STISManager.cpp" />
+    <ClCompile Include="src\STISManagerDlg.cpp" />
+    <ClCompile Include="src\STISManagerGUI.cpp" />
+    <ClCompile Include="src\STISPredefinedMessages.cpp" />
+    <ClCompile Include="src\TemplatePage.cpp" />
+    <ClCompile Include="src\TimeControlManager.cpp" />
+    <ClCompile Include="src\TisAgentInterface.cpp" />
+    <ClCompile Include="src\UserMessages.cpp" />
+    <ClCompile Include="src\VersionGen.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\WindowsUtil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CallbackButton.h" />
+    <ClInclude Include="src\CallbackDateTimeCtrl.h" />
+    <ClInclude Include="src\TemplatePreviewProcess.h" />
+    <ClInclude Include="src\PythonServer.h" />
+    <ClInclude Include="src\TemplateViewerProcess.h" />
+    <ClInclude Include="src\MessageViewerProcess.h" />
+    <ClInclude Include="src\MonitorInfo.h" />
+    <ClInclude Include="src\SimpleTreeFilterCtrl.h" />
+    <ClInclude Include="src\SimpleColorStatic.h" />
+    <ClInclude Include="src\Createnewgroupdlg.h" />
+    <ClInclude Include="src\CurrentDisplayMessagesDlg.h" />
+    <ClInclude Include="src\DisplayPageInfo.h" />
+    <ClInclude Include="src\DisplayPage.h" />
+    <ClInclude Include="src\PidTreeCtrl.h" />
+    <ClInclude Include="src\WindowsUtil.h" />
+    <ClInclude Include="src\SimpleUnicodeControl.h" />
+    <ClInclude Include="src\SimpleUnicodeStatic.h" />
+    <ClInclude Include="src\SimpleUnicodeEdit.h" />
+    <ClInclude Include="src\FreeTextPage.h" />
+    <ClInclude Include="src\GraphworxComms.h" />
+    <ClInclude Include="src\helperfun.h" />
+    <ClInclude Include="src\IButtonListener.h" />
+    <ClInclude Include="src\IDateTimeListener.h" />
+    <ClInclude Include="src\IMessageSelectionListener.h" />
+    <ClInclude Include="src\InitProgressDlg.h" />
+    <ClInclude Include="src\IPidSelectionListener.h" />
+    <ClInclude Include="src\LibraryVersionListCtrl.h" />
+    <ClInclude Include="src\LibraryVersionMonitor.h" />
+    <ClInclude Include="src\LibraryVersionPage.h" />
+    <ClInclude Include="src\MainTab.h" />
+    <ClInclude Include="src\MessageTypeTab.h" />
+    <ClInclude Include="src\PIDController.h" />
+    <ClInclude Include="src\PIDControlDlg.h" />
+    <ClInclude Include="src\PidGroupCombo.h" />
+    <ClInclude Include="src\PidListCtrl.h" />
+    <ClInclude Include="src\PidSelectionManager.h" />
+    <ClInclude Include="src\ITabPage.h" />
+    <ClInclude Include="src\PredefinedPage.h" />
+    <ClInclude Include="src\PriorityManager.h" />
+    <ClInclude Include="src\REBProgressManager.h" />
+    <ClInclude Include="src\Resource.h" />
+    <ClInclude Include="src\RightsManager.h" />
+    <ClInclude Include="src\StdAfx.h" />
+    <ClInclude Include="src\STISManager.h" />
+    <ClInclude Include="src\STISManagerDlg.h" />
+    <ClInclude Include="src\STISManagerGUI.h" />
+    <ClInclude Include="src\STISPredefinedMessages.h" />
+    <ClInclude Include="src\STISTemplates.h" />
+    <ClInclude Include="src\TemplatePage.h" />
+    <ClInclude Include="src\TimeControlManager.h" />
+    <ClInclude Include="src\TisAgentInterface.h" />
+    <ClInclude Include="src\UserMessages.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\STISManager.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\STISManager.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\STISManager.rc2" />
+    <None Include="src\xmlrpc_message_server.py" />
+    <None Include="src\tcp_message_server.py" />
+    <None Include="src\http_message_server.py" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{c44fba82-0b33-4acf-8666-9ba784f12e78}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{4c65ec30-ccff-4269-b732-1842b85b9071}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Display Page">
+      <UniqueIdentifier>{fdd9db3f-0bb4-41f0-9ceb-c7458aca6426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Display Page\PID selection">
+      <UniqueIdentifier>{37d20b3d-15c9-4786-b695-64f1b2937028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Display Page\Message Selection">
+      <UniqueIdentifier>{4b8e6af4-3295-4db7-bad9-0117ecbde9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Display Page\Time Controls">
+      <UniqueIdentifier>{4e7af87c-22ca-42f5-85ca-5f3835561875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Versions Page">
+      <UniqueIdentifier>{23739213-99a9-4515-a1a2-ca906bfba6fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{a2b6ed74-5087-4871-9a94-5fa00c4d549a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Python Server Scripts">
+      <UniqueIdentifier>{a672c104-bad0-452c-876b-b792ac5c5d02}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GraphworxComms.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InitProgressDlg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LibraryVersionMonitor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainTab.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PIDController.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\REBProgressManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RightsManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StdAfx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISManagerDlg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISManagerGUI.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISPredefinedMessages.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UserMessages.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VersionGen.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CallbackButton.cpp">
+      <Filter>Display Page</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DisplayPage.cpp">
+      <Filter>Display Page</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CreateNewGroupDlg.cpp">
+      <Filter>Display Page\PID selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PidGroupCombo.cpp">
+      <Filter>Display Page\PID selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PidListCtrl.cpp">
+      <Filter>Display Page\PID selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PidSelectionManager.cpp">
+      <Filter>Display Page\PID selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FreeTextPage.cpp">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MessageTypeTab.cpp">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PredefinedPage.cpp">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CallbackDateTimeCtrl.cpp">
+      <Filter>Display Page\Time Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TimeControlManager.cpp">
+      <Filter>Display Page\Time Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LibraryVersionListCtrl.cpp">
+      <Filter>Versions Page</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LibraryVersionPage.cpp">
+      <Filter>Versions Page</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TemplatePage.cpp">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISTemplates.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TisAgentInterface.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PriorityManager.cpp">
+      <Filter>Display Page</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SimpleUnicodeEdit.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\helperfun.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SimpleUnicodeStatic.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowsUtil.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CurrentDisplayMessagesDlg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PidTreeCtrl.cpp">
+      <Filter>Display Page\PID selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SimpleColorStatic.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SimpleTreeFilterCtrl.cpp">
+      <Filter>Display Page\PID selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MonitorInfo.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MessageViewerProcess.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PythonServer.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TemplateViewerProcess.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TemplatePreviewProcess.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PIDControlDlg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\GraphworxComms.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LibraryVersionMonitor.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MainTab.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PIDController.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\REBProgressManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resource.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RightsManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StdAfx.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STISManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STISManagerDlg.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STISManagerGUI.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STISPredefinedMessages.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserMessages.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CallbackButton.h">
+      <Filter>Display Page</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DisplayPage.h">
+      <Filter>Display Page</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IButtonListener.h">
+      <Filter>Display Page</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Createnewgroupdlg.h">
+      <Filter>Display Page\PID selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IPidSelectionListener.h">
+      <Filter>Display Page\PID selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PidGroupCombo.h">
+      <Filter>Display Page\PID selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PidListCtrl.h">
+      <Filter>Display Page\PID selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PidSelectionManager.h">
+      <Filter>Display Page\PID selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FreeTextPage.h">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IMessageSelectionListener.h">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MessageTypeTab.h">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PredefinedPage.h">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CallbackDateTimeCtrl.h">
+      <Filter>Display Page\Time Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IDateTimeListener.h">
+      <Filter>Display Page\Time Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TimeControlManager.h">
+      <Filter>Display Page\Time Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LibraryVersionListCtrl.h">
+      <Filter>Versions Page</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LibraryVersionPage.h">
+      <Filter>Versions Page</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TemplatePage.h">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STISTemplates.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TisAgentInterface.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DisplayPageInfo.h">
+      <Filter>Display Page</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ITabPage.h">
+      <Filter>Display Page\Message Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PriorityManager.h">
+      <Filter>Display Page</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SimpleUnicodeEdit.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helperfun.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SimpleUnicodeControl.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SimpleUnicodeStatic.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowsUtil.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CurrentDisplayMessagesDlg.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InitProgressDlg.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PidTreeCtrl.h">
+      <Filter>Display Page\PID selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SimpleColorStatic.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SimpleTreeFilterCtrl.h">
+      <Filter>Display Page\PID selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MonitorInfo.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MessageViewerProcess.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PythonServer.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TemplateViewerProcess.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TemplatePreviewProcess.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PIDControlDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\STISManager.rc">
+      <Filter>src</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\STISManager.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\STISManager.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\http_message_server.py">
+      <Filter>Utility\Python Server Scripts</Filter>
+    </None>
+    <None Include="src\xmlrpc_message_server.py">
+      <Filter>Utility\Python Server Scripts</Filter>
+    </None>
+    <None Include="src\tcp_message_server.py">
+      <Filter>Utility\Python Server Scripts</Filter>
+    </None>
+  </ItemGroup>
+</Project>

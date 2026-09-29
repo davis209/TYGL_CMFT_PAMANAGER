@@ -1,0 +1,603 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// (￡) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CURRENT_DISPLAY_MESSAGES DIALOGEX 0, 0, 437, 484
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_PALETTEWINDOW
+CAPTION "預定訊息列表"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+//FONT 10, "Arial Bold", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "取消",IDCANCEL,380,463,50,14
+    CONTROL         "",IDC_CDM_MESSAGES,"SysTreeView32",TVS_HASBUTTONS | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | TVS_SHOWSELALWAYS | WS_HSCROLL | WS_TABSTOP,7,104,423,250,WS_EX_STATICEDGE
+    LTEXT           "車站：",IDC_STATIC,7,9,26,8
+    LTEXT           "PID:",IDC_STATIC,7,23,15,8
+    LTEXT           "模板類型：",IDC_STATIC,7,50,51,8
+    LTEXT           "模板開始時間：",IDC_STATIC,7,76,68,8
+    LTEXT           "模板結束時間：",IDC_STATIC,7,89,64,8
+    EDITTEXT        IDC_CDM_STATION,94,9,336,12,ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    EDITTEXT        IDC_CDM_PID,94,23,336,12,ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    EDITTEXT        IDC_CDM_TEMPLATE_TYPE,94,50,336,12,ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    EDITTEXT        IDC_CDM_TEMPLATE_ID,94,63,336,12,ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    EDITTEXT        IDC_CDM_TEMPLATE_START_TIME,94,76,336,12,ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    EDITTEXT        IDC_CDM_TEMPLATE_END_TIME,94,89,336,12,ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    PUSHBUTTON      "清除",IDC_CDM_CLEAR,309,463,50,14
+    LTEXT           "模板編號：",IDC_STATIC,7,63,42,8
+    LTEXT           "訊息狀態：",IDC_STATIC,7,36,54,8
+    EDITTEXT        IDC_CDM_MESSAGE_STATUS,94,36,336,12,ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    EDITTEXT        IDC_CDM_MESSAGE_TEXT,7,355,423,107,ES_MULTILINE | ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_CURRENT_DISPLAY_MESSAGES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 430
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 477
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CURRENT_DISPLAY_MESSAGES AFX_DIALOG_LAYOUT
+BEGIN
+    0,
+    100, 100, 0, 0,
+    0, 0, 100, 100,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 100, 0,
+    0, 0, 100, 0,
+    0, 0, 100, 0,
+    0, 0, 100, 0,
+    0, 0, 100, 0,
+    0, 0, 100, 0,
+    100, 100, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 100, 0,
+    0, 100, 100, 0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU2 MENU
+BEGIN
+    POPUP "SELECTEDPID"
+    BEGIN
+        MENUITEM "清除",                      ID_SELECTEDPID_REMOVE
+    END
+END
+
+#endif    // (￡) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// ￠() resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_STISMANAGER_DIALOG DIALOGEX 0, 0, 955, 379
+STYLE DS_SETFONT | DS_3DLOOK | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "旅客資訊管理器"
+MENU IDR_MENU1
+FONT 10, "Arial Bold", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tab1",IDC_MAINPAGE_TAB,"SysTabControl32",0x0,6,2,945,351
+    PUSHBUTTON      "說明",IDC_HELP_BUTTON,6,358,49,19
+    PUSHBUTTON      "關閉",IDC_CLOSE,902,358,49,19,WS_GROUP
+    PUSHBUTTON      "查看所有預定訊息",IDC_ALL_MESSAGE_VIEWER_BUTTON,60,358,107,19
+    PUSHBUTTON      "查看所有預定模板",IDC_ALL_TEMPLATE_VIEWER_BUTTON,172,358,107,19
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_STISMANAGER_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 951
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 377
+        HORZGUIDE, 334
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_STISMANAGER_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 99,99,99,99
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "ST Engineering Electronics Limited"
+            VALUE "FileDescription", "STISManager MFC Application"
+            VALUE "FileVersion", "0, 0, 0, 0"
+            VALUE "InternalName", "STIS Manager"
+            VALUE "LegalCopyright", "Copyright (C) 2020"
+            VALUE "LegalTrademarks", "transActive"
+            VALUE "OriginalFilename", "STISManager.EXE"
+            VALUE "ProductName", "STISManager Application"
+            VALUE "ProductVersion", "0, 0, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // ￠() resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// ￠(°) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENA)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PREDEFINED DIALOGEX 0, 0, 494, 305
+STYLE DS_SETFONT | WS_CHILD
+EXSTYLE WS_EX_STATICEDGE
+FONT 10, "Arial Bold", 0, 0, 0x0
+BEGIN
+    LTEXT           "訊息內容",IDC_CONTENT_LABEL,7,227,70,8
+    EDITTEXT        IDC_PREDEFINED_CONTENT,7,238,480,61,ES_MULTILINE | ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "篩選",IDC_LABEL_SEARCH1,7,214,17,10
+    EDITTEXT        IDC_SEARCH_NORMAL,27,213,217,12,NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "普通",IDC_NORMAL_LABEL,112,5,23,8
+    LTEXT           "緊急",IDC_EMERGENCY_LABEL,364,5,37,8
+    LTEXT           "篩選",IDC_LABEL_SEARCH2,254,214,18,9
+    EDITTEXT        IDC_SEARCH_EMERGENCY,272,213,215,12,NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "可用語言",IDC_LANGUAGES_LABEL,416,229,71,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_LANGUAGES,416,238,71,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE
+    CONTROL         "List1",IDC_EMERGENCY_PREDEFINED,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | WS_TABSTOP,254,16,233,193,WS_EX_STATICEDGE
+    CONTROL         "List1",IDC_NORMAL_PREDEFINED,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | WS_TABSTOP,7,16,237,193,WS_EX_STATICEDGE
+END
+
+IDD_FREE_TEXT DIALOGEX 0, 0, 499, 305
+STYLE DS_SETFONT | WS_CHILD
+EXSTYLE WS_EX_STATICEDGE
+FONT 10, "Arial Bold", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_MESSAGE_CONTENT,245,55,234,218,ES_MULTILINE | ES_AUTOVSCROLL | ES_NOHIDESEL | ES_WANTRETURN | NOT WS_BORDER | WS_GROUP,WS_EX_STATICEDGE
+    PUSHBUTTON      "編輯",IDC_EDIT,352,281,56,20
+    LTEXT           "訊息標題",IDC_MESSAGE_TITLE_LABEL,245,5,57,8
+    PUSHBUTTON      "保存",IDC_SAVE,423,281,56,20
+    LTEXT           "訊息內容",IDC_MESSAGE_CONTENT_LABEL,245,44,64,10
+    EDITTEXT        IDC_MESSAGE_TITLE,245,19,234,12,ES_AUTOHSCROLL | ES_NOHIDESEL | NOT WS_BORDER | WS_GROUP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_FREETEXT_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | WS_TABSTOP,7,7,221,292,WS_EX_STATICEDGE
+END
+
+IDD_RATIS DIALOG 0, 0, 322, 277
+STYLE DS_SETFONT | WS_CHILD
+FONT 10, "Arial Bold"
+BEGIN
+    COMBOBOX        IDC_RATIS_TAG,39,47,68,129,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_RATIS_DEST,39,100,68,129,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_RATIS_CONTENT,25,146,272,84,ES_MULTILINE | ES_WANTRETURN | WS_VSCROLL
+    PUSHBUTTON      "拼寫檢查",IDC_SPELL_CHECK,133,236,55,14
+    CONTROL         "新建/更新",IDC_RADIO_NEW,"Button",BS_AUTORADIOBUTTON | WS_GROUP,160,47,50,13
+    CONTROL         "清除",IDC_RADIO_CLEAR,"Button",BS_AUTORADIOBUTTON,222,47,30,13
+    GROUPBOX        "訊息內容",IDC_RATIS_CONTENT_FRAME,15,132,292,123
+    GROUPBOX        "RATIS 標籤",IDC_RATIS_TAG_FRAME,27,31,90,40
+    GROUPBOX        "訊息類型",IDC_MESSAGE_TYPE_FRAME,149,31,110,40
+    GROUPBOX        "目的地",IDC_DESTINATION_FRAME,27,85,90,36
+    GROUPBOX        "",IDC_STATIC,15,16,270,114
+    CONTROL         "啟用覆蓋",IDC_CHB_OVERRIDE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,88,64,10
+    CONTROL         "啟用審核",IDC_CHB_VETTING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,108,68,10
+END
+
+IDD_DISPLAY_PAGE DIALOGEX 0, 0, 955, 344
+STYLE DS_SETFONT | WS_CHILD
+FONT 10, "Arial Bold", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "訊息",IDC_DISPLAY_MESSAGE,788,297,68,17
+    GROUPBOX        "日期 / 時間",IDC_LABEL1,785,54,148,58
+    LTEXT           "開始",IDC_START_TIME_LABEL,795,71,18,10
+    LTEXT           "結束",IDC_END_TIME_LABEL,795,89,18,10
+    CONTROL         "日期時間選擇器1",IDC_START_TIME1,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,885,70,44,12
+    CONTROL         "日期時間選擇器1",IDC_END_TIME1,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,885,87,44,12
+    CONTROL         "Tab1",IDC_MESSAGE_TYPE_TAB,"SysTabControl32",0x0,273,14,496,320
+    GROUPBOX        "顯示",IDC_LABEL15,782,278,156,59
+    COMBOBOX        IDC_PRIORITY,831,235,96,90,CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    CONTROL         "List1",IDC_PID_LIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_TABSTOP,119,15,142,207,WS_EX_STATICEDGE
+    GROUPBOX        "選定的 PIDs",IDC_STATIC,115,4,149,256
+    GROUPBOX        "訊息/模板選擇",IDC_STATIC,270,4,502,333
+    PUSHBUTTON      "全部",IDC_CLEAR_ALL,118,318,146,17
+    PUSHBUTTON      "普通模板",IDC_CLEAR_NORMAL_TEMPLATE,118,298,65,17
+    PUSHBUTTON      "普通訊息",IDC_CLEAR_NORMAL_MESSAGE,118,277,65,17
+    GROUPBOX        "清除訊息/模板",IDC_STATIC,115,261,153,76
+    COMBOBOX        IDC_STN_PID_GROUP_COMBO,119,225,142,51,CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_HASSTRINGS | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "保存",IDC_SAVE_GROUP,118,241,60,15
+    PUSHBUTTON      "刪除",IDC_DELETE_GROUP,200,241,61,15
+    CONTROL         "日期時間選擇器1",IDC_START_DATE1,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | WS_TABSTOP,819,70,62,12
+    CONTROL         "日期時間選擇器1",IDC_END_DATE1,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | WS_TABSTOP,819,87,62,12
+    PUSHBUTTON      "緊急訊息\r\n和\r\n緊急模板",IDC_CLEAR_EMERGENCY_MESSAGE_AND_TEMPLATE,187,277,77,38,BS_MULTILINE
+    GROUPBOX        "選定的模板",IDC_LABEL2,779,4,159,117
+    LTEXT           "LCD",IDC_LCD_STATIC_LABEL,786,19,18,10
+    LTEXT           "未選取的",IDC_LCD_LABEL,802,17,79,15,SS_CENTERIMAGE,WS_EX_STATICEDGE
+    PUSHBUTTON      "預覽",IDC_LCD_PREVIEW,885,17,49,15
+    LTEXT           "LED",IDC_LED_STATIC_LABEL,785,39,18,10,NOT WS_VISIBLE
+    LTEXT           "未選取的",IDC_LED_LABEL,802,36,79,15,SS_CENTERIMAGE | NOT WS_VISIBLE,WS_EX_STATICEDGE
+    PUSHBUTTON      "預覽",IDC_LED_PREVIEW,885,36,49,15,NOT WS_VISIBLE
+    GROUPBOX        "日期 / 時間",IDC_LABEL6,789,169,140,58
+    LTEXT           "開始",IDC_START_TIME_LABEL6,795,187,18,10
+    LTEXT           "結束",IDC_END_TIME_LABEL2,795,205,18,10
+    CONTROL         "",IDC_START_TIME2,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,885,186,44,12
+    CONTROL         "",IDC_END_TIME2,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,885,204,44,12
+    CONTROL         "",IDC_START_DATE2,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | WS_TABSTOP,819,185,62,12
+    CONTROL         "",IDC_END_DATE2,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | WS_TABSTOP,819,204,62,12
+    GROUPBOX        "選定的訊息",IDC_LABEL7,782,135,156,121
+    LTEXT           "",IDC_SELECTED_MESSAGE,788,152,141,15,SS_CENTERIMAGE,WS_EX_STATICEDGE
+    LTEXT           "優先級",IDC_END_TIME_LABEL3,790,234,29,10
+    PUSHBUTTON      "模板",IDC_DISPLAY_TEMPLATE,865,297,68,17
+    CONTROL         "",IDC_PID_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | TVS_NOTOOLTIPS | TVS_CHECKBOXES | TVS_NOHSCROLL | WS_BORDER | WS_TABSTOP,10,51,103,282
+    PUSHBUTTON      "全部",IDC_DISPLAY_ALL,788,318,145,17
+    GROUPBOX        "過濾器",IDC_STATIC,9,12,105,33,BS_RIGHT
+    GROUPBOX        "所有 PID",IDC_STATIC,7,4,109,333
+    CONTROL         "",IDC_PID_LOCATION_FILTER_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_DISABLEDRAGDROP | TVS_NOTOOLTIPS | TVS_CHECKBOXES | TVS_NOHSCROLL | NOT WS_VISIBLE | WS_BORDER | WS_TABSTOP,10,41,50,284
+    CONTROL         "全部",IDC_SPLIT_LOCATION,"Button",BS_SPLITBUTTON | WS_TABSTOP,10,27,50,14
+    LTEXT           "地點",IDC_STATIC,11,18,29,8
+    LTEXT           "區域",IDC_STATIC,64,18,16,8
+    CONTROL         "全部",IDC_SPLIT_AREA,"Button",BS_SPLITBUTTON | WS_TABSTOP,63,27,50,14
+    CONTROL         "",IDC_PID_AREA_FILTER_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_DISABLEDRAGDROP | TVS_NOTOOLTIPS | TVS_CHECKBOXES | TVS_NOHSCROLL | NOT WS_VISIBLE | WS_BORDER | WS_TABSTOP,63,41,50,122
+END
+
+IDD_VERSION_PAGE DIALOGEX 0, 0, 939, 344
+STYLE DS_SETFONT | WS_CHILD
+FONT 10, "Arial Bold", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "升級訊息版本",IDC_UPGRADE_ISCS_MESSAGE,421,110,94,25,BS_CENTER
+    CONTROL         "List1",IDC_STATION_MESSAGE_VERSION_LIST,"SysListView32",LVS_REPORT | LVS_NOCOLUMNHEADER | WS_TABSTOP,7,26,369,308
+    LTEXT           "當前 ISCS 訊息版本",IDC_STATIC,395,62,101,10
+    EDITTEXT        IDC_ISCS__MESSAGE_CURRENT_VERSION,503,59,33,12,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "下一個 ISCS 訊息版本",IDC_STATIC,395,84,101,10
+    EDITTEXT        IDC_ISCS__MESSAGE_NEXT_VERSION,503,82,33,12,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "List2",IDC_VERSION_LIST_MAIN_HEADER1,"SysListView32",LVS_REPORT | LVS_NOCOLUMNHEADER | WS_TABSTOP,7,7,369,9
+    CONTROL         "List3",IDC_VERSION_LIST_SUBHEADER1,"SysListView32",LVS_REPORT | LVS_NOCOLUMNHEADER | WS_TABSTOP,7,16,369,9
+    LTEXT           "OCCDB 版本",IDC_STATIC,445,35,59,11
+    CONTROL         "",IDC_STATION_TEMPLATE_VERSION_LIST,"SysListView32",LVS_REPORT | LVS_NOCOLUMNHEADER | WS_TABSTOP,560,26,369,308
+    CONTROL         "",IDC_VERSION_LIST_MAIN_HEADER2,"SysListView32",LVS_REPORT | LVS_NOCOLUMNHEADER | WS_TABSTOP,560,7,369,9
+    CONTROL         "",IDC_VERSION_LIST_SUBHEADER2,"SysListView32",LVS_REPORT | LVS_NOCOLUMNHEADER | WS_TABSTOP,560,16,369,9
+    PUSHBUTTON      "升級模板版本",IDC_UPGRADE_ISCS_TEMPLATE,421,218,94,25,BS_CENTER
+    LTEXT           "當前 ISCS 模板版本",IDC_STATIC,395,170,101,10
+    EDITTEXT        IDC_ISCS_TEMPLATE_CURRENT_VERSION,503,167,33,12,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "下一個 ISCS 模板版本",IDC_STATIC,395,192,101,10
+    EDITTEXT        IDC_ISCS_TEMPLATE_NEXT_VERSION,503,190,33,12,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_PID_GROUP_NAME DIALOG 0, 0, 186, 66
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "旅客資訊管理器"
+FONT 10, "Arial Bold"
+BEGIN
+    DEFPUSHBUTTON   "確定",IDOK,7,45,50,14
+    PUSHBUTTON      "取消",ID_CLOSE,129,45,50,14
+    EDITTEXT        IDC_EDITNAME,7,26,172,12,ES_AUTOHSCROLL
+    CTEXT           "",IDC_STATICTEXT,7,12,172,9
+END
+
+IDD_DLG_INITPROGRESS DIALOG 0, 0, 243, 51
+STYLE DS_SETFONT | DS_SETFOREGROUND | WS_POPUP | WS_BORDER
+FONT 9, "Arial Unicode MS"
+BEGIN
+    CONTROL         "Progress1",IDC_PROGRESS_CTRL,"msctls_progress32",PBS_SMOOTH | WS_BORDER,7,21,229,14
+    LTEXT           "靜態",IDC_STATIC_TEXT1,7,8,229,11
+    LTEXT           "靜態",IDC_STATIC_TEXT2,72,29,53,16,NOT WS_VISIBLE
+    LTEXT           "靜態",IDC_STATIC_TEXT3,8,32,27,16,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,85,35,70,13
+END
+
+IDD_TEMPLATE DIALOGEX 0, 0, 499, 305
+STYLE DS_SETFONT | WS_CHILD
+EXSTYLE WS_EX_STATICEDGE
+FONT 10, "Arial Bold", 0, 0, 0x0
+BEGIN
+    LTEXT           "搜索",IDC_LABEL_SEARCH1,7,29,30,10
+    EDITTEXT        IDC_SEARCH_LCD,44,28,192,12,NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "LCD",IDC_NORMAL_LABEL,116,49,23,8
+    LTEXT           "LED",IDC_EMERGENCY_LABEL,360,49,14,8,NOT WS_VISIBLE | WS_DISABLED
+    LTEXT           "搜索",IDC_LABEL_SEARCH2,251,32,29,9,NOT WS_VISIBLE | WS_DISABLED
+    EDITTEXT        IDC_SEARCH_LED,289,28,191,12,NOT WS_VISIBLE | WS_DISABLED | NOT WS_BORDER,WS_EX_STATICEDGE
+    CONTROL         "List1",IDC_LED_TEMPLATE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | NOT WS_VISIBLE | WS_TABSTOP,250,60,230,208,WS_EX_STATICEDGE
+    CONTROL         "List1",IDC_LCD_TEMPLATE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | WS_TABSTOP,7,60,474,208,WS_EX_STATICEDGE
+    CONTROL         "普通模板",IDC_RADIO_NORMAL_TEMPLATE,"Button",BS_AUTORADIOBUTTON,7,7,71,10
+    CONTROL         "緊急模板",IDC_RADIO_EMERGENCY_TEMPLATE,"Button",BS_AUTORADIOBUTTON,80,7,83,10
+    PUSHBUTTON      "預設設定",IDC_LCD_DEFAULT_SETTING,212,277,75,17
+    PUSHBUTTON      "預設設定",IDC_LED_DEFAULT_SETTING,405,277,75,17,NOT WS_VISIBLE | WS_DISABLED
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_PREDEFINED, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 487
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 299
+    END
+
+    IDD_FREE_TEXT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 492
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 301
+    END
+
+    IDD_RATIS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 315
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 273
+    END
+
+    IDD_DISPLAY_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 948
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 337
+    END
+
+    IDD_VERSION_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 929
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 334
+    END
+
+    IDD_PID_GROUP_NAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 59
+    END
+
+    IDD_DLG_INITPROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 236
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_TEMPLATE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 492
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 299
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DISPLAY_PAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_PREDEFINED AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_FREE_TEXT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_TEMPLATE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_VERSION_PAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU
+BEGIN
+    POPUP "檔案"
+    BEGIN
+        MENUITEM "關閉",                        ID_FILE_EXIT
+    END
+    POPUP "說明"
+    BEGIN
+        MENUITEM "旅客資訊管理器幫助",           ID_HELP_STISMANAGERHELP
+        MENUITEM "關於旅客資訊管理器",          ID_HELP_ABOUTSTISMANAGER
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\STISManager.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "..\\res\\STISManager.ico"
+
+#endif    // ￠(°) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(950)
+#endif //_WIN32
+#include "res\STISManager.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource>
+        <file>images/refresh.png</file>
+        <file>images/clear.png</file>
+        <file>images/main.ico</file>
+    </qresource>
+</RCC>

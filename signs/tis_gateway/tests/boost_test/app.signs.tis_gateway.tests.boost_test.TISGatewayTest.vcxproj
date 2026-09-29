@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\stis_protocol\STISLibraryServer.cpp" />
+    <ClCompile Include="..\..\src\stis_protocol\STISServer.cpp" />
+    <ClCompile Include="..\..\src\stis_protocol\STISTCPClient.cpp" />
+    <ClCompile Include="..\..\src\TISGateway.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\STISLibraryServerTest.cpp" />
+    <ClCompile Include="src\STISSimulatorTest.cpp" />
+    <ClCompile Include="src\TISGatewayTest.cpp" />
+    <ClCompile Include="src\STISServerTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\stis_protocol\A10.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A20.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A21.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A22.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A23.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A30.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A31.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A32.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A50.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A70.h" />
+    <ClInclude Include="..\..\src\stis_protocol\A99.h" />
+    <ClInclude Include="..\..\src\stis_protocol\DISPLAYEFFECT.h" />
+    <ClInclude Include="..\..\src\stis_protocol\EnableUtility.h" />
+    <ClInclude Include="..\..\src\stis_protocol\GENERALPACKET.h" />
+    <ClInclude Include="..\..\src\stis_protocol\LEDFONT.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M10.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M11.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M20.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M21.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M22.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M23.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M30.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M31.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M32.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M50.h" />
+    <ClInclude Include="..\..\src\stis_protocol\M70.h" />
+    <ClInclude Include="..\..\src\stis_protocol\MessageTypes.h" />
+    <ClInclude Include="..\..\src\stis_protocol\MSGDEST.h" />
+    <ClInclude Include="..\..\src\stis_protocol\MSGFREE.h" />
+    <ClInclude Include="..\..\src\stis_protocol\MSGPRE.h" />
+    <ClInclude Include="..\..\src\stis_protocol\SequenceGenerator.h" />
+    <ClInclude Include="..\..\src\stis_protocol\STATIONSTATUSDETAIL.h" />
+    <ClInclude Include="..\..\src\stis_protocol\STISLibraryServer.h" />
+    <ClInclude Include="..\..\src\stis_protocol\STISServer.h" />
+    <ClInclude Include="..\..\src\stis_protocol\STISTCPClient.h" />
+    <ClInclude Include="..\..\src\stis_protocol\TLPRE.h" />
+    <ClInclude Include="..\..\src\TISGateway.h" />
+    <ClInclude Include="src\pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\common_library\app.signs.common_library.TA_SignsCommonLibrary.vcxproj">
+      <Project>{ae2a3f66-e5f5-4801-8f9f-f712cb660681}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>app.signs.tis_gateway.boost_test</ProjectName>
+    <ProjectGuid>{124FD6EB-3AA9-493D-A19A-95D137E16DFA}</ProjectGuid>
+    <RootNamespace>test</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.27924.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;disable_BOOST_CHRONO_HEADER_ONLY;BOOST_ASIO_HAS_IOCP;BOOST_ASIO_HAS_WINDOWS_RANDOM_ACCESS_HANDLE;TA_DEBUGUTIL_USE_MACROS_LOG_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>src;..\src;Database;DAI;DatabaseStatusMonitor;F:\COTS_everything\googletest-master\googletest;F:\COTS_everything\googletest-master\googletest\include;F:\COTS_everything\googletest-master\googlemock;F:\COTS_everything\googletest-master\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>TA_Utilities$(TA_LibrarySuffix).lib;TA_DAI$(TA_LibrarySuffix).lib;TA_DatabaseStatusMonitor$(TA_LibrarySuffix).lib;TA_Thread$(TA_LibrarySuffix).lib;TA_Base_Core$(TA_LibrarySuffix).lib;$(TA_Cots_Library);gmockd.lib;gmock_maind.lib;gtestd.lib;gtest_maind.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>F:\COTS_everything\googletest-master\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;TA_ASSERT_FAIL=FAIL_RUNTIME;BOOST_ASIO_HAS_IOCP;BOOST_ASIO_HAS_WINDOWS_RANDOM_ACCESS_HANDLE;TA_DEBUGUTIL_USE_MACROS_LOG_LEVEL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>.;src;..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>TA_SignsCommonLibrary.lib;TA_TISAgentDAI$(TA_LibSuffix).lib;TA_IRS_Bus$(TA_LibSuffix).lib;TA_IRS_Core$(TA_LibSuffix).lib;TA_Base_Bus$(TA_LibSuffix).lib;TA_Base_Core$(TA_LibSuffix).lib;$(TA_AllCotsLib);libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference />
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Optimize|Win32">
+      <Configuration>Optimize</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>app.signs.common_library</ProjectName>
+    <ProjectGuid>{AE2A3F66-E5F5-4801-8F9F-F712CB660681}</ProjectGuid>
+    <RootNamespace>app.signs.tis_gateway</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\tools\build\VCPropSheet\Common2.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm300  %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>TA_Base_Core_d.lib;TA_Base_Bus_d.lib;TA_IRS_Core_d.lib;TA_IRS_Bus_d.lib;Rpcrt4.lib;WS2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;WIN32;BOOST_ASIO_WINDOWS_RUNTIME;BOOST_ASIO_HAS_IO_URING_AS_DEFAULT;BOOST_ASIO_HAS_IOCP;BOOST_ASIO_HAS_WINDOWS_RANDOM_ACCESS_HANDLE;SQLITE_HAS_CODEC;TA_PP_USE_PCH=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>.\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>TA_Base_Core.lib;TA_Base_Bus.lib;TA_IRS_Core.lib;TA_IRS_Bus.lib;Rpcrt4.lib;WS2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;WIN32;BOOST_ASIO_WINDOWS_RUNTIME;BOOST_ASIO_HAS_IO_URING_AS_DEFAULT;BOOST_ASIO_HAS_IOCP;BOOST_ASIO_HAS_WINDOWS_RANDOM_ACCESS_HANDLE;SQLITE_HAS_CODEC;TA_PP_USE_PCH=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>.\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>TA_Base_Core.lib;TA_Base_Bus.lib;TA_IRS_Core.lib;TA_IRS_Bus.lib;Rpcrt4.lib;WS2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <Lib />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Optimize|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\STISUtility.cpp" />
+    <ClCompile Include="src\STISAuditMessage.cpp" />
+    <ClCompile Include="src\stis_protocol\message_types\A50.cpp" />
+    <ClCompile Include="src\stis_protocol\message_types\A51.cpp" />
+    <ClCompile Include="src\stis_protocol\message_types\MessageTypes.cpp" />
+    <ClCompile Include="src\stis_protocol\message_types\MSGFREE.cpp" />
+    <ClCompile Include="src\stis_protocol\STISAdHocMySQL.cpp" />
+    <ClCompile Include="src\stis_protocol\STISAllLibraryVersionsMySQL.cpp" />
+    <ClCompile Include="src\stis_protocol\STISLibraryClient.cpp" />
+    <ClCompile Include="src\stis_protocol\STISAdHocSQLite.cpp" />
+    <ClCompile Include="src\stis_protocol\STISAllLibraryVersionsSQLite.cpp" />
+    <ClCompile Include="src\stis_protocol\STISLibraryVersionsMySQL.cpp" />
+    <ClCompile Include="src\stis_protocol\STISStatusClient.cpp" />
+    <ClCompile Include="src\stis_protocol\STISMessageClient.cpp" />
+    <ClCompile Include="src\stis_protocol\STISClient.cpp" />
+    <ClCompile Include="src\stis_protocol\STISLibraryVersionsSQLite.cpp" />
+    <ClCompile Include="src\stis_protocol\XMLParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\STISUtility.h" />
+    <ClInclude Include="src\STISAuditMessage.h" />
+    <ClInclude Include="src\stis_protocol\CommonDefs.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A10.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A20.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A21.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A22.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A24.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A23.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A30.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A33.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A31.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A32.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A51.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A50.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A52.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A53.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A70.h" />
+    <ClInclude Include="src\stis_protocol\message_types\A99.h" />
+    <ClInclude Include="src\stis_protocol\message_types\DISPLAYEFFECT.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M24.h" />
+    <ClInclude Include="src\stis_protocol\message_types\GENERALPACKET.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M10.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M11.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M20.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M21.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M22.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M23.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M30.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M31.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M33.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M32.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M51.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M50.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M52.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M53.h" />
+    <ClInclude Include="src\stis_protocol\message_types\M70.h" />
+    <ClInclude Include="src\stis_protocol\message_types\MessageDataTypes.h" />
+    <ClInclude Include="src\stis_protocol\message_types\MessageTypes.h" />
+    <ClInclude Include="src\stis_protocol\message_types\MSGDEST.h" />
+    <ClInclude Include="src\stis_protocol\message_types\MSGFREE.h" />
+    <ClInclude Include="src\stis_protocol\message_types\MSGPRE.h" />
+    <ClInclude Include="src\stis_protocol\message_types\STATIONSTATUSDETAIL.h" />
+    <ClInclude Include="src\stis_protocol\message_types\TLPRE.h" />
+    <ClInclude Include="src\stis_protocol\STISAdHocMySQL.h" />
+    <ClInclude Include="src\stis_protocol\STISAllLibraryVersionsMySQL.h" />
+    <ClInclude Include="src\stis_protocol\STISDatabaseCommon.h" />
+    <ClInclude Include="src\stis_protocol\STISLibraryClient.h" />
+    <ClInclude Include="src\stis_protocol\STISAdHocSQLite.h" />
+    <ClInclude Include="src\stis_protocol\STISAllLibraryVersionsSQLite.h" />
+    <ClInclude Include="src\stis_protocol\STISLibraryVersionsMySQL.h" />
+    <ClInclude Include="src\stis_protocol\STISStatusClient.h" />
+    <ClInclude Include="src\stis_protocol\STISMessageClient.h" />
+    <ClInclude Include="src\stis_protocol\STISClient.h" />
+    <ClInclude Include="src\stis_protocol\STISLibraryVersionsSQLite.h" />
+    <ClInclude Include="src\stis_protocol\XMLParser.h" />
+    <ClInclude Include="src\stis_protocol\STSTMLIB_XML.h" />
+    <ClInclude Include="src\stis_protocol\STSMSGLIB_XML.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\utility\core.utility.TA_Utility.vcxproj">
+      <Project>{c8ea8c7a-3e88-4a87-9b09-7b79f86192e4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

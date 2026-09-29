@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\stis_protocol\STISLibraryServer.cpp">
+      <Filter>tis-gateway\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\stis_protocol\STISServer.cpp">
+      <Filter>tis-gateway\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\stis_protocol\STISTCPClient.cpp">
+      <Filter>tis-gateway\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISServerTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TISGateway.cpp">
+      <Filter>tis-gateway\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISLibraryServerTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TISGatewayTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISSimulatorTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{67900b7c-2e94-46e0-a4c1-3397d1fdc75e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{3e4c6568-c1bb-41ff-8e25-6a98e246b34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tis-gateway">
+      <UniqueIdentifier>{327d9a09-e7b1-4a6f-9f4a-ceb4b2bab602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tis-gateway\stis_protocol">
+      <UniqueIdentifier>{77b6fe70-a6c2-45a6-b905-5f8215b33d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tis-gateway\stis_protocol\impl">
+      <UniqueIdentifier>{2247c8ef-e08c-4ccd-8f0e-95b3afd5b71a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tis-gateway\src">
+      <UniqueIdentifier>{3733bc00-268d-4578-967b-da4122805f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tis-gateway\stis_protocol\message_types">
+      <UniqueIdentifier>{12690dab-c985-4dcd-b01c-958b2dab5927}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\pch.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\STISTCPClient.h">
+      <Filter>tis-gateway\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A10.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A20.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A21.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A22.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A23.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A30.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A31.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A32.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A50.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A70.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\A99.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\DISPLAYEFFECT.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\EnableUtility.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\GENERALPACKET.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\LEDFONT.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M10.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M11.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M20.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M21.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M22.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M23.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M30.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M31.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M32.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M50.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\M70.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\MessageTypes.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\MSGDEST.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\MSGFREE.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\MSGPRE.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\SequenceGenerator.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\STATIONSTATUSDETAIL.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\TLPRE.h">
+      <Filter>tis-gateway\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\STISLibraryServer.h">
+      <Filter>tis-gateway\stis_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\stis_protocol\STISServer.h">
+      <Filter>tis-gateway\stis_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TISGateway.h">
+      <Filter>tis-gateway\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

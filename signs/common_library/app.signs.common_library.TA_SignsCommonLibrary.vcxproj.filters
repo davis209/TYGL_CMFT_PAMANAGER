@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISClient.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\XMLParser.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISLibraryVersionsSQLite.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISMessageClient.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISStatusClient.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISLibraryClient.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISAdHocSQLite.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISAllLibraryVersionsSQLite.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISAuditMessage.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STISUtility.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\message_types\MessageTypes.cpp">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\message_types\MSGFREE.cpp">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\message_types\A50.cpp">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\message_types\A51.cpp">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISAdHocMySQL.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISAllLibraryVersionsMySQL.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stis_protocol\STISLibraryVersionsMySQL.cpp">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\pch.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISClient.h">
+      <Filter>src\stis_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\XMLParser.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISLibraryVersionsSQLite.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISMessageClient.h">
+      <Filter>src\stis_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISStatusClient.h">
+      <Filter>src\stis_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISLibraryClient.h">
+      <Filter>src\stis_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STSMSGLIB_XML.h">
+      <Filter>src\stis_protocol\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STSTMLIB_XML.h">
+      <Filter>src\stis_protocol\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A10.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A20.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A21.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A22.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A23.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A30.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A31.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A32.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A50.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A70.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A99.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\DISPLAYEFFECT.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\GENERALPACKET.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M10.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M11.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M20.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M21.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M22.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M23.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M30.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M31.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M32.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M50.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M70.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\MSGDEST.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\MSGFREE.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\MSGPRE.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\STATIONSTATUSDETAIL.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\TLPRE.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\MessageDataTypes.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\MessageTypes.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISAdHocSQLite.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\CommonDefs.h">
+      <Filter>src\stis_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISAllLibraryVersionsSQLite.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M24.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A24.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STISAuditMessage.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STISUtility.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M33.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A33.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M51.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A51.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M52.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A52.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\M53.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\message_types\A53.h">
+      <Filter>src\stis_protocol\message_types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISAdHocMySQL.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISAllLibraryVersionsMySQL.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISDatabaseCommon.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stis_protocol\STISLibraryVersionsMySQL.h">
+      <Filter>src\stis_protocol\impl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{2ddf0302-ff01-4859-aaf4-574031e0a4f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{b8ced5dd-27f3-4c0c-a9b9-30634c1d21d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\stis_protocol">
+      <UniqueIdentifier>{3c2bf38b-7693-4c05-9f53-bb5c65c6838c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\stis_protocol\impl">
+      <UniqueIdentifier>{1de744a8-3008-4055-a407-2a6a4d2e484e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\stis_protocol\xml">
+      <UniqueIdentifier>{7459b00f-cc39-40cc-8281-eef9d77c93db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\stis_protocol\message_types">
+      <UniqueIdentifier>{40210d42-96f0-4a78-888f-47a6d332b33c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
