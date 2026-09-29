@@ -42,6 +42,16 @@ Optional protocol header parameters mirror `PaTcpClient`: `--pa-server-id` (defa
 
 Database host, port, user, password, TLS and schema settings are not service command-line options. They must be configured through the original project's `DatabaseFactory`/`Pa_Cd` database configuration.
 
+## PAAgent RunParams
+
+When the scheduler is run through `PAAgent`, it is no longer started as the standalone executable above. PAAgent reads these exact RunParams names:
+
+- `--pa-host` — PA device IP address or host name (required).
+- `--pa-port` — PA device TCP port (required).
+- `--poll-seconds` — schedule polling interval in seconds (optional; default `2`).
+
+For PAAgent, `--location-id` and the standalone protocol-header parameters (`--pa-server-id`, `--pa-console-id`, `--pa-version`, `--pa-line-id`, `--pa-station-id`, `--pa-connect-timeout-ms`, and `--pa-response-timeout-ms`) are not read. The current PAAgent scheduler location is the configured default `1`; PAAgent starts scheduling only after it enters Control mode.
+
 ## Scheduling and safety
 
 - Only `LOCATION_ID = --location-id` rows are selected.
