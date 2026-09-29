@@ -4,6 +4,9 @@
 
 std::wstring convertUtf8ToUtf16le(const std::string& src);
 std::string convertUtf16leToUtf8(const std::wstring& src);
+std::wstring convertBig5ToUtf16le(const std::string& src);
+std::string convertBig5ToUtf8(const std::string& src);
+std::string convertUtf8ToBig5(const std::string& src);
 std::vector<std::string> tokenizeString(std::string theString, const std::string& separatorList);
 
 std::string join_4_languages(const std::string& english,

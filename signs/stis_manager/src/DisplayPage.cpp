@@ -1458,7 +1458,10 @@ namespace TA_IRS_App
 
             if (m_PIDTree.apply_location_filter(m_location_filter.get_selection()))
             {
-                GetDlgItem(IDC_SPLIT_LOCATION)->SetWindowText(m_location_filter.get_title().c_str());
+                const std::wstring locationTitle =
+                    CodeConverter::UTF8ToUnicode(m_location_filter.get_title());
+                ::SetWindowTextW(GetDlgItem(IDC_SPLIT_LOCATION)->GetSafeHwnd(),
+                                 locationTitle.c_str());
                 m_location_filter_tooltip.UpdateTipText(m_location_filter.get_tooltip().c_str(), GetDlgItem(IDC_SPLIT_LOCATION));
 
                 // TODO: update areas

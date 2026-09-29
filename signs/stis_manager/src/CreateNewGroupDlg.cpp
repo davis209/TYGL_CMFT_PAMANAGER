@@ -18,6 +18,7 @@
 #include "stdafx.h"
 #include "resource.h"
 #include "CreateNewGroupDlg.h"
+#include "helperfun.h"
 #include "PidGroupCombo.h"
 #include "core/data_access_interface/tis_agent/src/PidGroupsAccessFactory.h"
 #include "bus/generic_gui/src/TransactiveMessage.h" // TD14164 
@@ -37,12 +38,13 @@ namespace TA_IRS_App
                                          CWnd* pParent /*=NULL*/)
         :
         CDialog(CreateNewGroupDlg::IDD, pParent),
-        m_windowTitle(windowTitle),
+        m_windowTitle(convertBig5ToUtf16le(static_cast<LPCSTR>(windowTitle))),
+        m_textPrompt(convertBig5ToUtf16le(static_cast<LPCSTR>(textPrompt))),
         m_AccessFactoryFailure(false)
     {
         //{{AFX_DATA_INIT(CreateNewGroupDlg)
         m_name = _T(defaultName);
-        m_textPrompt = _T(textPrompt);
+
         //}}AFX_DATA_INIT
     }
 
@@ -53,7 +55,7 @@ namespace TA_IRS_App
         DDX_Control(pDX, IDC_EDITNAME, m_nameControl);
         DDX_Text(pDX, IDC_EDITNAME, m_name);
         DDV_MaxChars(pDX, m_name, 40);
-        DDX_Text(pDX, IDC_STATICTEXT, m_textPrompt);
+
         //}}AFX_DATA_MAP
     }
 
@@ -68,8 +70,10 @@ namespace TA_IRS_App
     {
         CDialog::OnInitDialog();
 
-        // Apply the title
-        SetWindowText(m_windowTitle);
+        // The supplied title and prompt are Big5 text. Display them through
+        // Unicode APIs so their rendering does not depend on the system ACP.
+        ::SetWindowTextW(m_hWnd, m_windowTitle.c_str());
+        ::SetDlgItemTextW(m_hWnd, IDC_STATICTEXT, m_textPrompt.c_str());
 
         return TRUE;  // return TRUE unless you set the focus to a control
         // EXCEPTION: OCX Property Pages should return FALSE
@@ -81,7 +85,8 @@ namespace TA_IRS_App
         //the groups specified for a schematic
         CString text;
         m_nameControl.GetWindowText(text);
-        std::string nameEntered = text;
+        m_nameUtf8 = convertBig5ToUtf8(static_cast<LPCSTR>(text));
+        const std::string& nameEntered = m_nameUtf8;
 
         if (nameEntered == PidGroupCombo::HMIGroupName || nameEntered.empty())
         {

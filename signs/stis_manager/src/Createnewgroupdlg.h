@@ -48,7 +48,7 @@ namespace TA_IRS_App
          * @return the name the user entered in dialog box
          *
          */
-        CString getName() { return m_name; }
+        std::string getName() const { return m_nameUtf8; }
 
         bool isModify() { return m_isModify; }
 
@@ -91,10 +91,11 @@ namespace TA_IRS_App
         enum { IDD = IDD_PID_GROUP_NAME };
         CEdit   m_nameControl;
         CString m_name;
-        CString m_textPrompt;
+        std::string m_nameUtf8;
+        std::wstring m_textPrompt;
         //}}AFX_DATA
 
-        CString m_windowTitle;
+        std::wstring m_windowTitle;
         bool m_isModify = false;
     };
 

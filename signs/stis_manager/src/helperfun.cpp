@@ -27,6 +27,56 @@ std::string convertUtf16leToUtf8(const std::wstring& src)
     return result;
 }
 
+std::wstring convertBig5ToUtf16le(const std::string& src)
+{
+    if (src.empty())
+    {
+        return std::wstring();
+    }
+
+    const int dstLen = MultiByteToWideChar(950, 0,
+                                            src.data(), static_cast<int>(src.size()),
+                                            NULL, 0);
+    if (dstLen <= 0)
+    {
+        return std::wstring();
+    }
+
+    std::wstring result(dstLen, L'\0');
+    MultiByteToWideChar(950, 0,
+                        src.data(), static_cast<int>(src.size()),
+                        &result[0], dstLen);
+    return result;
+}
+
+std::string convertBig5ToUtf8(const std::string& src)
+{
+    return convertUtf16leToUtf8(convertBig5ToUtf16le(src));
+}
+
+std::string convertUtf8ToBig5(const std::string& src)
+{
+    if (src.empty())
+    {
+        return std::string();
+    }
+
+    const std::wstring unicode = convertUtf8ToUtf16le(src);
+    const int dstLen = WideCharToMultiByte(950, 0,
+                                           unicode.data(), static_cast<int>(unicode.size()),
+                                           NULL, 0, NULL, NULL);
+    if (dstLen <= 0)
+    {
+        return std::string();
+    }
+
+    std::string result(dstLen, '\0');
+    WideCharToMultiByte(950, 0,
+                        unicode.data(), static_cast<int>(unicode.size()),
+                        &result[0], dstLen, NULL, NULL);
+    return result;
+}
+
 std::vector<std::string> tokenizeString(std::string theString, const std::string& separatorList)
 {
     std::vector<std::string> parts;

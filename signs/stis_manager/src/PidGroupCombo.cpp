@@ -17,6 +17,7 @@
 
 #include "StdAfx.h"
 #include "PidGroupCombo.h"
+#include "helperfun.h"
 #include "PidSelectionManager.h"
 #include "core/utilities/src/DebugUtil.h"
 #include "core/utilities/src/TAAssert.h"
@@ -32,7 +33,7 @@ using TA_Base_Bus::ColourCombo;
 
 namespace TA_IRS_App
 {
-    const std::string PidGroupCombo::HMIGroupName = "當前選擇區域"; // Schematic
+    const std::string PidGroupCombo::HMIGroupName = convertBig5ToUtf8("當前選擇區域"); // Schematic
     static const DWORD COLOR_RED = RGB(255, 0, 0);
 
     BEGIN_MESSAGE_MAP(PidGroupCombo, ColourCombo)
@@ -72,9 +73,10 @@ namespace TA_IRS_App
         // Replace all strings
         ResetContent();
 
-        for (auto& name : groupNames)
+        for (const auto& name : groupNames)
         {
-            auto pos = AddString(name.c_str());
+            const std::string displayName = convertUtf8ToBig5(name);
+            auto pos = AddString(displayName.c_str());
             //if this is the group associated with the schematic change the text to read
             SetItemData(pos, name == HMIGroupName ? 0 : 1); // mapped to RED
         }
@@ -86,7 +88,8 @@ namespace TA_IRS_App
         RedrawWindow();
 
         // Re select item we had selected before if it is still avaiable or select the schematic item
-        if (sel != CB_ERR && FindString(-1, currentSelectedString.c_str()) != CB_ERR)
+        const std::string currentDisplayName = convertUtf8ToBig5(currentSelectedString);
+        if (sel != CB_ERR && FindString(-1, currentDisplayName.c_str()) != CB_ERR)
         {
             selectGroupName(currentSelectedString);
         }
@@ -105,17 +108,19 @@ namespace TA_IRS_App
 
         GetLBText(sel, currentSelectedString);
 
-        return (const char*)currentSelectedString;
+        return convertBig5ToUtf8(static_cast<LPCSTR>(currentSelectedString));
     }
 
     bool PidGroupCombo::groupNameIsAnExistingGroup(std::string groupName)
     {
-        return FindStringExact(0, groupName.c_str()) > -1;
+        const std::string displayName = convertUtf8ToBig5(groupName);
+        return FindStringExact(0, displayName.c_str()) > -1;
     }
 
     void PidGroupCombo::selectGroupName(std::string groupName)
     {
-        int newSelIndex = SelectString(-1, groupName.c_str());
+        const std::string displayName = convertUtf8ToBig5(groupName);
+        int newSelIndex = SelectString(-1, displayName.c_str());
 
         if (m_pidSelectionManager)
         {
@@ -141,7 +146,7 @@ namespace TA_IRS_App
         {
             CString text;
             GetLBText(i, text);
-            return {(const char*)text, i};
+            return {convertBig5ToUtf8(static_cast<LPCSTR>(text)), i};
         }
 
         return {"", CB_ERR};
